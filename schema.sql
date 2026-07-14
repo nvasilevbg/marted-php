@@ -26,7 +26,7 @@ INSERT INTO settings (k,v) VALUES
 ('hours','Пон – Нед: 08:00 – 20:00'),('established','2019'),
 ('home_hero_title','Монтаж и демонтаж на мебели'),
 ('home_hero_lead','Професионален монтаж, демонтаж, разнос и изнасяне на мебели в Добрич, Балчик, Варна и околността — с гаранция за качество, точност и чист завършек.'),
-('about_heading','Първо се уточнява задачата. След това се работи.'),
+('home_hero_image','/assets/media/hero-kitchen.jpg'),('about_heading','Първо се уточнява задачата. След това се работи.'),
 ('about_text','Всеки монтаж започва с проверка на обекта, размерите и особеностите на мебелите. Целта е да няма изненади, крив монтаж, липсващи елементи или недовършена работа.');
 
 INSERT INTO projects (slug,title,category,pdate,location,description,cover,gallery) VALUES

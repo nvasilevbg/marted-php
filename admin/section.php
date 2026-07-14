@@ -15,6 +15,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $section = $_POST['section'] ?? '';
     if ($section === 'hero') {
         foreach (['home_hero_title','home_hero_lead'] as $k) if (isset($_POST[$k])) db()->prepare("UPDATE settings SET v=? WHERE k=?")->execute([trim($_POST[$k]), $k]);
+        $heroImg = $_POST['hero_image_existing'] ?? '';
+        $uploaded = upload_image('hero_image_file', __DIR__ . '/../assets/media/projects');
+        if ($uploaded) $heroImg = $uploaded;
+        if ($heroImg) db()->prepare("UPDATE settings SET v=? WHERE k='home_hero_image'")->execute([$heroImg]);
     } elseif ($section === 'stats') {
         if (isset($_POST['stat_ids'])) {
             foreach ($_POST['stat_ids'] as $i => $id) {
@@ -40,10 +44,16 @@ require __DIR__ . '/../inc/admin-header.php';
 <div class="adminTop"><div><span class="eyebrow eyebrow-line">Секция</span><h1><?= e($titles[$edit]) ?></h1></div></div>
 
 <?php if ($edit === 'hero'): ?>
-<form method="POST" class="adminForm">
+<form method="POST" enctype="multipart/form-data" class="adminForm">
   <input type="hidden" name="section" value="hero">
   <div><label>Заглавие</label><input name="home_hero_title" value="<?= e(content('home_hero_title')) ?>"></div>
   <div><label>Подзаглавие (текст)</label><textarea name="home_hero_lead" rows="3"><?= e(content('home_hero_lead')) ?></textarea></div>
+  <div><label>Снимка на херобанера</label>
+    <?php $heroImg = content('home_hero_image', '/assets/media/hero-kitchen.jpg'); ?>
+    <?php if ($heroImg): ?><img src="<?= e($heroImg) ?>" style="max-height:100px;border-radius:4px;margin-bottom:8px"><?php endif; ?>
+    <input type="hidden" name="hero_image_existing" value="<?= e($heroImg) ?>">
+    <input type="file" name="hero_image_file" accept="image/*">
+  </div>
   <button class="btn btn-primary btn-block" type="submit">Запази</button>
 </form>
 

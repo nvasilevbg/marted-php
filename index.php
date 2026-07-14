@@ -22,7 +22,7 @@ require __DIR__ . '/inc/header.php';
       </div>
     </div>
     <div class="heroVisual anim" style="--d:300ms">
-      <div class="heroPhoto"><img src="/assets/media/hero-kitchen.jpg" alt="Монтаж на модерна кухня"></div>
+      <div class="heroPhoto"><img src="<?php echo e(content("home_hero_image","/assets/media/hero-kitchen.jpg")); ?>" alt="Монтаж на модерна кухня"></div>
       <p class="heroCaption">Кухня по поръчка · гр. Добрич</p>
     </div>
   </div>
