@@ -33,6 +33,9 @@ function db_install($pdo) {
     $pdo->exec("CREATE TABLE settings (k TEXT PRIMARY KEY, v TEXT)");
     $pdo->exec("CREATE TABLE projects (id INTEGER PRIMARY KEY AUTOINCREMENT, slug TEXT UNIQUE, title TEXT, category TEXT, pdate TEXT, location TEXT, description TEXT, cover TEXT, gallery TEXT, created_at TEXT DEFAULT (datetime('now')))");
     $pdo->exec("CREATE TABLE bookings (id INTEGER PRIMARY KEY AUTOINCREMENT, bdate TEXT, slot TEXT, name TEXT, phone TEXT, service TEXT, notes TEXT, status TEXT DEFAULT 'pending', created_at TEXT DEFAULT (datetime('now')))");
+    $pdo->exec("CREATE TABLE services (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, stext TEXT, icon TEXT, image TEXT, sort_order INTEGER DEFAULT 0)");
+    $pdo->exec("CREATE TABLE testimonials (id INTEGER PRIMARY KEY AUTOINCREMENT, tname TEXT, ttext TEXT, stars INTEGER DEFAULT 5, sort_order INTEGER DEFAULT 0)");
+    $pdo->exec("CREATE TABLE stats (id INTEGER PRIMARY KEY AUTOINCREMENT, svalue TEXT, slabel TEXT, sort_order INTEGER DEFAULT 0)");
     db_seed($pdo);
 }
 
@@ -45,6 +48,40 @@ function db_seed($pdo) {
     ];
     $st = $pdo->prepare("INSERT INTO settings (k,v) VALUES (?,?)");
     foreach ($s as $k=>$v) $st->execute([$k,$v]);
+    // page content
+    $content = [
+        'home_hero_title'=>'Монтаж и демонтаж на мебели',
+        'home_hero_lead'=>'Професионален монтаж, демонтаж, разнос и изнасяне на мебели в Добрич, Балчик, Варна и околността — с гаранция за качество, точност и чист завършек.',
+        'about_heading'=>'Първо се уточнява задачата. След това се работи.',
+        'about_text'=>'Всеки монтаж започва с проверка на обекта, размерите и особеностите на мебелите. Целта е да няма изненади, крив монтаж, липсващи елементи или недовършена работа.',
+    ];
+    $st2 = $pdo->prepare("INSERT INTO settings (k,v) VALUES (?,?)");
+    foreach ($content as $k=>$v) $st2->execute([$k,$v]);
+    // services
+    $svcs = [
+        ['Монтаж на мебели','Монтаж на кухни, спални, гардероби, секции и всякакви мебели.','drill','/assets/media/kitchen-1.jpg',1],
+        ['Демонтаж на мебели','Професионален демонтаж и опаковане при пренасяне или ремонт.','demolition','',2],
+        ['Разнос на мебели','Транспорт и разнос на мебели до адрес и етаж по ваш избор.','truck','',3],
+        ['Изнасяне на стари мебели','Изнасяме и извозваме стари мебели и ненужни вещи.','box','',4],
+        ['Замерване и консултация','Замерване на място и консултация за вашия проект.','measure','',5],
+        ['Коректност и гаранция','Работим чисто и прецизно с гаранция за качество.','shield','',6],
+    ];
+    $st3 = $pdo->prepare("INSERT INTO services (title,stext,icon,image,sort_order) VALUES (?,?,?,?,?)");
+    foreach ($svcs as $s) $st3->execute($s);
+    // testimonials
+    $tests = [
+        ['Иван Петров','Много съм доволен от услугата. Бързи, точни и коректни. Препоръчвам.',5,1],
+        ['Мария Георгиева','Стегнат екип. Монтираха ми кухнята чисто и прецизно. Благодаря.',5,2],
+        ['Георги Йорданов','Професионалисти. Работят точно и подредено. Много съм доволен.',5,3],
+    ];
+    $st4 = $pdo->prepare("INSERT INTO testimonials (tname,ttext,stars,sort_order) VALUES (?,?,?,?)");
+    foreach ($tests as $t) $st4->execute($t);
+    // stats
+    $stats = [
+        ['500+','Доволни клиенти',1],['1200+','Монтирани мебели',2],['5+','Години опит',3],['Добрич','и околността',4],
+    ];
+    $st5 = $pdo->prepare("INSERT INTO stats (svalue,slabel,sort_order) VALUES (?,?,?)");
+    foreach ($stats as $s) $st5->execute($s);
     $seed = [
         ['kuhnya-po-porachka','Кухня по поръчка','Кухни','Юли 2024','Добрич','Монтаж на кухня по поръчка с остров, вградени шкафове и завършващи панели.','/assets/media/kitchen-2.jpg',['/assets/media/kitchen-2.jpg','/assets/media/kitchen-1.jpg','/assets/media/kitchen-3.jpg','/assets/media/kitchen-4.jpg']],
         ['moderna-kuhnya','Модерна кухня','Кухни','Юни 2024','Балчик','Монтаж на модерна кухня с остров, вградени шкафове и завършващи панели.','/assets/media/kitchen-3.jpg',['/assets/media/kitchen-3.jpg','/assets/media/kitchen-4.jpg','/assets/media/kitchen-1.jpg']],

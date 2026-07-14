@@ -4,36 +4,28 @@ require_once __DIR__ . '/../inc/icons.php';
 require_once __DIR__ . '/../inc/admin-functions.php';
 require_admin();
 $s = settings();
-
-// Handle status change
+$GLOBALS['admin_page'] = 'bookings';
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
     $id = $_POST['id'] ?? '';
-    $action = $_POST['action'] ?? '';
-    if ($action === 'status' && in_array($_POST['status']??'', ['pending','confirmed','cancelled'])) {
-        $st = db()->prepare("UPDATE bookings SET status=? WHERE id=?");
-        $st->execute([$_POST['status'], $id]);
-    } elseif ($action === 'delete') {
-        $st = db()->prepare("DELETE FROM bookings WHERE id=?");
-        $st->execute([$id]);
+    if ($_POST['action'] === 'status' && in_array($_POST['status']??'', ['pending','confirmed','cancelled'])) {
+        db()->prepare("UPDATE bookings SET status=? WHERE id=?")->execute([$_POST['status'], $id]);
+    } elseif ($_POST['action'] === 'delete') {
+        db()->prepare("DELETE FROM bookings WHERE id=?")->execute([$id]);
     }
     header('Location: bookings.php'); exit;
 }
-
 $filter = $_GET['filter'] ?? '';
-$where = '';
-if ($filter === 'pending') $where = " WHERE status='pending'";
+$where = $filter === 'pending' ? " WHERE status='pending'" : '';
 $bookings = db()->query("SELECT * FROM bookings$where ORDER BY bdate DESC, slot DESC")->fetchAll();
-
+$labels = ['pending'=>'Чака','confirmed'=>'Потвърден','cancelled'=>'Отказан'];
 $title = 'Резервации | Админ | ' . $s['name'];
 require __DIR__ . '/../inc/admin-header.php';
-require __DIR__ . '/../inc/admin-styles.php';
-$labels = ['pending'=>'Чака','confirmed'=>'Потвърден','cancelled'=>'Отказан'];
 ?>
 <div class="adminTop"><div><span class="eyebrow eyebrow-line">Админ</span><h1>Запазени часове</h1></div></div>
 <?php if (empty($bookings)): ?>
 <p class="formNote" style="margin-top:20px">Все още няма запазени часове.</p>
 <?php else: ?>
-<div class="bookingsList">
+<div class="adminList">
   <?php foreach ($bookings as $b): ?>
   <div class="bookingItem">
     <div class="biMain">

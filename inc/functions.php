@@ -45,25 +45,26 @@ function add_booking($d) {
     return ['ok'=>true];
 }
 
-// --- static content ---
+// --- DB-backed content ---
 function services() {
-    return [
-        ['title'=>'Монтаж на мебели','text'=>'Монтаж на кухни, спални, гардероби, секции и всякакви мебели.','icon'=>'drill'],
-        ['title'=>'Демонтаж на мебели','text'=>'Професионален демонтаж и опаковане при пренасяне или ремонт.','icon'=>'demolition'],
-        ['title'=>'Разнос на мебели','text'=>'Транспорт и разнос на мебели до адрес и етаж по ваш избор.','icon'=>'truck'],
-        ['title'=>'Изнасяне на стари мебели','text'=>'Изнасяме и извозваме стари мебели и ненужни вещи.','icon'=>'box'],
-        ['title'=>'Замерване и консултация','text'=>'Замерване на място и консултация за вашия проект.','icon'=>'measure'],
-        ['title'=>'Коректност и гаранция','text'=>'Работим чисто и прецизно с гаранция за качество.','icon'=>'shield'],
-    ];
+    $rows = db()->query("SELECT * FROM services ORDER BY sort_order ASC, id ASC")->fetchAll();
+    return array_map(function($r) { return ['title'=>$r['title'],'text'=>$r['stext'],'icon'=>$r['icon'],'image'=>$r['image']]; }, $rows);
 }
 function stats() {
-    return [['value'=>'500+','label'=>'Доволни клиенти'],['value'=>'1200+','label'=>'Монтирани мебели'],['value'=>'5+','label'=>'Години опит'],['value'=>'Добрич','label'=>'и околността']];
+    $rows = db()->query("SELECT * FROM stats ORDER BY sort_order ASC, id ASC")->fetchAll();
+    return array_map(function($r) { return ['value'=>$r['svalue'],'label'=>$r['slabel']]; }, $rows);
 }
 function testimonials() {
-    return [
-        ['name'=>'Иван Петров','text'=>'Много съм доволен от услугата. Бързи, точни и коректни. Препоръчвам.'],
-        ['name'=>'Мария Георгиева','text'=>'Стегнат екип. Монтираха ми кухнята чисто и прецизно. Благодаря.'],
-        ['name'=>'Георги Йорданов','text'=>'Професионалисти. Работят точно и подредено. Много съм доволен.'],
-    ];
+    $rows = db()->query("SELECT * FROM testimonials ORDER BY sort_order ASC, id ASC")->fetchAll();
+    return array_map(function($r) { return ['name'=>$r['tname'],'text'=>$r['ttext'],'stars'=>$r['stars']]; }, $rows);
+}
+function content($key, $def='') {
+    static $cache = null;
+    if ($cache === null) {
+        $rows = db()->query("SELECT k,v FROM settings")->fetchAll();
+        $cache = [];
+        foreach ($rows as $r) $cache[$r['k']] = $r['v'];
+    }
+    return isset($cache[$key]) && $cache[$key] !== '' ? $cache[$key] : $def;
 }
 function filters() { return ['Всички','Кухни','Спални','Гардероби','Други']; }

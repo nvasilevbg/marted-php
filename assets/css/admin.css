@@ -1,0 +1,63 @@
+.adminBody{background:var(--bg);color:var(--ink);font-family:var(--font-sans)}
+.adminLayout{display:flex;min-height:100vh}
+.adminSidebar{width:240px;flex:0 0 240px;background:var(--bg-2);border-right:1px solid var(--line);display:flex;flex-direction:column;position:sticky;top:0;height:100vh;overflow-y:auto}
+.adminSidebarLogo{padding:20px;border-bottom:1px solid var(--line-soft)}
+.adminNav{flex:1;padding:12px 0;display:flex;flex-direction:column;gap:2px}
+.adminNav a{display:flex;align-items:center;gap:12px;padding:12px 20px;color:var(--muted);font-size:14px;font-weight:600;text-decoration:none;transition:all .2s;border-left:3px solid transparent}
+.adminNav a:hover{background:var(--bg-3);color:var(--ink)}
+.adminNav a.active{background:var(--bg-3);color:var(--accent-2);border-left-color:var(--accent)}
+.adminNav a .icon{width:20px;height:20px;flex:0 0 auto;color:var(--muted)}
+.adminNav a.active .icon{color:var(--accent-2)}
+.navBadge{margin-left:auto;background:var(--accent);color:#100d08;font-size:11px;font-weight:700;padding:2px 8px;border-radius:10px;font-family:var(--font-mono)}
+.adminSidebarBottom{padding:16px 20px;border-top:1px solid var(--line-soft);display:flex;flex-direction:column;gap:4px}
+.adminSidebarLink{display:flex;align-items:center;gap:10px;padding:8px 0;color:var(--muted-2);font-size:13px;text-decoration:none}
+.adminSidebarLink:hover{color:var(--accent-2)}
+.adminSidebarLink .icon{width:16px;height:16px}
+.adminMain{flex:1;padding:clamp(24px,4vw,48px);overflow-x:hidden}
+.adminTop{display:flex;justify-content:space-between;align-items:center;margin-bottom:28px;flex-wrap:wrap;gap:14px}
+.adminTop h1{font-size:clamp(24px,3vw,36px);margin-top:6px}
+.adminCards{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:16px}
+.adminCard{background:var(--bg-2);border:1px solid var(--line);border-radius:var(--radius);padding:24px;text-align:center;text-decoration:none;color:var(--ink);transition:transform .2s,border-color .2s}
+.adminCard:hover{transform:translateY(-2px);border-color:var(--accent)}
+.acNum{font-family:var(--font-serif);font-size:36px;color:var(--accent-2)}
+.acLabel{font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:6px}
+.adminTabs{display:flex;gap:0;border-bottom:2px solid var(--line);margin-bottom:24px}
+.adminTabs button{font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;padding:12px 22px;background:transparent;border:0;border-bottom:2px solid transparent;color:var(--muted);cursor:pointer;transition:all .2s;margin-bottom:-2px}
+.adminTabs button.active{color:var(--accent-2);border-bottom-color:var(--accent)}
+.adminTabs button:hover{color:var(--ink)}
+.tabContent{display:none}
+.tabContent.active{display:block}
+.adminForm{display:grid;gap:20px;background:var(--bg-2);border:1px solid var(--line);border-radius:var(--radius);padding:30px;max-width:760px;box-shadow:var(--shadow-soft)}
+.adminForm input,.adminForm textarea,.adminForm select{background:var(--bg-3);border:1px solid var(--line);border-radius:var(--radius);padding:10px 14px;color:var(--ink);font-size:15px;width:100%;box-sizing:border-box}
+.adminForm input:focus,.adminForm textarea:focus,.adminForm select:focus{outline:none;border-color:var(--accent)}
+.adminForm label{font-family:var(--font-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:4px;display:block}
+.formRow{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.adminList{display:grid;gap:10px;margin-top:20px}
+.adminRow{display:grid;grid-template-columns:80px 1fr auto;gap:16px;align-items:center;background:var(--bg-2);border:1px solid var(--line);border-radius:var(--radius);padding:12px 16px}
+.adminRow img{width:80px;height:60px;object-fit:cover;border-radius:var(--radius);border:1px solid var(--line-soft)}
+.adminRowInfo strong{font-family:var(--font-serif);font-size:17px}
+.adminRowInfo span{font-family:var(--font-mono);font-size:11px;text-transform:uppercase;color:var(--muted)}
+.adminRowActions{display:flex;gap:8px}
+.adminRowActions a,.adminRowActions button{font-family:var(--font-mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;padding:8px 12px;border:1px solid var(--line);border-radius:var(--radius);background:transparent;color:var(--ink-2);cursor:pointer;text-decoration:none;transition:all .2s}
+.adminRowActions a:hover,.adminRowActions button:hover{border-color:var(--accent);color:var(--accent-2)}
+.adminRowActions .del:hover{border-color:#b5503e;color:#e09a8a}
+.bookingItem{display:grid;grid-template-columns:1fr auto;gap:10px 18px;background:var(--bg-2);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px}
+.biMain{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.biMain strong{font-family:var(--font-serif);font-size:19px}
+.biService{font-family:var(--font-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.biContact{display:flex;flex-direction:column;gap:4px;align-items:end}
+.biContact a{display:inline-flex;align-items:center;gap:6px;color:var(--ink);font-size:14px;text-decoration:none}
+.biNotes{grid-column:1/-1;color:var(--muted);font-size:14px;margin:0;padding-top:9px;border-top:1px solid var(--line-soft)}
+.biActions{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:8px;padding-top:11px;border-top:1px solid var(--line-soft);margin-top:10px}
+.biActions button{font-family:var(--font-mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;padding:8px 14px;border:1px solid var(--line);border-radius:var(--radius);background:transparent;color:var(--ink-2);cursor:pointer;transition:all .2s}
+.pill{font-family:var(--font-mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;padding:4px 10px;border-radius:20px;border:1px solid}
+.pill.pending{color:var(--accent-2);border-color:var(--accent-3);background:var(--accent-soft)}
+.pill.confirmed{color:#9fd0a6;border-color:#3c6b46;background:rgba(95,130,100,.14)}
+.pill.cancelled{color:#e09a8a;border-color:#6b3a32;background:rgba(150,80,70,.14)}
+.adminGate{max-width:440px;margin:0 auto;padding-top:60px}
+.adminGate h1{font-size:clamp(28px,4vw,46px);margin:14px 0 26px}
+.formMsg{margin:0;font-size:14px}.formMsg.ok{color:var(--accent-2)}.formMsg.err{color:#e09a8a}
+.btn-block{width:100%;justify-content:center}
+.linkBtn{background:transparent;border:0;color:var(--accent-2);font-family:var(--font-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;text-decoration:none}
+.projFormHead{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+@media(max-width:760px){.adminSidebar{position:fixed;left:-240px;z-index:100;transition:left .3s}.adminMain{padding:16px}.adminRow{grid-template-columns:60px 1fr}.adminRowActions{grid-column:1/-1}.formRow{grid-template-columns:1fr}.bookingItem{grid-template-columns:1fr}.adminTabs button{padding:10px 14px;font-size:11px}}
