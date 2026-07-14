@@ -7,6 +7,12 @@ if (preg_match('/\.(css|js|png|jpg|jpeg|gif|svg|ico|webp|woff2?|ttf|map)$/', $ur
     return false; // serve as-is
 }
 
+// Direct .php file (e.g. /api/taken.php)
+if (preg_match('/\\.php$/', ) && file_exists(__DIR__ . )) {
+    require __DIR__ . ;
+    return true;
+}
+
 // Pretty URL → .php file mapping
 $map = [
     "/" => "/index.php",
