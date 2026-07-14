@@ -3,12 +3,12 @@ require_once __DIR__ . '/../inc/functions.php';
 require_once __DIR__ . '/../inc/admin-functions.php';
 $s = settings();
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (admin_login($_POST['pass'] ?? '')) { header('Location: home.php'); exit; }
-    $authErr = 'Грешна парола.';
+    if (admin_login($_POST['pass'] ?? '')) { header('Location: settings.php'); exit; }
+    $authErr = 'Greshna parola.';
 }
-if (is_admin()) { header('Location: home.php'); exit; }
+if (is_admin()) { header('Location: settings.php'); exit; }
 $GLOBALS['admin_page'] = '';
-$title = 'Вход | Админ | ' . $s['name'];
+$title = 'Vhod | Admin | ' . $s['name'];
 require __DIR__ . '/../inc/admin-header.php';
 ?>
 <div class="adminGate">
