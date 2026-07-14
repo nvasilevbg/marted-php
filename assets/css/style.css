@@ -1,5 +1,5 @@
 /* MarTed — quiet luxury. Charcoal canvas, champagne-gold accent, confident serif. No noise, no orbs. */
-1
+:root {
   --font-serif:'Spectral', Georgia, serif;--font-sans:'Manrope', system-ui, sans-serif;--font-mono:'JetBrains Mono', monospace;
   --bg:#0c0b0a; --bg-2:#100e0c; --bg-3:#15130f; --bg-4:#1b1813;
   --ink:#f2ead9; --ink-2:#e4dcc9; --muted:#9f9580; --muted-2:#6e6553;
