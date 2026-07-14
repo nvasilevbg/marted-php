@@ -1,0 +1,5 @@
+inc/config.php
+data/
+*.db
+assets/media/projects/*
+!assets/media/projects/.gitkeep

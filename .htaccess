@@ -1,0 +1,16 @@
+RewriteEngine On
+RewriteBase /
+
+# Pretty URLs for PHP pages
+RewriteRule ^uslugi/?$ uslugi.php [L]
+RewriteRule ^proekti/?$ proekti.php [L]
+RewriteRule ^proekti/([a-zA-Z0-9_-]+)/?$ proekt.php?slug=$1 [L]
+RewriteRule ^kontakti/?$ kontakti.php [L]
+RewriteRule ^zapazi/?$ zapazi.php [L]
+RewriteRule ^za-nas/?$ za-nas.php [L]
+
+# Admin
+RewriteRule ^admin/?$ admin/index.php [L]
+
+# Protect sensitive files
+RewriteRule ^(inc|data|config\.php) - [F]
