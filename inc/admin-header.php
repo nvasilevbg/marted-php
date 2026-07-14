@@ -4,12 +4,24 @@ require_once __DIR__ . '/icons.php';
 require_once __DIR__ . '/admin-functions.php';
 $s = settings();
 $current = $GLOBALS['admin_page'] ?? '';
-$nav = [
-    'projects' => ['label'=>'Проекти','icon'=>'drill','href'=>'projects.php'],
-    'services' => ['label'=>'Услуги','icon'=>'shield','href'=>'services.php'],
-    'testimonials' => ['label'=>'Отзиви','icon'=>'users','href'=>'testimonials.php'],
-    'bookings' => ['label'=>'Резервации','icon'=>'calendar','href'=>'bookings.php'],
-    'settings' => ['label'=>'Настройки','icon'=>'clock','href'=>'settings.php'],
+$navGroups = [
+    'НАЧАЛНА' => [
+        'hero' => ['label'=>'Херобанер','icon'=>'pin','href'=>'section.php?edit=hero'],
+        'stats' => ['label'=>'Статистики','icon'=>'users','href'=>'section.php?edit=stats'],
+        'services' => ['label'=>'Услуги','icon'=>'shield','href'=>'services.php'],
+        'projects' => ['label'=>'Проекти','icon'=>'drill','href'=>'projects.php'],
+        'testimonials' => ['label'=>'Отзиви','icon'=>'users','href'=>'testimonials.php'],
+    ],
+    'ДРУГИ СТРАНИЦИ' => [
+        'contact' => ['label'=>'Контакти','icon'=>'phone','href'=>'section.php?edit=contact'],
+        'about' => ['label'=>'За нас','icon'=>'users','href'=>'section.php?edit=about'],
+    ],
+    'ОПЕРАЦИИ' => [
+        'bookings' => ['label'=>'Резервации','icon'=>'calendar','href'=>'bookings.php'],
+    ],
+    'ОБЩИ' => [
+        'brand' => ['label'=>'Настройки','icon'=>'clock','href'=>'section.php?edit=brand'],
+    ],
 ];
 $bCount = is_admin() ? db()->query("SELECT COUNT(*) FROM bookings")->fetchColumn() : 0;
 ?>
@@ -20,15 +32,18 @@ $bCount = is_admin() ? db()->query("SELECT COUNT(*) FROM bookings")->fetchColumn
 <link rel="icon" href="/assets/media/icon.svg" type="image/svg+xml">
 <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;0,700&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/style.css?v=3">
-<link rel="stylesheet" href="/assets/css/admin.css?v=3">
+<link rel="stylesheet" href="/assets/css/admin.css?v=4">
 </head>
 <body class="adminBody">
 <div class="adminLayout">
   <aside class="adminSidebar">
     <div class="adminSidebarLogo"><img src="/assets/media/logo.png" alt="<?= e($s['name']) ?>" style="height:40px;width:auto"></div>
     <nav class="adminNav">
-      <?php foreach ($nav as $key=>$item): ?>
-      <a href="<?= $item['href'] ?>" class="<?= $current===$key?'active':'' ?>"><?= icon($item['icon'],'icon') ?><span><?= e($item['label']) ?></span><?php if ($key==='bookings' && $bCount>0): ?><span class="navBadge"><?= $bCount ?></span><?php endif; ?></a>
+      <?php foreach ($navGroups as $groupLabel => $items): ?>
+      <div class="navGroupLabel"><?= $groupLabel ?></div>
+      <?php foreach ($items as $key => $item): ?>
+      <a href="<?= $item['href'] ?>" class="navItem <?= $current===$key?'active':'' ?>"><?= icon($item['icon'],'icon') ?><span><?= e($item['label']) ?></span><?php if ($key==='bookings' && $bCount>0): ?><span class="navBadge"><?= $bCount ?></span><?php endif; ?></a>
+      <?php endforeach; ?>
       <?php endforeach; ?>
     </nav>
     <div class="adminSidebarBottom">
