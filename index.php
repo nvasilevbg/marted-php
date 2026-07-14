@@ -47,7 +47,7 @@ require __DIR__ . '/inc/header.php';
     </div>
     <div class="serviceIconGrid reveal" style="--d:80ms">
       <?php foreach ($svcs as $svc): ?>
-      <article class="serviceIconCard"><span class="icIdx">0</span><?= icon($svc['icon']) ?><h3><?= e($svc['title']) ?></h3><p><?= e($svc['text']) ?></p></article>
+      <article class="serviceIconCard"><?= icon($svc['icon']) ?><h3><?= e($svc['title']) ?></h3><p><?= e($svc['text']) ?></p></article>
       <?php endforeach; ?>
     </div>
   </div>

@@ -46,12 +46,12 @@ function db_seed($pdo) {
     $st = $pdo->prepare("INSERT INTO settings (k,v) VALUES (?,?)");
     foreach ($s as $k=>$v) $st->execute([$k,$v]);
     $seed = [
-        ['kuhnya-po-porachka','Кухня по поръчка','Кухни','Юли 2024','Добрич','Монтаж на кухня по поръчка с остров, вградени шкафове и завършващи панели.','/media/kitchen-2.jpg',['/media/kitchen-2.jpg','/media/kitchen-1.jpg','/media/kitchen-3.jpg','/media/kitchen-4.jpg']],
-        ['moderna-kuhnya','Модерна кухня','Кухни','Юни 2024','Балчик','Монтаж на модерна кухня с остров, вградени шкафове и завършващи панели.','/media/kitchen-3.jpg',['/media/kitchen-3.jpg','/media/kitchen-4.jpg','/media/kitchen-1.jpg']],
-        ['spalnya-i-garderob','Спалня и гардероб','Спални','Април 2024','Добрич','Сглобяване на спалня, нощни шкафчета и гардероб с плъзгащи се врати.','/media/bedroom-1.jpg',['/media/bedroom-1.jpg','/media/bedroom-2.jpg','/media/living-3.jpg']],
-        ['garderob-po-razmer','Гардероб по размер','Гардероби','Март 2024','Варна','Монтаж на висок гардероб по размер с плавно затваряне и вътрешно разпределение.','/media/bedroom-2.jpg',['/media/bedroom-2.jpg','/media/bedroom-1.jpg','/media/kitchen-4.jpg']],
-        ['sektsiya-za-dnevna','Секция за дневна','Други','Февруари 2024','Добрич','Монтаж на секция за дневна с ТВ панел, шкафове и скрит монтаж.','/media/living-1.jpg',['/media/living-1.jpg','/media/living-2.jpg','/media/living-3.jpg']],
-        ['ofis-obzavezhdane','Офис обзавеждане','Други','Януари 2024','Добрич','Монтаж на офис бюро, шкафове, етажерки и конферентна маса.','/media/living-3.jpg',['/media/living-3.jpg','/media/living-2.jpg','/media/kitchen-4.jpg']],
+        ['kuhnya-po-porachka','Кухня по поръчка','Кухни','Юли 2024','Добрич','Монтаж на кухня по поръчка с остров, вградени шкафове и завършващи панели.','/assets/media/kitchen-2.jpg',['/assets/media/kitchen-2.jpg','/assets/media/kitchen-1.jpg','/assets/media/kitchen-3.jpg','/assets/media/kitchen-4.jpg']],
+        ['moderna-kuhnya','Модерна кухня','Кухни','Юни 2024','Балчик','Монтаж на модерна кухня с остров, вградени шкафове и завършващи панели.','/assets/media/kitchen-3.jpg',['/assets/media/kitchen-3.jpg','/assets/media/kitchen-4.jpg','/assets/media/kitchen-1.jpg']],
+        ['spalnya-i-garderob','Спалня и гардероб','Спални','Април 2024','Добрич','Сглобяване на спалня, нощни шкафчета и гардероб с плъзгащи се врати.','/assets/media/bedroom-1.jpg',['/assets/media/bedroom-1.jpg','/assets/media/bedroom-2.jpg','/assets/media/living-3.jpg']],
+        ['garderob-po-razmer','Гардероб по размер','Гардероби','Март 2024','Варна','Монтаж на висок гардероб по размер с плавно затваряне и вътрешно разпределение.','/assets/media/bedroom-2.jpg',['/assets/media/bedroom-2.jpg','/assets/media/bedroom-1.jpg','/assets/media/kitchen-4.jpg']],
+        ['sektsiya-za-dnevna','Секция за дневна','Други','Февруари 2024','Добрич','Монтаж на секция за дневна с ТВ панел, шкафове и скрит монтаж.','/assets/media/living-1.jpg',['/assets/media/living-1.jpg','/assets/media/living-2.jpg','/assets/media/living-3.jpg']],
+        ['ofis-obzavezhdane','Офис обзавеждане','Други','Януари 2024','Добрич','Монтаж на офис бюро, шкафове, етажерки и конферентна маса.','/assets/media/living-3.jpg',['/assets/media/living-3.jpg','/assets/media/living-2.jpg','/assets/media/kitchen-4.jpg']],
     ];
     $st = $pdo->prepare("INSERT INTO projects (slug,title,category,pdate,location,description,cover,gallery) VALUES (?,?,?,?,?,?,?,?)");
     foreach ($seed as $p) $st->execute([$p[0],$p[1],$p[2],$p[3],$p[4],$p[5],$p[6],json_encode($p[7])]);
