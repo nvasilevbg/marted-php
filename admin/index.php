@@ -1,39 +1,23 @@
 <?php
 require_once __DIR__ . '/../inc/functions.php';
-require_once __DIR__ . '/../inc/icons.php';
 require_once __DIR__ . '/../inc/admin-functions.php';
 $s = settings();
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (admin_login($_POST['pass'] ?? '')) { header('Location: index.php'); exit; }
+    if (admin_login($_POST['pass'] ?? '')) { header('Location: home.php'); exit; }
     $authErr = 'Грешна парола.';
 }
-$GLOBALS['admin_page'] = 'dashboard';
-if (is_admin()) {
-    $bCount = db()->query("SELECT COUNT(*) FROM bookings")->fetchColumn();
-    $pCount = db()->query("SELECT COUNT(*) FROM projects")->fetchColumn();
-    $sCount = db()->query("SELECT COUNT(*) FROM services")->fetchColumn();
-    $pending = db()->query("SELECT COUNT(*) FROM bookings WHERE status='pending'")->fetchColumn();
-}
-$title = 'Админ | ' . $s['name'];
+if (is_admin()) { header('Location: home.php'); exit; }
+$GLOBALS['admin_page'] = '';
+$title = 'Вход | Админ | ' . $s['name'];
 require __DIR__ . '/../inc/admin-header.php';
 ?>
-<?php if (is_admin()): ?>
-<div class="adminTop"><div><span class="eyebrow eyebrow-line">Админ панел</span><h1>MarTed · управление</h1></div></div>
-<div class="adminCards">
-  <a href="projects.php" class="adminCard"><div class="acNum"><?= $pCount ?></div><div class="acLabel">Проекти</div></a>
-  <a href="bookings.php" class="adminCard"><div class="acNum"><?= $bCount ?></div><div class="acLabel">Резервации</div></a>
-  <a href="bookings.php?filter=pending" class="adminCard"><div class="acNum"><?= $pending ?></div><div class="acLabel">Чакат потвърждение</div></a>
-  <a href="services.php" class="adminCard"><div class="acNum"><?= $sCount ?></div><div class="acLabel">Услуги</div></a>
-</div>
-<?php else: ?>
 <div class="adminGate">
   <span class="eyebrow eyebrow-line">Админ</span>
   <h1>Вход за администратор</h1>
   <form method="POST" style="margin-top:20px;display:grid;gap:18px">
-    <div><label for="ad-pass">Парола</label><input id="ad-pass" type="password" name="pass" placeholder="Админ парола"></div>
+    <div><label for="ad-pass">Парола</label><input id="ad-pass" type="password" name="pass" placeholder="Админ парола" style="background:var(--bg-3);border:1px solid var(--line);border-radius:var(--radius);padding:10px 14px;color:var(--ink);font-size:15px;width:100%;box-sizing:border-box"></div>
     <button class="btn btn-primary btn-block" type="submit">Вход</button>
     <?php if (!empty($authErr)): ?><p class="formMsg err"><?= e($authErr) ?></p><?php endif; ?>
   </form>
 </div>
-<?php endif; ?>
 <?php require __DIR__ . '/../inc/admin-footer.php'; ?>

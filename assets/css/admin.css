@@ -61,3 +61,4 @@
 .linkBtn{background:transparent;border:0;color:var(--accent-2);font-family:var(--font-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;text-decoration:none}
 .projFormHead{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
 @media(max-width:760px){.adminSidebar{position:fixed;left:-240px;z-index:100;transition:left .3s}.adminMain{padding:16px}.adminRow{grid-template-columns:60px 1fr}.adminRowActions{grid-column:1/-1}.formRow{grid-template-columns:1fr}.bookingItem{grid-template-columns:1fr}.adminTabs button{padding:10px 14px;font-size:11px}}
+.navSectionLabel{font-family:var(--font-mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted-2);padding:12px 20px 6px}.navSub{padding-left:36px}.navDivider{height:1px;background:var(--line-soft);margin:12px 20px}
