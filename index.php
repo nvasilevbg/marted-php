@@ -9,8 +9,8 @@ require __DIR__ . '/inc/header.php';
   <div class="container heroGrid">
     <div class="heroCopy">
       <p class="eyebrow anim" style="--d:0ms">Фирма за монтаж · гр. Добрич</p>
-      <h1 class="anim" style="--d:120ms">Монтаж и демонтаж <em>на мебели</em></h1>
-      <p class="heroLead anim" style="--d:260ms">Професионален монтаж, демонтаж, разнос и изнасяне на мебели в Добрич, Балчик, Варна и околността — с гаранция за качество, точност и чист завършек.</p>
+      <h1 class="anim" style="--d:120ms"><?php echo e(content("home_hero_title","Монтаж и демонтаж на мебели")); ?></h1>
+      <p class="heroLead anim" style="--d:260ms"><?php echo e(content("home_hero_lead")); ?></p>
       <div class="heroActions anim" style="--d:380ms">
         <a href="<?= e($s['phoneHref']) ?>" class="btn btn-primary"><?= icon('phone') ?> Позвъни сега</a>
         <a href="/zapazi" class="btn btn-ghost">Запази час</a>
