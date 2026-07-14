@@ -4,13 +4,10 @@ require_once __DIR__ . '/db.php';
 function e($s) { return htmlspecialchars((string)$s, ENT_QUOTES, 'UTF-8'); }
 
 function settings() {
-    static $s = null;
-    if ($s === null) {
-        $rows = db()->query("SELECT k,v FROM settings")->fetchAll();
-        $s = [];
-        foreach ($rows as $r) $s[$r['k']] = $r['v'];
-        $s += ['name'=>'MarTed','subtitle'=>'монтаж на мебели','tagline'=>'Фирма за монтаж и демонтаж','phone'=>'','phoneHref'=>'#','email'=>'','location'=>'','region'=>'','hours'=>'','established'=>''];
-    }
+    $rows = db()->query("SELECT k,v FROM settings")->fetchAll();
+    $s = [];
+    foreach ($rows as $r) $s[$r['k']] = $r['v'];
+    $s += ['name'=>'MarTed','subtitle'=>'монтаж на мебели','tagline'=>'Фирма за монтаж и демонтаж','phone'=>'','phoneHref'=>'#','email'=>'','location'=>'','region'=>'','hours'=>'','established'=>''];
     return $s;
 }
 function setting($k, $def='') { $s = settings(); return isset($s[$k]) && $s[$k] !== '' ? $s[$k] : $def; }
@@ -59,12 +56,9 @@ function testimonials() {
     return array_map(function($r) { return ['name'=>$r['tname'],'text'=>$r['ttext'],'stars'=>$r['stars']]; }, $rows);
 }
 function content($key, $def='') {
-    static $cache = null;
-    if ($cache === null) {
-        $rows = db()->query("SELECT k,v FROM settings")->fetchAll();
-        $cache = [];
-        foreach ($rows as $r) $cache[$r['k']] = $r['v'];
-    }
-    return isset($cache[$key]) && $cache[$key] !== '' ? $cache[$key] : $def;
+    $st = db()->prepare("SELECT v FROM settings WHERE k=?");
+    $st->execute([$key]);
+    $v = $st->fetchColumn();
+    return ($v !== false && $v !== '') ? $v : $def;
 }
 function filters() { return ['Всички','Кухни','Спални','Гардероби','Други']; }
