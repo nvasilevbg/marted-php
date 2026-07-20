@@ -3,6 +3,14 @@ services:
     build: .
     ports:
       - "80"
+    networks:
+      - coolify
+      - default
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.marted.rule=Host(`marted.187.124.9.37.sslip.io`)"
+      - "traefik.http.routers.marted.entrypoints=web"
+      - "traefik.http.services.marted.loadbalancer.server.port=80"
     environment:
       - DB_DRIVER=mysql
       - DB_HOST=db
@@ -24,6 +32,11 @@ services:
       - dbdata:/var/lib/mysql
       - ./schema.sql:/docker-entrypoint-initdb.d/schema.sql
     restart: unless-stopped
+
+networks:
+  coolify:
+    external: true
+  default:
 
 volumes:
   dbdata:
