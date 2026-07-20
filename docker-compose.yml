@@ -1,0 +1,29 @@
+services:
+  app:
+    build: .
+    ports:
+      - "80"
+    environment:
+      - DB_DRIVER=mysql
+      - DB_HOST=db
+      - DB_NAME=marted
+      - DB_USER=marted
+      - DB_PASS=${DB_PASS:-martedpass}
+    depends_on:
+      - db
+    restart: unless-stopped
+
+  db:
+    image: mariadb:11
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASS:-rootpass}
+      - MYSQL_DATABASE=marted
+      - MYSQL_USER=marted
+      - MYSQL_PASSWORD=${DB_PASS:-martedpass}
+    volumes:
+      - dbdata:/var/lib/mysql
+      - ./schema.sql:/docker-entrypoint-initdb.d/schema.sql
+    restart: unless-stopped
+
+volumes:
+  dbdata:

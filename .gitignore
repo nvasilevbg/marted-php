@@ -1,4 +1,3 @@
-inc/config.php
 data/
 *.db
 assets/media/projects/*
