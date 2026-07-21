@@ -1,22 +1,18 @@
-services:
+﻿services:
   app:
     build: .
-    ports:
+    expose:
       - "80"
     networks:
       - coolify
       - default
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.marted.rule=Host(`marted.187.124.9.37.sslip.io`)"
-      - "traefik.http.routers.marted.entrypoints=web"
-      - "traefik.http.services.marted.loadbalancer.server.port=80"
     environment:
       - DB_DRIVER=mysql
       - DB_HOST=db
       - DB_NAME=marted
       - DB_USER=marted
       - DB_PASS=${DB_PASS:-martedpass}
+      - ADMIN_PASS=${ADMIN_PASS:-marted2024}
     depends_on:
       - db
     restart: unless-stopped
