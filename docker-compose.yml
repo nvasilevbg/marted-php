@@ -16,9 +16,14 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.docker.network=coolify"
-      - "traefik.http.routers.marted.entrypoints=http"
+      - "traefik.http.routers.marted-http.entrypoints=http"
+      - "traefik.http.routers.marted-http.rule=Host(`marted.187.124.9.37.nip.io`)"
+      - "traefik.http.routers.marted-http.middlewares=marted-redirect"
+      - "traefik.http.middlewares.marted-redirect.redirectscheme.scheme=https"
+      - "traefik.http.routers.marted.entrypoints=https"
       - "traefik.http.routers.marted.rule=Host(`marted.187.124.9.37.nip.io`)"
       - "traefik.http.routers.marted.service=marted-svc"
+      - "traefik.http.routers.marted.tls.certresolver=letsencrypt"
       - "traefik.http.services.marted-svc.loadbalancer.server.port=80"
     depends_on:
       - db
