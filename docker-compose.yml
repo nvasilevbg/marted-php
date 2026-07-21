@@ -15,6 +15,7 @@ services:
       - ADMIN_PASS=${ADMIN_PASS:-marted2024}
     labels:
       - "traefik.enable=true"
+      - "traefik.docker.network=coolify"
       - "traefik.http.routers.marted.entrypoints=http"
       - "traefik.http.routers.marted.rule=Host(`marted.187.124.9.37.nip.io`)"
       - "traefik.http.routers.marted.service=marted-svc"
