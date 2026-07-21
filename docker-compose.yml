@@ -13,6 +13,12 @@ services:
       - DB_USER=marted
       - DB_PASS=${DB_PASS:-martedpass}
       - ADMIN_PASS=${ADMIN_PASS:-marted2024}
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.marted.entrypoints=http"
+      - "traefik.http.routers.marted.rule=Host(`marted.187.124.9.37.nip.io`)"
+      - "traefik.http.routers.marted.service=marted-svc"
+      - "traefik.http.services.marted-svc.loadbalancer.server.port=80"
     depends_on:
       - db
     restart: unless-stopped
