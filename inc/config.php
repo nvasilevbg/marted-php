@@ -1,5 +1,5 @@
-<?php
-// Config — reads from env vars (Docker/Coolify) or falls back to SQLite (local)
+﻿<?php
+// Config — reads from env vars (Docker/Coolify) or falls back to SQLite (local) â€” reads from env vars (Docker/Coolify) or falls back to SQLite (local)
 $driver = getenv('DB_DRIVER') ?: 'sqlite';
 return [
     'db' => [
