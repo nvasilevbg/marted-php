@@ -37,9 +37,14 @@ function add_booking($d) {
     $chk = db()->prepare("SELECT 1 FROM bookings WHERE status<>'cancelled' AND bdate=? AND slot=?");
     $chk->execute([$d['date'],$d['slot']]);
     if ($chk->fetch()) return ['ok'=>false,'error'=>'Този час вече е зает. Моля, изберете друг.'];
-    $st = db()->prepare("INSERT INTO bookings (bdate,slot,name,phone,service,notes,status) VALUES (?,?,?,?,?,?,'pending')");
-    $st->execute([$d['date'],$d['slot'],trim($d['name']),trim($d['phone']),$d['service']??'',$d['notes']??'']);
-    return ['ok'=>true];
+    try {
+        $st = db()->prepare("INSERT INTO bookings (bdate,slot,name,phone,service,notes,status) VALUES (?,?,?,?,?,?,'pending')");
+        $st->execute([$d['date'],$d['slot'],trim($d['name']),trim($d['phone']),$d['service']??'',$d['notes']??'']);
+        return ['ok'=>true];
+    } catch (\PDOException $e) {
+        if ($e->getCode() == 23000) return ['ok'=>false,'error'=>'Този час вече е зает. Моля, изберете друг.'];
+        throw $e;
+    }
 }
 
 // --- DB-backed content ---

@@ -12,7 +12,7 @@ services:
       - DB_NAME=marted
       - DB_USER=marted
       - DB_PASS=${DB_PASS:-martedpass}
-      - ADMIN_PASS=${ADMIN_PASS:-marted2024}
+      - ADMIN_PASS=${ADMIN_PASS:-CHANGE_ME_IN_CONFIG}
     labels:
       - "traefik.enable=true"
       - "traefik.docker.network=coolify"

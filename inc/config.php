@@ -1,5 +1,6 @@
-﻿<?php
-// Config — reads from env vars (Docker/Coolify) or falls back to SQLite (local) â€” reads from env vars (Docker/Coolify) or falls back to SQLite (local)
+<?php
+// Config — reads from env vars (Docker/Coolify) or falls back to SQLite (local).
+// For shared hosting: copy config.sample.php to config.php and fill in real values.
 $driver = getenv('DB_DRIVER') ?: 'sqlite';
 return [
     'db' => [
@@ -13,6 +14,6 @@ return [
             'charset' => 'utf8mb4',
         ],
     ],
-    'admin_pass' => getenv('ADMIN_PASS') ?: 'marted2024',
+    'admin_pass' => getenv('ADMIN_PASS') ?: 'CHANGE_ME_IN_CONFIG',
     'base_url' => getenv('BASE_URL') ?: '',
 ];
