@@ -1,17 +1,18 @@
 <?php
-// Kopiray tozi fail kato config.php na servera i popalni stojnostite.
+// Copy this file to inc/config.php and fill in your MySQL credentials.
+// This is for shared hosting (superhosting.bg) — no Docker, no env vars.
 return [
     'db' => [
         'driver' => 'mysql',
-        'sqlite_path' => __DIR__ . '/data/site.db',
+        'sqlite_path' => __DIR__ . '/../data/site.db',
         'mysql' => [
             'host' => 'localhost',
-            'name' => 'vasata_baza',
-            'user' => 'vasia_user',
-            'pass' => 'vasata_parola',
+            'name' => 'YOUR_DB_NAME',
+            'user' => 'YOUR_DB_USER',
+            'pass' => 'YOUR_DB_PASS',
             'charset' => 'utf8mb4',
         ],
     ],
-    'admin_pass' => 'smeni_tazi_parola',
-    'base_url' => 'https://vashiqt-domajn.bg',
+    'admin_pass' => 'CHANGE_THIS_TO_A_STRONG_PASSWORD',
+    'base_url' => 'https://your-domain.bg',
 ];
