@@ -29,11 +29,14 @@ echo "<p style='color:green'>Connected.</p>";
 $sql = file_get_contents(__DIR__ . '/schema.sql');
 if (!$sql) die("<p style='color:red'>schema.sql not found.</p>");
 
+// Strip SQL comments before splitting
+$sql = preg_replace('/--[^\r\n]*/', '', $sql);
+
 $stmts = preg_split('/;[\r\n]+/', $sql);
 $ok = 0; $errors = [];
 foreach ($stmts as $stmt) {
     $stmt = trim($stmt);
-    if ($stmt === '' || str_starts_with($stmt, '--')) continue;
+    if ($stmt === '') continue;
     try {
         $pdo->exec($stmt);
         $ok++;
