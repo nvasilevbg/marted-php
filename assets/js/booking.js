@@ -82,10 +82,14 @@
     d.appendChild(el('<h3>'+(selected?nice(selected):'')+'</h3>'));
     var sg=el('<div class="slots"></div>');
     var tf=takenForDay();
+    var isToday = (selected === today());
+    var nowHour = new Date().getHours();
     SLOTS.forEach(function(s){
       var takenS=tf.indexOf(s)>=0;
-      var b=el('<button class="slot '+(slot===s?'sel':'')+' '+(takenS?'taken':'')+'" '+(takenS?'disabled':'')+'>'+s+'</button>');
-      if(!takenS) b.onclick=function(){ slot=s; step=3; setTimeout(function(){render();},200); };
+      var pastS = isToday && (parseInt(s) <= nowHour);
+      var dis = takenS || pastS;
+      var b=el('<button class="slot '+(slot===s?'sel':'')+' '+(dis?'taken':'')+'" '+(dis?'disabled':'')+'>'+s+(pastS?'':'')+'</button>');
+      if(!dis) b.onclick=function(){ slot=s; step=3; setTimeout(function(){render();},200); };
       sg.appendChild(b);
     });
     d.appendChild(sg);
