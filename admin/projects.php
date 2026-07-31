@@ -25,7 +25,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 if (move_uploaded_file($tmp, $tmpPath)) {
                     $webpName = 'p_' . time() . '_' . rand(100,999) . '.webp';
                     $webpPath = $dir . '/' . $webpName;
-                    if (convert_to_webp($tmpPath, $webpPath, 85)) {
+                    $videoExts = ['mp4','webm','mov'];
+                    if (in_array($ext, $videoExts)) {
+                        $gallery_urls[] = '/assets/media/projects/' . $tmpName;
+                    } elseif (convert_to_webp($tmpPath, $webpPath, 85)) {
                         @unlink($tmpPath);
                         $gallery_urls[] = '/assets/media/projects/' . $webpName;
                     } else {
@@ -77,7 +80,7 @@ require __DIR__ . '/../inc/admin-header.php';
       <input type="file" name="cover_file" accept="image/*">
     </div>
     <div><label>Галерия (URL на ред или качи файлове)</label>
-      <textarea name="gallery" rows="4" placeholder="/assets/media/kitchen-1.jpg"><?= e(implode("\n", $editing['gallery'])) ?></textarea>
+      <textarea name="gallery" rows="4" placeholder="/assets/media/kitchen-1.webp или /assets/media/video.mp4"><?= e(implode("\n", $editing['gallery'])) ?></textarea>
       <input type="file" name="gallery_files[]" multiple accept="image/*" style="margin-top:8px">
     </div>
   </div>

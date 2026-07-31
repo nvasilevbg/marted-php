@@ -26,8 +26,12 @@ require __DIR__ . '/inc/header.php';
     </div>
     <span class="eyebrow eyebrow-line galleryLabel">Галерия</span>
     <div class="projectGallery">
-      <?php foreach ($p['gallery'] as $i=>$img): ?>
-      <img src="<?= e($img) ?>" alt="<?= e($p['title']) ?> — изглед <?= $i+1 ?>">
+      <?php foreach ($p['gallery'] as $i=>$media): $mext = strtolower(pathinfo($media, PATHINFO_EXTENSION)); $isVideo = in_array($mext, ['mp4','webm','mov']); ?>
+      <?php if ($isVideo): ?>
+      <video controls preload="metadata" class="projectVideo"><source src="<?= e($media) ?>" type="video/<?= $mext === 'mov' ? 'mp4' : $mext ?>"></video>
+      <?php else: ?>
+      <img src="<?= e($media) ?>" alt="<?= e($p['title']) ?> — изглед <?= $i+1 ?>">
+      <?php endif; ?>
       <?php endforeach; ?>
     </div>
     <div class="projectCta">

@@ -66,12 +66,12 @@ function convert_to_webp($src, $dest, $quality = 85) {
 function upload_image($field, $dest_dir) {
     if (empty($_FILES[$field]['name']) || $_FILES[$field]['error'] !== UPLOAD_ERR_OK) return null;
     $ext = strtolower(pathinfo($_FILES[$field]['name'], PATHINFO_EXTENSION));
-    $allowed = ['jpg','jpeg','png','webp'];
+    $allowed = ['jpg','jpeg','png','webp','mp4','webm','mov'];
     if (!in_array($ext, $allowed)) return null;
     $finfo = finfo_open(FILEINFO_MIME_TYPE);
     $mime = finfo_file($finfo, $_FILES[$field]['tmp_name']);
     finfo_close($finfo);
-    $allowedMimes = ['image/jpeg','image/png','image/webp'];
+    $allowedMimes = ['image/jpeg','image/png','image/webp','video/mp4','video/webm','video/quicktime'];
     if (!in_array($mime, $allowedMimes)) return null;
     
     // Upload original to temp
@@ -79,14 +79,18 @@ function upload_image($field, $dest_dir) {
     $tmpPath = $dest_dir . '/' . $tmpName;
     if (!move_uploaded_file($_FILES[$field]['tmp_name'], $tmpPath)) return null;
     
-    // Convert to WebP
+    // Videos: keep as-is (no WebP conversion)
+    $videoExts = ['mp4','webm','mov'];
+    if (in_array($ext, $videoExts)) {
+        return '/assets/media/projects/' . $tmpName;
+    }
+    // Images: convert to WebP
     $webpName = 'p_' . time() . '_' . rand(100,999) . '.webp';
     $webpPath = $dest_dir . '/' . $webpName;
     if (convert_to_webp($tmpPath, $webpPath, 85)) {
-        @unlink($tmpPath); // delete original
+        @unlink($tmpPath);
         return '/assets/media/projects/' . $webpName;
     }
-    // Conversion failed — keep original
     return '/assets/media/projects/' . $tmpName;
 }
 
