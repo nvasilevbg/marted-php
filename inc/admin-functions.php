@@ -9,12 +9,15 @@ function is_admin() {
     _start_session();
     return !empty($_SESSION['is_admin']);
 }
-function admin_login($pass) {
+function admin_login($user, $pass) {
     _start_session();
+    $configUser = config()['admin_user'] ?? 'admin';
     $configPass = config()['admin_pass'];
+    $dbUser = setting('admin_user', '');
     $dbPass = setting('admin_pass', '');
+    $validUser = ($dbUser !== '') ? $dbUser : $configUser;
     $validPass = ($dbPass !== '' && $dbPass !== 'CHANGE_ME_IN_CONFIG') ? $dbPass : $configPass;
-    if (hash_equals($validPass, $pass)) { $_SESSION['is_admin'] = true; return true; }
+    if (hash_equals($validUser, $user) && hash_equals($validPass, $pass)) { $_SESSION['is_admin'] = true; return true; }
     return false;
 }
 function admin_logout() {

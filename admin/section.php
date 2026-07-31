@@ -119,6 +119,7 @@ require __DIR__ . '/../inc/admin-header.php';
 <form method="POST" class="adminForm">
   <?= csrf_field() ?>
   <input type="hidden" name="section" value="security">
+  <div><label>Потребител име</label><input name="new_user" value="<?= e(setting('admin_user', config()['admin_user'] ?? 'admin')) ?>"></div>
   <div><label>Текуща парола</label><input type="password" name="current_pass" required></div>
   <div><label>Нова парола (min 6 символа)</label><input type="password" name="new_pass" required></div>
   <div><label>Повтори новата</label><input type="password" name="confirm_pass" required></div>

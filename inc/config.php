@@ -14,6 +14,7 @@ return [
             'charset' => 'utf8mb4',
         ],
     ],
+    'admin_user' => getenv('ADMIN_USER') ?: 'admin',
     'admin_pass' => getenv('ADMIN_PASS') ?: 'CHANGE_ME_IN_CONFIG',
     'base_url' => getenv('BASE_URL') ?: '',
 ];

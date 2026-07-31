@@ -3,7 +3,7 @@ require_once __DIR__ . '/../inc/functions.php';
 require_once __DIR__ . '/../inc/admin-functions.php';
 $s = settings();
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (admin_login($_POST['pass'] ?? '')) { header('Location: section.php?edit=hero'); exit; }
+    if (admin_login($_POST['user'] ?? '', $_POST['pass'] ?? '')) { header('Location: section.php?edit=hero'); exit; }
     $authErr = 'Грешна парола.';
 }
 if (is_admin()) { header('Location: section.php?edit=hero'); exit; }
