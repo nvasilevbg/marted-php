@@ -112,5 +112,18 @@ require __DIR__ . '/../inc/admin-header.php';
   <div><label>Година на основаване</label><input name="established" value="<?= e($s['established']) ?>"></div>
   <button class="btn btn-primary btn-block" type="submit">Запази</button>
 </form>
+
+<?php elseif ($edit === 'security'): ?>
+<?php if (!empty($GLOBALS['sec_ok'])): ?><p class="formMsg ok" style="margin-bottom:16px">Паролата е сменена успешно.</p><?php endif; ?>
+<?php if (!empty($GLOBALS['sec_error'])): ?><p class="formMsg err" style="margin-bottom:16px"><?= e($GLOBALS['sec_error']) ?></p><?php endif; ?>
+<form method="POST" class="adminForm">
+  <?= csrf_field() ?>
+  <input type="hidden" name="section" value="security">
+  <div><label>Текуща парола</label><input type="password" name="current_pass" required></div>
+  <div><label>Нова парола (min 6 символа)</label><input type="password" name="new_pass" required></div>
+  <div><label>Повтори новата</label><input type="password" name="confirm_pass" required></div>
+  <button class="btn btn-primary btn-block" type="submit">Смени паролата</button>
+</form>
+<p class="formNote" style="margin-top:20px"><strong>Ако забравиш паролата:</strong> влез в cPanel → File Manager → <code>inc/config.php</code> и смени <code>admin_pass</code>. Или изтрий реда <code>admin_pass</code> от таблица <code>settings</code> в phpMyAdmin — тогава се връща към паролата в config.php.</p>
 <?php endif; ?>
 <?php require __DIR__ . '/../inc/admin-footer.php'; ?>
