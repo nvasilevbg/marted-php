@@ -44,7 +44,7 @@ require __DIR__ . '/../inc/admin-header.php';
 <div style="margin-bottom:16px"><a href="testimonials.php?edit=new" class="btn btn-primary">+ Добави отзив</a></div>
 <div class="adminList">
   <?php foreach ($list as $t): ?>
-  <div class="adminRow"><div style="width:80px;height:60px;display:grid;place-items:center;background:var(--bg-3);border-radius:var(--radius);color:var(--accent-2);font-size:18px"><?= str_repeat('â˜…',$t['stars']) ?></div><div class="adminRowInfo"><strong><?= e($t['tname']) ?></strong><span><?= e(mb_substr($t['ttext'],0,60)) ?>...</span></div><div class="adminRowActions"><a href="testimonials.php?edit=<?= $t['id'] ?>">Редактирай</a><a href="testimonials.php?delete=<?= $t['id'] ?>" onclick="return confirm('Изтриване?')" class="del">Изтрий</a></div></div>
+  <div class="adminRow"><div style="width:80px;height:60px;display:grid;place-items:center;background:var(--bg-3);border-radius:var(--radius);color:var(--accent-2);font-size:18px"><?= str_repeat('★',$t['stars']) ?></div><div class="adminRowInfo"><strong><?= e($t['tname']) ?></strong><span><?= e(mb_substr($t['ttext'],0,60)) ?>...</span></div><div class="adminRowActions"><a href="testimonials.php?edit=<?= $t['id'] ?>">Редактирай</a><a href="testimonials.php?delete=<?= $t['id'] ?>" onclick="return confirm('Изтриване?')" class="del">Изтрий</a></div></div>
   <?php endforeach; ?>
 </div>
 <?php endif; ?>
