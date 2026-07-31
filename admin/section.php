@@ -124,6 +124,5 @@ require __DIR__ . '/../inc/admin-header.php';
   <div><label>Повтори новата</label><input type="password" name="confirm_pass" required></div>
   <button class="btn btn-primary btn-block" type="submit">Смени паролата</button>
 </form>
-<p class="formNote" style="margin-top:20px"><strong>Ако забравиш паролата:</strong> влез в cPanel → File Manager → <code>inc/config.php</code> и смени <code>admin_pass</code>. Или изтрий реда <code>admin_pass</code> от таблица <code>settings</code> в phpMyAdmin — тогава се връща към паролата в config.php.</p>
 <?php endif; ?>
 <?php require __DIR__ . '/../inc/admin-footer.php'; ?>
