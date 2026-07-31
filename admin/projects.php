@@ -69,7 +69,10 @@ require __DIR__ . '/../inc/admin-header.php';
   <input type="hidden" name="id" value="<?= e($editing['id']) ?>">
   <div id="tab-main" class="tabContent active">
     <div><label>Заглавие *</label><input name="title" value="<?= e($editing['title']) ?>" placeholder="Модерна кухня"></div>
-    <div class="formRow"><div><label>Категория</label><input name="category" value="<?= e($editing['category']) ?>"></div><div><label>Дата</label><input name="pdate" value="<?= e($editing['pdate']) ?>" placeholder="Юли 2024"></div></div>
+    <div class="formRow"><div><label>Категория</label><select name="category"><?php
+    $cats = ['Кухни','Спални','Гардероби','Други'];
+    if (!in_array($editing['category'], $cats) && $editing['category']) $cats[] = $editing['category'];
+    foreach ($cats as $cat): ?><option value="<?= e($cat) ?>" <?= $editing['category']===$cat?'selected':'' ?>><?= e($cat) ?></option><?php endforeach; ?></select>></div><div><label>Дата</label><input name="pdate" value="<?= e($editing['pdate']) ?>" placeholder="Юли 2024"></div></div>
     <div class="formRow"><div><label>Локация</label><input name="location" value="<?= e($editing['location']) ?>"></div><div><label>Slug</label><input value="<?= e($editing['slug']) ?>" disabled></div></div>
     <div><label>Описание</label><textarea name="description" rows="3" placeholder="Монтаж на модерна кухня..."><?= e($editing['description']) ?></textarea></div>
   </div>
