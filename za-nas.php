@@ -26,7 +26,7 @@ require __DIR__ . '/inc/header.php';
       </ul>
       <a href="/zapazi" class="btn btn-primary">Запази час</a>
     </div>
-    <div class="aboutVisual"><img src="/assets/media/workshop-1.jpg" alt="Работа по монтаж на мебели"></div>
+    <div class="aboutVisual"><img src="/assets/media/workshop-1.jpg" alt="Работа по монтаж на мебели" loading="lazy"></div>
   </div>
 </section>
 <?php include __DIR__ . '/inc/booking-section.php'; ?>
