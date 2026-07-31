@@ -4,6 +4,7 @@ require_once __DIR__ . '/../inc/icons.php';
 require_once __DIR__ . '/../inc/admin-functions.php';
 require_admin();
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && !csrf_check()) { http_response_code(403); exit('Invalid CSRF token.'); }
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && !csrf_check()) { http_response_code(403); exit('Invalid CSRF token.'); }
 $s = settings();
 $GLOBALS['admin_page'] = 'services';
 $editing = null;
@@ -43,6 +44,7 @@ require __DIR__ . '/../inc/admin-header.php';
 <?php if ($editing): ?>
 <div class="adminTabs"><button class="active" onclick="void(0)">ÐžÑÐ½Ð¾Ð²Ð½Ð¾</button></div>
 <form method="POST" enctype="multipart/form-data" class="adminForm">
+  <?= csrf_field() ?>
   <?= csrf_field() ?>
   <div class="projFormHead"><span class="eyebrow eyebrow-line"><?= $editing['id']?'Ð ÐµÐ´Ð°ÐºÑ†Ð¸Ñ':'ÐÐ¾Ð²Ð° ÑƒÑÐ»ÑƒÐ³Ð°' ?></span><a href="services.php" class="linkBtn">&larr; ÐÐ°Ð·Ð°Ð´</a></div>
   <input type="hidden" name="id" value="<?= e($editing['id']) ?>">

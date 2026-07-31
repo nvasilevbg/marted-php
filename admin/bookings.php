@@ -4,6 +4,7 @@ require_once __DIR__ . '/../inc/icons.php';
 require_once __DIR__ . '/../inc/admin-functions.php';
 require_admin();
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && !csrf_check()) { http_response_code(403); exit('Invalid CSRF token.'); }
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && !csrf_check()) { http_response_code(403); exit('Invalid CSRF token.'); }
 $s = settings();
 $GLOBALS['admin_page'] = 'bookings';
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
@@ -42,12 +43,14 @@ require __DIR__ . '/../inc/admin-header.php';
     <div class="biActions">
       <form method="POST" style="display:inline">
   <?= csrf_field() ?>
+  <?= csrf_field() ?>
         <input type="hidden" name="action" value="status"><input type="hidden" name="id" value="<?= e($b['id']) ?>">
         <?php if ($b['status'] !== 'confirmed'): ?><button name="status" value="confirmed" type="submit">ÐŸÐ¾Ñ‚Ð²ÑŠÑ€Ð´Ð¸</button><?php endif; ?>
         <?php if ($b['status'] !== 'cancelled'): ?><button name="status" value="cancelled" type="submit">ÐžÑ‚ÐºÐ°Ð¶Ð¸</button><?php endif; ?>
         <?php if ($b['status'] !== 'pending'): ?><button name="status" value="pending" type="submit">Ð§Ð°ÐºÐ°Ñ‰Ð¸</button><?php endif; ?>
       </form>
       <form method="POST" style="display:inline" onsubmit="return confirm('Ð˜Ð·Ñ‚Ñ€Ð¸Ð²Ð°Ð½Ðµ?')">
+  <?= csrf_field() ?>
   <?= csrf_field() ?>
         <input type="hidden" name="action" value="delete"><input type="hidden" name="id" value="<?= e($b['id']) ?>">
         <button class="del" type="submit">Ð˜Ð·Ñ‚Ñ€Ð¸Ð¹</button>

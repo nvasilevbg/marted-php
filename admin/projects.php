@@ -4,6 +4,7 @@ require_once __DIR__ . '/../inc/icons.php';
 require_once __DIR__ . '/../inc/admin-functions.php';
 require_admin();
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && !csrf_check()) { http_response_code(403); exit('Invalid CSRF token.'); }
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && !csrf_check()) { http_response_code(403); exit('Invalid CSRF token.'); }
 $s = settings();
 $GLOBALS['admin_page'] = 'projects';
 $editing = null;
@@ -45,6 +46,7 @@ require __DIR__ . '/../inc/admin-header.php';
 <?php if (isset($_GET['ok'])): ?><p class="formMsg ok" style="margin-bottom:16px">Ð—Ð°Ð¿Ð°Ð·ÐµÐ½Ð¾.</p><?php endif; ?>
 <?php if ($editing): ?>
 <form method="POST" enctype="multipart/form-data" class="adminForm" style="max-width:none">
+  <?= csrf_field() ?>
   <?= csrf_field() ?>
   <div class="projFormHead"><span class="eyebrow eyebrow-line"><?= $editing['id']?'Ð ÐµÐ´Ð°ÐºÑ†Ð¸Ñ':'ÐÐ¾Ð² Ð¿Ñ€Ð¾ÐµÐºÑ‚' ?></span><a href="projects.php" class="linkBtn">&larr; ÐÐ°Ð·Ð°Ð´</a></div>
   <div class="adminTabs">

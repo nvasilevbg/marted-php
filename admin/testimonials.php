@@ -4,6 +4,7 @@ require_once __DIR__ . '/../inc/icons.php';
 require_once __DIR__ . '/../inc/admin-functions.php';
 require_admin();
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && !csrf_check()) { http_response_code(403); exit('Invalid CSRF token.'); }
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && !csrf_check()) { http_response_code(403); exit('Invalid CSRF token.'); }
 $s = settings();
 $GLOBALS['admin_page'] = 'testimonials';
 $editing = null;
@@ -30,6 +31,7 @@ require __DIR__ . '/../inc/admin-header.php';
 <div class="adminTop"><div><span class="eyebrow eyebrow-line">Ð¡ÑŠÐ´ÑŠÑ€Ð¶Ð°Ð½Ð¸Ðµ</span><h1>ÐžÑ‚Ð·Ð¸Ð²Ð¸</h1></div></div>
 <?php if ($editing): ?>
 <form method="POST" class="adminForm">
+  <?= csrf_field() ?>
   <?= csrf_field() ?>
   <div class="projFormHead"><span class="eyebrow eyebrow-line"><?= $editing['id']?'Ð ÐµÐ´Ð°ÐºÑ†Ð¸Ñ':'ÐÐ¾Ð² Ð¾Ñ‚Ð·Ð¸Ð²' ?></span><a href="testimonials.php" class="linkBtn">&larr; ÐÐ°Ð·Ð°Ð´</a></div>
   <input type="hidden" name="id" value="<?= e($editing['id']) ?>">

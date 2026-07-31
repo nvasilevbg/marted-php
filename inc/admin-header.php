@@ -5,22 +5,22 @@ require_once __DIR__ . '/admin-functions.php';
 $s = settings();
 $current = $GLOBALS['admin_page'] ?? '';
 $navGroups = [
-    'ÐÐÐ§ÐÐ›ÐÐ' => [
-        'hero' => ['label'=>'Ð¥ÐµÑ€Ð¾Ð±Ð°Ð½ÐµÑ€','icon'=>'pin','href'=>'section.php?edit=hero'],
-        'stats' => ['label'=>'Ð¡Ñ‚Ð°Ñ‚Ð¸ÑÑ‚Ð¸ÐºÐ¸','icon'=>'users','href'=>'section.php?edit=stats'],
-        'services' => ['label'=>'Ð£ÑÐ»ÑƒÐ³Ð¸','icon'=>'shield','href'=>'services.php'],
-        'projects' => ['label'=>'ÐŸÑ€Ð¾ÐµÐºÑ‚Ð¸','icon'=>'drill','href'=>'projects.php'],
-        'testimonials' => ['label'=>'ÐžÑ‚Ð·Ð¸Ð²Ð¸','icon'=>'users','href'=>'testimonials.php'],
+    'НАЧАЛНА' => [
+        'hero' => ['label'=>'Херобанер','icon'=>'pin','href'=>'section.php?edit=hero'],
+        'stats' => ['label'=>'Статистики','icon'=>'users','href'=>'section.php?edit=stats'],
+        'services' => ['label'=>'Услуги','icon'=>'shield','href'=>'services.php'],
+        'projects' => ['label'=>'Проекти','icon'=>'drill','href'=>'projects.php'],
+        'testimonials' => ['label'=>'Отзиви','icon'=>'users','href'=>'testimonials.php'],
     ],
-    'Ð”Ð Ð£Ð“Ð˜ Ð¡Ð¢Ð ÐÐÐ˜Ð¦Ð˜' => [
-        'contact' => ['label'=>'ÐšÐ¾Ð½Ñ‚Ð°ÐºÑ‚Ð¸','icon'=>'phone','href'=>'section.php?edit=contact'],
-        'about' => ['label'=>'Ð—Ð° Ð½Ð°Ñ','icon'=>'users','href'=>'section.php?edit=about'],
+    'ДРУГИ СТРАНИЦИ' => [
+        'contact' => ['label'=>'Контакти','icon'=>'phone','href'=>'section.php?edit=contact'],
+        'about' => ['label'=>'За нас','icon'=>'users','href'=>'section.php?edit=about'],
     ],
-    'ÐžÐŸÐ•Ð ÐÐ¦Ð˜Ð˜' => [
-        'bookings' => ['label'=>'Ð ÐµÐ·ÐµÑ€Ð²Ð°Ñ†Ð¸Ð¸','icon'=>'calendar','href'=>'bookings.php'],
+    'ОПЕРАЦИИ' => [
+        'bookings' => ['label'=>'Резервации','icon'=>'calendar','href'=>'bookings.php'],
     ],
-    'ÐžÐ‘Ð©Ð˜' => [
-        'brand' => ['label'=>'ÐÐ°ÑÑ‚Ñ€Ð¾Ð¹ÐºÐ¸','icon'=>'clock','href'=>'section.php?edit=brand'],
+    'ОБЩИ' => [
+        'brand' => ['label'=>'Настройки','icon'=>'clock','href'=>'section.php?edit=brand'],
     ],
 ];
 $bCount = is_admin() ? db()->query("SELECT COUNT(*) FROM bookings")->fetchColumn() : 0;
@@ -36,7 +36,8 @@ $bCount = is_admin() ? db()->query("SELECT COUNT(*) FROM bookings")->fetchColumn
 </head>
 <body class="adminBody">
 <div class="adminLayout">
-  <?php if (is_admin()): ?>`n  <aside class="adminSidebar">
+  <?php if (is_admin()): ?>
+  <aside class="adminSidebar">
     <div class="adminSidebarLogo"><img src="/assets/media/logo.png" alt="<?= e($s['name']) ?>" style="height:40px;width:auto"></div>
     <nav class="adminNav">
       <?php foreach ($navGroups as $groupLabel => $items): ?>
@@ -47,8 +48,8 @@ $bCount = is_admin() ? db()->query("SELECT COUNT(*) FROM bookings")->fetchColumn
       <?php endforeach; ?>
     </nav>
     <div class="adminSidebarBottom">
-      <a href="/" class="adminSidebarLink"><?= icon('arrow','icon') ?> ÐšÑŠÐ¼ ÑÐ°Ð¹Ñ‚Ð°</a>
-      <a href="logout.php" class="adminSidebarLink"><?= icon('arrow','icon') ?> Ð˜Ð·Ñ…Ð¾Ð´</a>
+      <a href="/" class="adminSidebarLink"><?= icon('arrow','icon') ?> Към сайта</a>
+      <a href="logout.php" class="adminSidebarLink"><?= icon('arrow','icon') ?> Изход</a>
     </div>
   </aside>
   <?php else: ?>

@@ -4,6 +4,7 @@ require_once __DIR__ . '/../inc/icons.php';
 require_once __DIR__ . '/../inc/admin-functions.php';
 require_admin();
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && !csrf_check()) { http_response_code(403); exit('Invalid CSRF token.'); }
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && !csrf_check()) { http_response_code(403); exit('Invalid CSRF token.'); }
 $s = settings();
 $edit = $_GET['edit'] ?? 'hero';
 $valid = ['hero','stats','contact','about','brand'];
@@ -47,6 +48,7 @@ require __DIR__ . '/../inc/admin-header.php';
 <?php if ($edit === 'hero'): ?>
 <form method="POST" enctype="multipart/form-data" class="adminForm">
   <?= csrf_field() ?>
+  <?= csrf_field() ?>
   <input type="hidden" name="section" value="hero">
   <div><label>Ð—Ð°Ð³Ð»Ð°Ð²Ð¸Ðµ</label><input name="home_hero_title" value="<?= e(content('home_hero_title')) ?>"></div>
   <div><label>ÐŸÐ¾Ð´Ð·Ð°Ð³Ð»Ð°Ð²Ð¸Ðµ (Ñ‚ÐµÐºÑÑ‚)</label><textarea name="home_hero_lead" rows="3"><?= e(content('home_hero_lead')) ?></textarea></div>
@@ -62,6 +64,7 @@ require __DIR__ . '/../inc/admin-header.php';
 <?php elseif ($edit === 'stats'): ?>
 <form method="POST" class="adminForm">
   <?= csrf_field() ?>
+  <?= csrf_field() ?>
   <input type="hidden" name="section" value="stats">
   <?php foreach ($stats as $st): ?>
   <input type="hidden" name="stat_ids[]" value="<?= e($st['id']) ?>">
@@ -72,6 +75,7 @@ require __DIR__ . '/../inc/admin-header.php';
 
 <?php elseif ($edit === 'contact'): ?>
 <form method="POST" class="adminForm">
+  <?= csrf_field() ?>
   <?= csrf_field() ?>
   <input type="hidden" name="section" value="contact">
   <div class="formRow"><div><label>Ð¢ÐµÐ»ÐµÑ„Ð¾Ð½</label><input name="phone" value="<?= e($s['phone']) ?>"></div><div><label>Ð¢ÐµÐ». Ð»Ð¸Ð½Ðº</label><input name="phoneHref" value="<?= e($s['phoneHref']) ?>"></div></div>
@@ -85,6 +89,7 @@ require __DIR__ . '/../inc/admin-header.php';
 <?php elseif ($edit === 'about'): ?>
 <form method="POST" class="adminForm">
   <?= csrf_field() ?>
+  <?= csrf_field() ?>
   <input type="hidden" name="section" value="about">
   <div><label>Ð—Ð°Ð³Ð»Ð°Ð²Ð¸Ðµ</label><input name="about_heading" value="<?= e(content('about_heading')) ?>"></div>
   <div><label>Ð¢ÐµÐºÑÑ‚</label><textarea name="about_text" rows="6"><?= e(content('about_text')) ?></textarea></div>
@@ -93,6 +98,7 @@ require __DIR__ . '/../inc/admin-header.php';
 
 <?php elseif ($edit === 'brand'): ?>
 <form method="POST" class="adminForm">
+  <?= csrf_field() ?>
   <?= csrf_field() ?>
   <input type="hidden" name="section" value="brand">
   <div><label>Ð˜Ð¼Ðµ Ð½Ð° Ñ„Ð¸Ñ€Ð¼Ð°Ñ‚Ð°</label><input name="name" value="<?= e($s['name']) ?>"></div>
