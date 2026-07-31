@@ -7,7 +7,7 @@ require __DIR__ . '/inc/header.php';
 ?>
 <section class="pageHero">
   <div class="container pageHeroInner">
-    <span class="eyebrow anim">За нас</span>
+    <span class="eyebrow">За нас</span>
     <h1 class="anim">Коректен монтаж <em>с ясен резултат</em></h1>
     <p class="anim">MarTed работи с фокус върху точност, чистота, здрав монтаж и нормална комуникация.</p>
   </div>

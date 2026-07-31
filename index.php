@@ -10,12 +10,12 @@ require __DIR__ . '/inc/header.php';
     <div class="heroCopy">
       <p class="eyebrow">Фирма за монтаж · гр. Добрич</p>
       <h1><?php echo e(content("home_hero_title","Монтаж и демонтаж на мебели")); ?></h1>
-      <p class="heroLead anim" style="--d:260ms"><?php echo e(content("home_hero_lead")); ?></p>
-      <div class="heroActions anim" style="--d:380ms">
+      <p class="heroLead" ><?php echo e(content("home_hero_lead")); ?></p>
+      <div class="heroActions" >
         <a href="<?= e($s['phoneHref']) ?>" class="btn btn-primary"><?= icon('phone') ?> Позвъни сега</a>
         <a href="/zapazi" class="btn btn-ghost">Запази час</a>
       </div>
-      <div class="heroSpec anim" style="--d:520ms">
+      <div class="heroSpec" >
         <div><?= icon('shield') ?><span><strong>Гаранция</strong></span></div>
         <div><?= icon('clock') ?><span><strong>Пон–Нед</strong> 08–20</span></div>
         <div><?= icon('pin') ?><span><strong>Добрич</strong></span></div>
@@ -45,7 +45,7 @@ require __DIR__ . '/inc/header.php';
       <div class="sectionTitle"><span class="eyebrow eyebrow-line">Нашите услуги</span><h2>Какво <em>предлагаме</em></h2></div>
       <p>Ясен процес, правилни инструменти, чист обект и коректно изпълнение при всеки монтаж.</p>
     </div>
-    <div class="serviceIconGrid reveal" style="--d:80ms">
+    <div class="serviceIconGrid reveal" >
       <?php foreach ($svcs as $svc): ?>
       <article class="serviceIconCard"><?= icon($svc['icon']) ?><h3><?= e($svc['title']) ?></h3><p><?= e($svc['text']) ?></p></article>
       <?php endforeach; ?>
@@ -61,7 +61,7 @@ require __DIR__ . '/inc/header.php';
       <p>Изпълнени обекти — кухни, спални, гардероби, секции и офис обзавеждане.</p>
       <div class="headActions"><a href="/proekti" class="btn btn-ghost">Виж всички проекти</a></div>
     </div>
-    <div class="projectMosaic reveal" style="--d:80ms">
+    <div class="projectMosaic reveal" >
       <?php $mcls=['pc-feat','pc-sq','pc-tall','pc-wide','pc-sq','pc-wide']; foreach (array_slice($projs,0,6) as $i=>$p): ?>
       <a class="projectCard <?= $mcls[$i%6] ?>" href="/proekti/<?= e($p['slug']) ?>">
         <img src="<?= e($p['cover']) ?>" alt="<?= e($p['title']) ?>">
@@ -79,7 +79,7 @@ require __DIR__ . '/inc/header.php';
       <span class="sectionIndex" aria-hidden="true"></span>
       <div class="sectionTitle"><span class="eyebrow eyebrow-line">Отзиви</span><h2>Какво казват <em>нашите клиенти</em></h2></div>
     </div>
-    <div class="quoteGrid reveal" style="--d:80ms">
+    <div class="quoteGrid reveal" >
       <?php foreach ($tests as $t): ?>
       <article class="quote"><span class="mark">"</span><div class="stars">★★★★★</div><blockquote><?= e($t['text']) ?></blockquote><span class="who"><?= e($t['name']) ?></span></article>
       <?php endforeach; ?>

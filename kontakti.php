@@ -7,7 +7,7 @@ require __DIR__ . '/inc/header.php';
 ?>
 <section class="pageHero">
   <div class="container pageHeroInner">
-    <span class="eyebrow anim">Контакти</span>
+    <span class="eyebrow">Контакти</span>
     <h1 class="anim">Свържете се <em>с нас</em></h1>
     <p class="anim">Телефон, имейл и адрес. Работим в Добрич, Балчик, Варна и околността — или запазете час директно от календара.</p>
   </div>

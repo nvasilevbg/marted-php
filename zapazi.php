@@ -7,7 +7,7 @@ require __DIR__ . '/inc/header.php';
 ?>
 <section class="pageHero">
   <div class="container pageHeroInner">
-    <span class="eyebrow anim">Резервация</span>
+    <span class="eyebrow">Резервация</span>
     <h1 class="anim">Запазете <em>час</em></h1>
     <p class="anim">Изберете удобна дата и час за монтаж, демонтаж или консултация. Потвърждаваме по телефон.</p>
   </div>

@@ -7,7 +7,7 @@ require __DIR__ . '/inc/header.php';
 ?>
 <section class="pageHero">
   <div class="container pageHeroInner">
-    <span class="eyebrow anim">Проекти</span>
+    <span class="eyebrow">Проекти</span>
     <h1 class="anim">Нашите <em>проекти</em></h1>
     <p class="anim">Галерия с примерни реализации и информация за всеки обект. Филтрирайте по категория.</p>
   </div>

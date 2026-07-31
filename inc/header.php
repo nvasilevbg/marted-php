@@ -19,9 +19,7 @@ $current = $GLOBALS['path'] ?? '';
 <title><?= e($title ?? $s['name']) ?></title>
 <meta name="description" content="<?= e($desc ?? 'Монтаж и демонтаж на мебели в Добрич, Балчик, Варна и околността.') ?>">
 <link rel="icon" href="/assets/media/icon.svg" type="image/svg+xml">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;600;700&family=Manrope:wght@400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/fonts/fonts.css?v=1">
 <link rel="preload" href="/assets/css/style.css?v=7" as="style">
 <link rel="stylesheet" href="/assets/css/style.css?v=7">
 </head>
