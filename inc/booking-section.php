@@ -3,8 +3,8 @@
   <div class="container">
     <div class="sectionHead reveal">
       <span class="sectionIndex" aria-hidden="true"></span>
-      <div class="sectionTitle"><span class="eyebrow eyebrow-line">Ð ÐµÐ·ÐµÑ€Ð²Ð°Ñ†Ð¸Ñ</span><h2>Ð—Ð°Ð¿Ð°Ð·ÐµÑ‚Ðµ <em>Ñ‡Ð°Ñ</em></h2></div>
-      <p>Ð˜Ð·Ð±ÐµÑ€ÐµÑ‚Ðµ ÑƒÐ´Ð¾Ð±Ð½Ð° Ð´Ð°Ñ‚Ð° Ð¸ Ñ‡Ð°Ñ Ð·Ð° Ð¼Ð¾Ð½Ñ‚Ð°Ð¶, Ð´ÐµÐ¼Ð¾Ð½Ñ‚Ð°Ð¶ Ð¸Ð»Ð¸ ÐºÐ¾Ð½ÑÑƒÐ»Ñ‚Ð°Ñ†Ð¸Ñ. ÐŸÐ¾Ñ‚Ð²ÑŠÑ€Ð¶Ð´Ð°Ð²Ð°Ð¼Ðµ Ð¿Ð¾ Ñ‚ÐµÐ»ÐµÑ„Ð¾Ð½.</p>
+      <div class="sectionTitle"><span class="eyebrow eyebrow-line">Резервация</span><h2>Запазете <em>час</em></h2></div>
+      <p>Изберете удобна дата и час за монтаж, демонтаж или консултация. Потвърждаваме по телефон.</p>
     </div>
     <div class="reveal" style="--d:80ms">
       <div id="booking"></div>
