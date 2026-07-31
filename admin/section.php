@@ -7,7 +7,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !csrf_check()) { http_response_code
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && !csrf_check()) { http_response_code(403); exit('Invalid CSRF token.'); }
 $s = settings();
 $edit = $_GET['edit'] ?? 'hero';
-$valid = ['hero','stats','contact','about','brand'];
+$valid = ['hero','stats','contact','about','brand','security'];
 if (!in_array($edit, $valid)) $edit = 'hero';
 $GLOBALS['admin_page'] = $edit;
 $stats = db()->query("SELECT * FROM stats ORDER BY sort_order ASC, id ASC")->fetchAll();
@@ -35,10 +35,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } elseif ($section === 'brand') {
         foreach (['name','subtitle','tagline','established'] as $k) if (isset($_POST[$k])) db()->prepare("UPDATE settings SET v=? WHERE k=?")->execute([trim($_POST[$k]), $k]);
     }
-    header("Location: section.php?edit=$section&ok=1"); exit;
+    if ($section === 'security' && !empty($GLOBALS['sec_error'])) {
+        // Don't redirect — show error
+    } else {
+        header("Location: section.php?edit=$section&ok=1"); exit;
+    }
 }
 
-$titles = ['hero'=>'Херобанер','stats'=>'Статистики','contact'=>'Контакти','about'=>'За нас','brand'=>'Настройки'];
+$titles = ['hero'=>'Херобанер','stats'=>'Статистики','contact'=>'Контакти','about'=>'За нас','brand'=>'Настройки','security'=>'Сигурност'];
 $title = $titles[$edit] . ' | Админ | ' . $s['name'];
 require __DIR__ . '/../inc/admin-header.php';
 ?>

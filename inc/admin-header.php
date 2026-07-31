@@ -21,6 +21,7 @@ $navGroups = [
     ],
     'ОБЩИ' => [
         'brand' => ['label'=>'Настройки','icon'=>'clock','href'=>'section.php?edit=brand'],
+        'security' => ['label'=>'Сигурност','icon'=>'shield','href'=>'section.php?edit=security'],
     ],
 ];
 $bCount = is_admin() ? db()->query("SELECT COUNT(*) FROM bookings")->fetchColumn() : 0;

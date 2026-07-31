@@ -11,7 +11,10 @@ function is_admin() {
 }
 function admin_login($pass) {
     _start_session();
-    if (hash_equals(config()['admin_pass'], $pass)) { $_SESSION['is_admin'] = true; return true; }
+    $configPass = config()['admin_pass'];
+    $dbPass = setting('admin_pass', '');
+    $validPass = ($dbPass !== '' && $dbPass !== 'CHANGE_ME_IN_CONFIG') ? $dbPass : $configPass;
+    if (hash_equals($validPass, $pass)) { $_SESSION['is_admin'] = true; return true; }
     return false;
 }
 function admin_logout() {
