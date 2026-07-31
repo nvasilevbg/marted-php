@@ -11,7 +11,7 @@
 <footer class="footer">
   <div class="container footerTop">
     <div>
-      <img class="footerLogo" src="/assets/media/logo.webp" alt="<?= e($s['name']) ?>">
+      <img class="footerLogo" src="/assets/media/logo.png" alt="<?= e($s['name']) ?>">
       <div class="footerTag"><?= e($s['tagline']) ?></div>
     </div>
     <div class="footerCol">

@@ -21,7 +21,7 @@ $current = $GLOBALS['path'] ?? '';
 <link rel="icon" href="/assets/media/icon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;600;700&family=Manrope:wght@400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" onload="this.rel='stylesheet'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;600;700&family=Manrope:wght@400;600;700&family=JetBrains+Mono:wght@400;700&display=swap"></noscript>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;600;700&family=Manrope:wght@400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="preload" href="/assets/css/style.css?v=7" as="style">
 <link rel="stylesheet" href="/assets/css/style.css?v=7">
 </head>
@@ -40,7 +40,7 @@ $current = $GLOBALS['path'] ?? '';
   </div>
   <div class="navWrap">
     <div class="container navInner">
-      <a href="/" class="logo" aria-label="MarTed — начало"><img class="logoImg" src="/assets/media/logo.webp" alt="<?= e($s['name']) ?> — монтаж на мебели"></a>
+      <a href="/" class="logo" aria-label="MarTed — начало"><img class="logoImg" src="/assets/media/logo.png" alt="<?= e($s['name']) ?> — монтаж на мебели"></a>
       <input id="nav-toggle" class="navToggle" type="checkbox" aria-label="Отвори меню">
       <label class="burger" for="nav-toggle"><?= icon('menu','icon') ?></label>
       <nav class="mainNav" aria-label="Основна навигация">
