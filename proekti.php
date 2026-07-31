@@ -22,7 +22,7 @@ require __DIR__ . '/inc/header.php';
     <div class="projectMosaic reveal">
       <?php $mcls=['pc-feat','pc-sq','pc-tall','pc-wide','pc-sq','pc-wide']; foreach ($projs as $i=>$p): ?>
       <a class="projectCard <?= $mcls[$i%6] ?>" data-cat="<?= e($p['category']) ?>" href="/proekti/<?= e($p['slug']) ?>">
-        <img src="<?= e($p['cover']) ? loading="lazy">" alt="<?= e($p['title']) ?>">
+        <img src="<?= e($p['cover']) ?>" alt="<?= e($p['title']) ?>">
         <span class="arrowChip"><?= icon('arrow') ?></span>
         <span class="cap"><span class="cat"><?= e($p['category']) ?> · <?= e($p['location']) ?></span><h3><?= e($p['title']) ?></h3><p class="desc"><?= e($p['description']) ?></p></span>
       </a>
