@@ -33,8 +33,8 @@ $current = $GLOBALS['path'] ?? '';
       <span><?= icon('clock','icon') ?> <?= e($s['hours']) ?></span>
       <a href="<?= e($s['phoneHref']) ?>"><?= icon('phone','icon') ?> <?= e($s['phone']) ?></a>
       <span class="specbarSocials" aria-label="Социални мрежи">
-        <a href="<?= e($s['phoneHref']) ?>" aria-label="Facebook"><?= icon('facebook','icon') ?></a>
-        <a href="<?= e($s['phoneHref']) ?>" aria-label="Instagram"><?= icon('instagram','icon') ?></a>
+        <a href="<?= e($s['facebook'] ?: '#') ?>" aria-label="Facebook" <?php if($s['facebook']): ?>target="_blank" rel="noopener"<?php endif; ?>><?= icon('facebook','icon') ?></a>
+        <a href="<?= e($s['instagram'] ?: '#') ?>" aria-label="Instagram" <?php if($s['instagram']): ?>target="_blank" rel="noopener"<?php endif; ?>><?= icon('instagram','icon') ?></a>
       </span>
     </div>
   </div>

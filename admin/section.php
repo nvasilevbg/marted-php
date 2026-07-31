@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         }
     } elseif ($section === 'contact') {
-        foreach (['phone','phoneHref','email','location','region','hours'] as $k) if (isset($_POST[$k])) db()->prepare("UPDATE settings SET v=? WHERE k=?")->execute([trim($_POST[$k]), $k]);
+        foreach (['phone','phoneHref','email','location','region','hours','facebook','instagram'] as $k) if (isset($_POST[$k])) db()->prepare("UPDATE settings SET v=? WHERE k=?")->execute([trim($_POST[$k]), $k]);
     } elseif ($section === 'about') {
         foreach (['about_heading','about_text'] as $k) if (isset($_POST[$k])) db()->prepare("UPDATE settings SET v=? WHERE k=?")->execute([trim($_POST[$k]), $k]);
     } elseif ($section === 'brand') {
@@ -83,6 +83,7 @@ require __DIR__ . '/../inc/admin-header.php';
   <div><label>Адрес</label><input name="location" value="<?= e($s['location']) ?>"></div>
   <div><label>Регион</label><input name="region" value="<?= e($s['region']) ?>"></div>
   <div><label>Работно време</label><input name="hours" value="<?= e($s['hours']) ?>"></div>
+    <div class="formRow"><div><label>Facebook</label><input name="facebook" value="<?= e($s['facebook']) ?>" placeholder="https://facebook.com/..."></div><div><label>Instagram</label><input name="instagram" value="<?= e($s['instagram']) ?>" placeholder="https://instagram.com/..."></div></div>
   <button class="btn btn-primary btn-block" type="submit">Запази</button>
 </form>
 

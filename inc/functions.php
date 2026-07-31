@@ -7,7 +7,7 @@ function settings() {
     $rows = db()->query("SELECT k,v FROM settings")->fetchAll();
     $s = [];
     foreach ($rows as $r) $s[$r['k']] = $r['v'];
-    $s += ['name'=>'MarTed','subtitle'=>'монтаж на мебели','tagline'=>'Фирма за монтаж и демонтаж','phone'=>'','phoneHref'=>'#','email'=>'','location'=>'','region'=>'','hours'=>'','established'=>''];
+    $s += ['name'=>'MarTed','subtitle'=>'монтаж на мебели','tagline'=>'Фирма за монтаж и демонтаж','phone'=>'','phoneHref'=>'#','email'=>'','location'=>'','region'=>'','hours'=>'','established'=>'','facebook'=>'','instagram'=>''];
     return $s;
 }
 function setting($k, $def='') { $s = settings(); return isset($s[$k]) && $s[$k] !== '' ? $s[$k] : $def; }
