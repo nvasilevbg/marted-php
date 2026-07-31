@@ -20,8 +20,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         foreach ($_FILES['gallery_files']['tmp_name'] as $i => $tmp) {
             if ($_FILES['gallery_files']['error'][$i] === UPLOAD_ERR_OK) {
                 $ext = strtolower(pathinfo($_FILES['gallery_files']['name'][$i], PATHINFO_EXTENSION));
-                $name = 'p_' . time() . '_' . $i . '.' . $ext;
-                if (move_uploaded_file($tmp, $dir . '/' . $name)) $gallery_urls[] = '/assets/media/projects/' . $name;
+                $tmpName = 'p_' . time() . '_' . $i . '.' . $ext;
+                $tmpPath = $dir . '/' . $tmpName;
+                if (move_uploaded_file($tmp, $tmpPath)) {
+                    $webpName = 'p_' . time() . '_' . rand(100,999) . '.webp';
+                    $webpPath = $dir . '/' . $webpName;
+                    if (convert_to_webp($tmpPath, $webpPath, 85)) {
+                        @unlink($tmpPath);
+                        $gallery_urls[] = '/assets/media/projects/' . $webpName;
+                    } else {
+                        $gallery_urls[] = '/assets/media/projects/' . $tmpName;
+                    }
+                }
             }
         }
     }

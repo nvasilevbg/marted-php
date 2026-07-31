@@ -34,6 +34,35 @@ function csrf_check() {
 function csrf_field() {
     return '<input type="hidden" name="csrf" value="' . csrf_token() . '">';
 }
+
+function convert_to_webp($src, $dest, $quality = 85) {
+    // Try cwebp command first (supports effort parameter)
+    if (function_exists('exec')) {
+        $cmd = 'cwebp -q ' . $quality . ' -m 6 ' . escapeshellarg($src) . ' -o ' . escapeshellarg($dest) . ' 2>&1';
+        @exec($cmd, $out, $ret);
+        if ($ret === 0 && file_exists($dest)) return true;
+    }
+    // Fallback to GD library
+    if (function_exists('imagewebp') && function_exists('getimagesize')) {
+        $info = @getimagesize($src);
+        if (!$info) return false;
+        switch ($info[2]) {
+            case IMAGETYPE_JPEG: $img = @imagecreatefromjpeg($src); break;
+            case IMAGETYPE_PNG:
+                $img = @imagecreatefrompng($src);
+                if ($img) { imagealphablending($img, true); imagesavealpha($img, true); }
+                break;
+            case IMAGETYPE_WEBP: return @copy($src, $dest);
+            default: return false;
+        }
+        if (!$img) return false;
+        $ok = @imagewebp($img, $dest, $quality);
+        imagedestroy($img);
+        return $ok;
+    }
+    return false;
+}
+
 function upload_image($field, $dest_dir) {
     if (empty($_FILES[$field]['name']) || $_FILES[$field]['error'] !== UPLOAD_ERR_OK) return null;
     $ext = strtolower(pathinfo($_FILES[$field]['name'], PATHINFO_EXTENSION));
@@ -44,11 +73,23 @@ function upload_image($field, $dest_dir) {
     finfo_close($finfo);
     $allowedMimes = ['image/jpeg','image/png','image/webp'];
     if (!in_array($mime, $allowedMimes)) return null;
-    $name = 'p_' . time() . '_' . rand(100,999) . '.' . $ext;
-    $path = $dest_dir . '/' . $name;
-    if (move_uploaded_file($_FILES[$field]['tmp_name'], $path)) return '/assets/media/projects/' . $name;
-    return null;
+    
+    // Upload original to temp
+    $tmpName = 'p_' . time() . '_' . rand(100,999) . '.' . $ext;
+    $tmpPath = $dest_dir . '/' . $tmpName;
+    if (!move_uploaded_file($_FILES[$field]['tmp_name'], $tmpPath)) return null;
+    
+    // Convert to WebP
+    $webpName = 'p_' . time() . '_' . rand(100,999) . '.webp';
+    $webpPath = $dest_dir . '/' . $webpName;
+    if (convert_to_webp($tmpPath, $webpPath, 85)) {
+        @unlink($tmpPath); // delete original
+        return '/assets/media/projects/' . $webpName;
+    }
+    // Conversion failed — keep original
+    return '/assets/media/projects/' . $tmpName;
 }
+
 function slugify($s) {
     $s = mb_strtolower(trim($s), 'UTF-8');
     $s = preg_replace('/[^a-z0-9--]+/u', '-', $s);
