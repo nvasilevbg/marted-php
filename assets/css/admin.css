@@ -35,7 +35,7 @@
 .adminList{display:grid;gap:10px;margin-top:20px}
 .adminRow{display:grid;grid-template-columns:80px 1fr auto;gap:16px;align-items:center;background:var(--bg-2);border:1px solid var(--line);border-radius:var(--radius);padding:12px 16px}
 .adminRow img{width:80px;height:60px;object-fit:cover;border-radius:var(--radius);border:1px solid var(--line-soft)}
-.adminRowInfo strong{font-family:var(--font-serif);font-size:17px}
+.adminRowInfo{display:grid;gap:4px}.adminRowInfo strong{font-family:var(--font-serif);font-size:17px}
 .adminRowInfo span{font-family:var(--font-mono);font-size:11px;text-transform:uppercase;color:var(--muted)}
 .adminRowActions{display:flex;gap:8px}
 .adminRowActions a,.adminRowActions button{font-family:var(--font-mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;padding:8px 12px;border:1px solid var(--line);border-radius:var(--radius);background:transparent;color:var(--ink-2);cursor:pointer;text-decoration:none;transition:all .2s}
