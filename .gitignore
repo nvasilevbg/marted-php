@@ -2,3 +2,4 @@ data/
 *.db
 assets/media/projects/*
 !assets/media/projects/.gitkeep
+google-service-account.json

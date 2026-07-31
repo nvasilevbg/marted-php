@@ -38,8 +38,8 @@ function add_booking($d) {
     $chk->execute([$d['date'],$d['slot']]);
     if ($chk->fetch()) return ['ok'=>false,'error'=>'Този час вече е зает. Моля, изберете друг.'];
     try {
-        $st = db()->prepare("INSERT INTO bookings (bdate,slot,name,phone,service,notes,status) VALUES (?,?,?,?,?,?,'pending')");
-        $st->execute([$d['date'],$d['slot'],trim($d['name']),trim($d['phone']),$d['service']??'',$d['notes']??'']);
+        $st = db()->prepare("INSERT INTO bookings (bdate,slot,name,phone,email,service,notes,status) VALUES (?,?,?,?,?,?,?,'pending')");
+        $st->execute([$d['date'],$d['slot'],trim($d['name']),trim($d['phone']),trim($d['email']??''),$d['service']??'',$d['notes']??'']);
         notify_booking($d);
         return ['ok'=>true];
     } catch (\PDOException $e) {
@@ -51,8 +51,8 @@ function add_booking($d) {
 
 function notify_booking($d) {
     $s = settings();
-    $to = $s['email'] ?? '';
-    if (!$to) return;
+    $ownerEmail = $s['email'] ?? '';
+    $customerEmail = trim($d['email'] ?? '');
     $date = $d['date'];
     $slot = $d['slot'];
     $name = trim($d['name']);
@@ -60,47 +60,107 @@ function notify_booking($d) {
     $service = $d['service'] ?? '';
     $notes = $d['notes'] ?? '';
     
-    // Google Calendar link
-    $start = str_replace('-', '', $date) . 'T' . str_replace(':', '', $slot) . '00';
-    $endHour = (int)substr($slot, 0, 2) + 1;
-    $end = str_replace('-', '', $date) . 'T' . sprintf('%02d', $endHour) . '0000';
-    $gcalText = urlencode("Монтаж - $name");
-    $gcalDetails = urlencode("Име: $name
-Телефон: $phone
-Услуга: $service" . ($notes ? "
-Бележка: $notes" : ''));
-    $gcalLoc = urlencode($s['location'] ?? 'Добрич');
-    $gcalUrl = "https://calendar.google.com/calendar/render?action=TEMPLATE&text=$gcalText&dates=$start/$end&details=$gcalDetails&location=$gcalLoc";
+    // Google Calendar event (direct API)
+    $gcalResult = create_calendar_event($d, $s);
     
     $subject = "Нова резервация - $date $slot";
-    $body = "Нова резервация от $name
+    $headers = "From: MarTed <noreply@dobrichmontaj.bg>\r\n";
+    $headers .= "Content-Type: text/plain; charset=utf-8\r\n";
+    $headers .= "Content-Transfer-Encoding: 8bit\r\n";
+    
+    // Email to site owner
+    if ($ownerEmail) {
+        $ownerBody = "Нова резервация от $name\n\n";
+        $ownerBody .= "Дата: $date\nЧас: $slot\n";
+        $ownerBody .= "Име: $name\nТелефон: $phone\n";
+        if ($customerEmail) $ownerBody .= "Имейл: $customerEmail\n";
+        $ownerBody .= "Услуга: $service\n";
+        if ($notes) $ownerBody .= "Бележка: $notes\n";
+        $ownerBody .= "\nАдмин: " . ($s['base_url'] ?? '') . "/admin/bookings.php";
+        if ($gcalResult) $ownerBody .= "\nДобавено в Google Calendar";
+        @mail($ownerEmail, $subject, $ownerBody, $headers);
+    }
+    
+    // Email to customer
+    if ($customerEmail) {
+        $custSubject = "Запазен час - MarTed";
+        $custBody = "Здравейте, $name!\n\n";
+        $custBody .= "Запазихте час за $date от $slot.\n";
+        $custBody .= "Ще се свържем с вас за потвърждение.\n\n";
+        $custBody .= "Телефон: " . ($s['phone'] ?? '') . "\n";
+        $custBody .= "MarTed - монтаж и демонтаж на мебели";
+        @mail($customerEmail, $custSubject, $custBody, $headers);
+    }
+}
 
-";
-    $body .= "Дата: $date
-";
-    $body .= "Час: $slot
-";
-    $body .= "Телефон: $phone
-";
-    $body .= "Услуга: $service
-";
-    if ($notes) $body .= "Бележка: $notes
-";
-    $body .= "
-Добави в Google Calendar:
-$gcalUrl
-";
-    $body .= "
-Админ: " . ($s['base_url'] ?? '') . "/admin/bookings.php";
+function create_calendar_event($d, $s) {
+    $keyFile = __DIR__ . '/../google-service-account.json';
+    if (!file_exists($keyFile)) return false;
+    $keyData = json_decode(file_get_contents($keyFile), true);
+    if (!$keyData || empty($keyData['private_key'])) return false;
     
-    $headers = "From: MarTed <noreply@dobrichmontaj.bg>
-";
-    $headers .= "Content-Type: text/plain; charset=utf-8
-";
-    $headers .= "Content-Transfer-Encoding: 8bit
-";
+    $now = time();
+    $header = ['alg' => 'RS256', 'typ' => 'JWT'];
+    $payload = [
+        'iss' => $keyData['client_email'],
+        'scope' => 'https://www.googleapis.com/auth/calendar',
+        'aud' => 'https://oauth2.googleapis.com/token',
+        'exp' => $now + 3600,
+        'iat' => $now
+    ];
     
-    @mail($to, $subject, $body, $headers);
+    $b64 = function($data) { return rtrim(strtr(base64_encode($data), '+/', '-_'), '='); };
+    $headerB64 = $b64(json_encode($header));
+    $payloadB64 = $b64(json_encode($payload));
+    $signInput = $headerB64 . '.' . $payloadB64;
+    
+    openssl_sign($signInput, $signature, $keyData['private_key'], 'SHA256');
+    $jwt = $signInput . '.' . $b64($signature);
+    
+    // Get access token
+    $ch = curl_init('https://oauth2.googleapis.com/token');
+    curl_setopt_array($ch, [
+        CURLOPT_POST => true,
+        CURLOPT_POSTFIELDS => http_build_query(['grant_type' => 'urn:ietf:params:oauth:grant-type:jwt-bearer', 'assertion' => $jwt]),
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_TIMEOUT => 10
+    ]);
+    $tokenResp = json_decode(curl_exec($ch), true);
+    curl_close($ch);
+    if (empty($tokenResp['access_token'])) return false;
+    
+    // Create event
+    $startHour = (int)substr($d['slot'], 0, 2);
+    $startDT = $d['date'] . 'T' . sprintf('%02d:00:00', $startHour);
+    $endDT = $d['date'] . 'T' . sprintf('%02d:00:00', $startHour + 1);
+    
+    $summary = "Монтаж - " . trim($d['name']);
+    $desc = "Телефон: " . trim($d['phone']) . "\nУслуга: " . ($d['service'] ?? '');
+    if (!empty($d['notes'])) $desc .= "\nБележка: " . $d['notes'];
+    
+    $event = [
+        'summary' => $summary,
+        'description' => $desc,
+        'start' => ['dateTime' => $startDT, 'timeZone' => 'Europe/Sofia'],
+        'end' => ['dateTime' => $endDT, 'timeZone' => 'Europe/Sofia'],
+        'location' => $s['location'] ?? ''
+    ];
+    
+    $calendarId = urlencode($keyData['calendar_id'] ?? 'primary');
+    $ch = curl_init("https://www.googleapis.com/calendar/v3/calendars/$calendarId/events?sendNotifications=true");
+    curl_setopt_array($ch, [
+        CURLOPT_POST => true,
+        CURLOPT_POSTFIELDS => json_encode($event),
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_TIMEOUT => 10,
+        CURLOPT_HTTPHEADER => [
+            'Authorization: Bearer ' . $tokenResp['access_token'],
+            'Content-Type: application/json'
+        ]
+    ]);
+    $eventResp = json_decode(curl_exec($ch), true);
+    curl_close($ch);
+    return !empty($eventResp['id']);
 }
 
 // --- DB-backed content ---
