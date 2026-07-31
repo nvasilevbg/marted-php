@@ -43,16 +43,15 @@
     else if (step===3) body.appendChild(renderForm());
     else if (step===4) body.appendChild(renderDone());
     root.appendChild(body);
-    if (step<4){
-      var nav=el('<div class="wizardNav">'+(step>1?'<button class="btn btn-night" id="bkBack">Назад</button>':'<span></span>')+'<button class="btn btn-primary" id="bkNext">'+(step===3?'Запази часа':'Напред')+'</button></div>');
+    if (step===3){
+      var nav=el('<div class="wizardNav"><button class="btn btn-night" id="bkBack">Назад</button><button class="btn btn-primary" id="bkNext">Запази часа</button></div>');
       root.appendChild(nav);
-      if (step>1) document.getElementById('bkBack').onclick=function(){ step--; render(); };
-      document.getElementById('bkNext').onclick=function(){
-        if (step===3){ submit(); return; }
-        if (step===1 && !selected) return;
-        if (step===2 && !slot) return;
-        step++; render();
-      };
+      document.getElementById('bkBack').onclick=function(){ step=2; render(); };
+      document.getElementById('bkNext').onclick=function(){ submit(); };
+    } else if (step>1) {
+      var nav=el('<div class="wizardNav"><button class="btn btn-night" id="bkBack">Назад</button><span></span></div>');
+      root.appendChild(nav);
+      document.getElementById('bkBack').onclick=function(){ step--; render(); };
     }
   }
   function renderCal(){
@@ -65,7 +64,7 @@
       if (!date){ g.appendChild(el('<span class="calEmpty"></span>')); return; }
       var past=date<today(); var sel=date===selected; var has=taken.some(function(t){return t.date===date;});
       var b=el('<button class="calDay '+(sel?'sel':'')+' '+(past?'disabled':'')+'" '+(past?'disabled':'')+'>'+Number(date.slice(-2))+(has&&!past?'<i class="calDot"></i>':'')+'</button>');
-      b.onclick=function(){ selected=date; slot=null; render(); };
+      b.onclick=function(){ selected=date; slot=null; step=2; setTimeout(function(){render();},200); };
       g.appendChild(b);
     });
     d.appendChild(g);
@@ -86,7 +85,7 @@
     SLOTS.forEach(function(s){
       var takenS=tf.indexOf(s)>=0;
       var b=el('<button class="slot '+(slot===s?'sel':'')+' '+(takenS?'taken':'')+'" '+(takenS?'disabled':'')+'>'+s+'</button>');
-      if(!takenS) b.onclick=function(){ slot=s; render(); };
+      if(!takenS) b.onclick=function(){ slot=s; step=3; setTimeout(function(){render();},200); };
       sg.appendChild(b);
     });
     d.appendChild(sg);
