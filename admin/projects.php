@@ -81,7 +81,7 @@ require __DIR__ . '/../inc/admin-header.php';
     </div>
     <div><label>Галерия (URL на ред или качи файлове)</label>
       <textarea name="gallery" rows="4" placeholder="/assets/media/kitchen-1.webp или /assets/media/video.mp4"><?= e(implode("\n", $editing['gallery'])) ?></textarea>
-      <input type="file" name="gallery_files[]" multiple accept="image/*" style="margin-top:8px">
+      <input type="file" name="gallery_files[]" multiple accept="image/*,video/*" style="margin-top:8px">
     </div>
   </div>
   <button class="btn btn-primary btn-block" type="submit"><?= $editing['id']?'Запази промените':'Добави проект' ?></button>
