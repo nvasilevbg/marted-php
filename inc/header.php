@@ -7,7 +7,6 @@ $nav = [
     ['href'=>'/za-nas','label'=>'Ð—Ð° Ð½Ð°Ñ'],
     ['href'=>'/uslugi','label'=>'Ð£ÑÐ»ÑƒÐ³Ð¸'],
     ['href'=>'/proekti','label'=>'ÐŸÑ€Ð¾ÐµÐºÑ‚Ð¸'],
-    ['href'=>'/zapazi','label'=>'Ð—Ð°Ð¿Ð°Ð·Ð¸ Ñ‡Ð°Ñ'],
     ['href'=>'/#otzivi','label'=>'ÐžÑ‚Ð·Ð¸Ð²Ð¸'],
     ['href'=>'/kontakti','label'=>'ÐšÐ¾Ð½Ñ‚Ð°ÐºÑ‚Ð¸'],
 ];
