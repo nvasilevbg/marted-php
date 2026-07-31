@@ -32,7 +32,7 @@ require __DIR__ . '/../inc/admin-header.php';
   <div class="bookingItem">
     <div class="biMain">
       <span class="pill <?= e($b['status']) ?>"><?= e($labels[$b['status']] ?? $b['status']) ?></span>
-      <strong><?= e($b['bdate']) ?> Â· <?= e($b['slot']) ?></strong>
+      <strong><?= e($b['bdate']) ?> · <?= e($b['slot']) ?></strong>
       <span class="biService"><?= e($b['service']) ?></span>
     </div>
     <div class="biContact">

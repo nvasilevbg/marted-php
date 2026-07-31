@@ -68,7 +68,7 @@ require __DIR__ . '/../inc/admin-header.php';
   <?php foreach ($svcList as $svc): ?>
   <div class="adminRow">
     <?php if ($svc['image']): ?><img src="<?= e($svc['image']) ?>" alt=""><?php else: ?><div style="width:80px;height:60px;display:grid;place-items:center;background:var(--bg-3);border-radius:var(--radius)"><?= icon($svc['icon']) ?></div><?php endif; ?>
-    <div class="adminRowInfo"><strong><?= e($svc['title']) ?></strong><span><?= e($svc['icon']) ?> Â· ред <?= e($svc['sort_order']) ?></span></div>
+    <div class="adminRowInfo"><strong><?= e($svc['title']) ?></strong><span><?= e($svc['icon']) ?> · ред <?= e($svc['sort_order']) ?></span></div>
     <div class="adminRowActions"><a href="services.php?edit=<?= $svc['id'] ?>">Редактирай</a><a href="services.php?delete=<?= $svc['id'] ?>" onclick="return confirm('Изтриване?')" class="del">Изтрий</a></div>
   </div>
   <?php endforeach; ?>

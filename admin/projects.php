@@ -87,7 +87,7 @@ function switchTab(e, id) {
 <div style="margin-top:20px"><a href="projects.php?edit=new" class="btn btn-primary">+ Добави проект</a></div>
 <div class="adminList">
   <?php foreach ($projs as $p): ?>
-  <div class="adminRow"><img src="<?= e($p['cover']) ?>" alt="<?= e($p['title']) ?>"><div class="adminRowInfo"><strong><?= e($p['title']) ?></strong><span><?= e($p['category']) ?> Â· <?= e($p['location']) ?> Â· <?= e($p['pdate']) ?></span><code><?= e($p['slug']) ?></code></div><div class="adminRowActions"><a href="projects.php?edit=<?= $p['id'] ?>">Редактирай</a><a href="projects.php?delete=<?= $p['id'] ?>" onclick="return confirm('Изтриване?')" class="del">Изтрий</a></div></div>
+  <div class="adminRow"><img src="<?= e($p['cover']) ?>" alt="<?= e($p['title']) ?>"><div class="adminRowInfo"><strong><?= e($p['title']) ?></strong><span><?= e($p['category']) ?> · <?= e($p['location']) ?> · <?= e($p['pdate']) ?></span><code><?= e($p['slug']) ?></code></div><div class="adminRowActions"><a href="projects.php?edit=<?= $p['id'] ?>">Редактирай</a><a href="projects.php?delete=<?= $p['id'] ?>" onclick="return confirm('Изтриване?')" class="del">Изтрий</a></div></div>
   <?php endforeach; ?>
 </div>
 <?php endif; ?>
