@@ -8,8 +8,8 @@ require __DIR__ . '/inc/header.php';
 <section class="hero" id="nachalo">
   <div class="container heroGrid">
     <div class="heroCopy">
-      <p class="eyebrow anim" style="--d:0ms">Фирма за монтаж · гр. Добрич</p>
-      <h1 class="anim" style="--d:120ms"><?php echo e(content("home_hero_title","Монтаж и демонтаж на мебели")); ?></h1>
+      <p class="eyebrow">Фирма за монтаж · гр. Добрич</p>
+      <h1 class="anim" style="--d:0ms"><?php echo e(content("home_hero_title","Монтаж и демонтаж на мебели")); ?></h1>
       <p class="heroLead anim" style="--d:260ms"><?php echo e(content("home_hero_lead")); ?></p>
       <div class="heroActions anim" style="--d:380ms">
         <a href="<?= e($s['phoneHref']) ?>" class="btn btn-primary"><?= icon('phone') ?> Позвъни сега</a>
@@ -21,7 +21,7 @@ require __DIR__ . '/inc/header.php';
         <div><?= icon('pin') ?><span><strong>Добрич</strong></span></div>
       </div>
     </div>
-    <div class="heroVisual anim" style="--d:300ms">
+    <div class="heroVisual">
       <div class="heroPhoto"><img src="<?php echo e(content("home_hero_image","/assets/media/hero-kitchen.jpg")); ?>" alt="Монтаж на модерна кухня"></div>
       <p class="heroCaption">Кухня по поръчка · гр. Добрич</p>
     </div>

@@ -22,8 +22,8 @@ $current = $GLOBALS['path'] ?? '';
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;600;700&family=Manrope:wght@400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" onload="this.rel='stylesheet'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;600;700&family=Manrope:wght@400;600;700&family=JetBrains+Mono:wght@400;700&display=swap"></noscript>
-<link rel="preload" href="/assets/css/style.css?v=6" as="style">
-<link rel="stylesheet" href="/assets/css/style.css?v=6">
+<link rel="preload" href="/assets/css/style.css?v=7" as="style">
+<link rel="stylesheet" href="/assets/css/style.css?v=7">
 </head>
 <body>
 <header class="siteHeader">
