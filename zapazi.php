@@ -18,5 +18,5 @@ require __DIR__ . '/inc/header.php';
   </div>
 </section>
 <script>window.SITE_HOURS=<?= json_encode($s['hours']) ?>;window.SITE_PHONE=<?= json_encode($s['phone']) ?>;window.SERVICES=<?= json_encode(array_column(services(),'title')) ?>;</script>
-<script src="/assets/js/booking.js?v=4"></script>
+<script src="/assets/js/booking.js?v=4" defer></script>
 <?php require __DIR__ . '/inc/footer.php'; ?>
