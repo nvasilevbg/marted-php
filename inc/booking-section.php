@@ -1,7 +1,7 @@
 <?php $s = settings(); ?>
 <section class="section" id="zapazi">
   <div class="container">
-    <div class="sectionHead reveal">
+    <div class="sectionHead">
       <span class="sectionIndex" aria-hidden="true"></span>
       <div class="sectionTitle"><span class="eyebrow eyebrow-line">Резервация</span><h2>Запазете <em>час</em></h2></div>
       <p>Изберете удобна дата и час за монтаж, демонтаж или консултация. Потвърждаваме по телефон.</p>

@@ -20,8 +20,8 @@ $current = $GLOBALS['path'] ?? '';
 <meta name="description" content="<?= e($desc ?? 'Монтаж и демонтаж на мебели в Добрич, Балчик, Варна и околността.') ?>">
 <link rel="icon" href="/assets/media/icon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="/assets/fonts/fonts.css?v=1">
-<link rel="preload" href="/assets/css/style.css?v=7" as="style">
-<link rel="stylesheet" href="/assets/css/style.css?v=7">
+<link rel="preload" href="/assets/css/style.css?v=8" as="style">
+<link rel="stylesheet" href="/assets/css/style.css?v=8">
 </head>
 <body>
 <header class="siteHeader">

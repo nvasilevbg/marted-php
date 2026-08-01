@@ -13,7 +13,7 @@ require __DIR__ . '/inc/header.php';
     <nav class="breadcrumb" aria-label="Навигация">
       <a href="/">Начало</a><span class="sep">/</span><a href="/proekti">Проекти</a><span class="sep">/</span><span><?= e($p['title']) ?></span>
     </nav>
-    <img class="projectCover" src="<?= e($p['cover']) ?>" alt="<?= e($p['title']) ?>">
+    <img class="projectCover" src="<?= e($p['cover']) ?>" srcset="<?= srcset($p['cover']) ?>" sizes="(max-width:760px) 100vw, 50vw" alt="<?= e($p['title']) ?>">
     <div class="projectIntro">
       <span class="eyebrow eyebrow-line">Проект</span>
       <h1 class="projectTitle"><?= e($p['title']) ?></h1>
@@ -30,7 +30,7 @@ require __DIR__ . '/inc/header.php';
       <?php if ($isVideo): ?>
       <video controls preload="metadata" class="projectVideo"><source src="<?= e($media) ?>" type="video/<?= $mext === 'mov' ? 'mp4' : $mext ?>"></video>
       <?php else: ?>
-      <img src="<?= e($media) ?>" alt="<?= e($p['title']) ?> — изглед <?= $i+1 ?>">
+      <img src="<?= e($media) ?>" srcset="<?= srcset($media) ?>" sizes="(max-width:760px) 100vw, (max-width:1024px) 50vw, 33vw" alt="<?= e($p['title']) ?> — изглед <?= $i+1 ?>">
       <?php endif; ?>
       <?php endforeach; ?>
     </div>

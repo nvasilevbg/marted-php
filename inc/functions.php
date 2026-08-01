@@ -163,6 +163,19 @@ function create_calendar_event($d, $s) {
     return !empty($eventResp['id']);
 }
 
+
+function srcset($path) {
+    $info = pathinfo($path);
+    $base = $info['dirname'] . '/' . $info['filename'];
+    $ext = $info['extension'] ?? 'webp';
+    $sets = [];
+    $w400 = $base . '-400.' . $ext;
+    if (file_exists(__DIR__ . '/..' . $w400)) $sets[] = $w400 . ' 400w';
+    $w800 = $base . '-800.' . $ext;
+    if (file_exists(__DIR__ . '/..' . $w800)) $sets[] = $w800 . ' 800w';
+    $sets[] = $path . ' 1200w';
+    return implode(', ', $sets);
+}
 // --- DB-backed content ---
 function services() {
     $rows = db()->query("SELECT * FROM services ORDER BY sort_order ASC, id ASC")->fetchAll();

@@ -30,7 +30,7 @@ require __DIR__ . '/inc/header.php';
 
 <section class="stats">
   <div class="container">
-    <div class="statsGrid reveal">
+    <div class="statsGrid">
       <?php foreach ($sts as $st): ?>
       <div class="stat"><span class="num"><em><?= e($st['value']) ?></em></span><span class="label"><?= e($st['label']) ?></span></div>
       <?php endforeach; ?>
@@ -40,12 +40,12 @@ require __DIR__ . '/inc/header.php';
 
 <section class="section" id="uslugi">
   <div class="container">
-    <div class="sectionHead reveal">
+    <div class="sectionHead">
       <span class="sectionIndex" aria-hidden="true"></span>
       <div class="sectionTitle"><span class="eyebrow eyebrow-line">Нашите услуги</span><h2>Какво <em>предлагаме</em></h2></div>
       <p>Ясен процес, правилни инструменти, чист обект и коректно изпълнение при всеки монтаж.</p>
     </div>
-    <div class="serviceIconGrid reveal" >
+    <div class="serviceIconGrid" >
       <?php foreach ($svcs as $svc): ?>
       <article class="serviceIconCard"><?= icon($svc['icon']) ?><h3><?= e($svc['title']) ?></h3><p><?= e($svc['text']) ?></p></article>
       <?php endforeach; ?>
@@ -55,16 +55,16 @@ require __DIR__ . '/inc/header.php';
 
 <section class="section" id="proekti">
   <div class="container">
-    <div class="sectionHead reveal">
+    <div class="sectionHead">
       <span class="sectionIndex" aria-hidden="true"></span>
       <div class="sectionTitle"><span class="eyebrow eyebrow-line">Проекти</span><h2>Нашите <em>проекти</em></h2></div>
       <p>Изпълнени обекти — кухни, спални, гардероби, секции и офис обзавеждане.</p>
       <div class="headActions"><a href="/proekti" class="btn btn-ghost">Виж всички проекти</a></div>
     </div>
-    <div class="projectMosaic reveal" >
+    <div class="projectMosaic" >
       <?php $mcls=['pc-feat','pc-sq','pc-tall','pc-wide','pc-sq','pc-wide']; foreach (array_slice($projs,0,6) as $i=>$p): ?>
       <a class="projectCard <?= $mcls[$i%6] ?>" href="/proekti/<?= e($p['slug']) ?>">
-        <img src="<?= e($p['cover']) ?>" alt="<?= e($p['title']) ?>">
+        <img src="<?= e($p['cover']) ?>" srcset="<?= srcset($p['cover']) ?>" sizes="(max-width:760px) 100vw, 50vw" alt="<?= e($p['title']) ?>" loading="lazy">
         <span class="arrowChip"><?= icon('arrow') ?></span>
         <span class="cap"><span class="cat"><?= e($p['category']) ?> · <?= e($p['location']) ?></span><h3><?= e($p['title']) ?></h3><p class="desc"><?= e($p['description']) ?></p></span>
       </a>
@@ -75,11 +75,11 @@ require __DIR__ . '/inc/header.php';
 
 <section class="section testimonials" id="otzivi">
   <div class="container">
-    <div class="sectionHead reveal">
+    <div class="sectionHead">
       <span class="sectionIndex" aria-hidden="true"></span>
       <div class="sectionTitle"><span class="eyebrow eyebrow-line">Отзиви</span><h2>Какво казват <em>нашите клиенти</em></h2></div>
     </div>
-    <div class="quoteGrid reveal" >
+    <div class="quoteGrid" >
       <?php foreach ($tests as $t): ?>
       <article class="quote"><span class="mark">"</span><div class="stars">★★★★★</div><blockquote><?= e($t['text']) ?></blockquote><span class="who"><?= e($t['name']) ?></span></article>
       <?php endforeach; ?>

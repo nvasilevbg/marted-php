@@ -41,7 +41,7 @@
   <a class="mbBtn mbBook" href="/zapazi">Запази час</a>
 </div>
 <?php endif; ?>
-<script src="/assets/js/main.js?v=2"></script>
+<script src="/assets/js/main.js?v=3"></script>
 <script>
 (function(){
   var items = document.querySelectorAll('.projectGallery img, .projectGallery video');
