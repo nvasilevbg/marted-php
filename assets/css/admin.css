@@ -63,8 +63,9 @@
 .adminMenuToggle{display:none;position:fixed;top:12px;left:12px;z-index:101;background:var(--bg-2);border:1px solid var(--line);border-radius:var(--radius);width:44px;height:44px;font-size:20px;cursor:pointer;color:var(--accent-2)}
 @media(max-width:760px){
 .adminMenuToggle{display:grid;place-items:center}
-.adminMain{padding-top:60px}
-.adminSidebar{box-shadow:2px 0 12px rgba(0,0,0,.3)}
+.adminMain{padding-top:60px;padding:16px;padding-top:60px}
+.adminSidebar{border-right:none;box-shadow:2px 0 16px rgba(0,0,0,.4);width:240px;max-width:80vw}
+.adminBody{overflow-x:hidden}
 }
 
 @media(max-width:760px){.adminSidebar{position:fixed;left:-240px;z-index:100;transition:left .3s}.adminMain{padding:16px}.adminRow{grid-template-columns:60px 1fr}.adminRowActions{grid-column:1/-1}.formRow{grid-template-columns:1fr}.bookingItem{grid-template-columns:1fr}.adminTabs button{padding:10px 14px;font-size:11px}}
