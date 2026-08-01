@@ -15,8 +15,8 @@ require __DIR__ . '/../inc/admin-header.php';
   <span class="eyebrow eyebrow-line">Админ</span>
   <h1>Вход за администратор</h1>
   <form method="POST" style="margin-top:20px;display:grid;gap:18px">
-    <div><label for="ad-user">Потребител</label><input id="ad-user" type="text" name="user" placeholder="admin" style="background:var(--bg-3);border:1px solid var(--line);border-radius:var(--radius);padding:10px 14px;color:var(--ink);font-size:15px;width:100%;box-sizing:border-box"></div>
-    <div><label for="ad-pass">Парола</label><input id="ad-pass" type="password" name="pass" placeholder="Админ парола" style="background:var(--bg-3);border:1px solid var(--line);border-radius:var(--radius);padding:10px 14px;color:var(--ink);font-size:15px;width:100%;box-sizing:border-box"></div>
+    <div><label for="ad-user">Потребител</label><input id="ad-user" type="text" name="user" placeholder="" style="background:var(--bg-3);border:1px solid var(--line);border-radius:var(--radius);padding:10px 14px;color:var(--ink);font-size:15px;width:100%;box-sizing:border-box"></div>
+    <div><label for="ad-pass">Парола</label><input id="ad-pass" type="password" name="pass" placeholder="Парола" style="background:var(--bg-3);border:1px solid var(--line);border-radius:var(--radius);padding:10px 14px;color:var(--ink);font-size:15px;width:100%;box-sizing:border-box"></div>
     <button class="btn btn-primary btn-block" type="submit">Вход</button>
     <?php if (!empty($authErr)): ?><p class="formMsg err"><?= e($authErr) ?></p><?php endif; ?>
   </form>

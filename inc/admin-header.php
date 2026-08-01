@@ -38,7 +38,8 @@ $bCount = is_admin() ? db()->query("SELECT COUNT(*) FROM bookings")->fetchColumn
 <body class="adminBody">
 <div class="adminLayout">
   <?php if (is_admin()): ?>`n  <?php if (is_admin()): ?>
-  <aside class="adminSidebar">
+  <button class="adminMenuToggle" id="adminMenuToggle" aria-label="Menu">☰</button>
+  <aside class="adminSidebar" id="adminSidebar">
     <div class="adminSidebarLogo"><img src="/assets/media/logo.png" alt="<?= e($s['name']) ?>" style="height:40px;width:auto"></div>
     <nav class="adminNav">
       <?php foreach ($navGroups as $groupLabel => $items): ?>
@@ -60,3 +61,12 @@ $bCount = is_admin() ? db()->query("SELECT COUNT(*) FROM bookings")->fetchColumn
   <aside class="adminSidebar" style="display:none"></aside>
   <?php endif; ?>
   <main class="adminMain">
+<script>
+document.getElementById('adminMenuToggle')?.addEventListener('click',function(){
+var s=document.getElementById('adminSidebar');
+if(s.style.left==='0px'){s.style.left='-240px';}else{s.style.left='0px';}
+});
+document.querySelectorAll('.navItem a,.adminSidebarLink').forEach(function(a){
+a.addEventListener('click',function(){if(window.innerWidth<=760){document.getElementById('adminSidebar').style.left='-240px';}});
+});
+</script>

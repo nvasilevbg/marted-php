@@ -60,6 +60,13 @@
 .btn-block{width:100%;justify-content:center}
 .linkBtn{background:transparent;border:0;color:var(--accent-2);font-family:var(--font-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;text-decoration:none}
 .projFormHead{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.adminMenuToggle{display:none;position:fixed;top:12px;left:12px;z-index:101;background:var(--bg-2);border:1px solid var(--line);border-radius:var(--radius);width:44px;height:44px;font-size:20px;cursor:pointer;color:var(--accent-2)}
+@media(max-width:760px){
+.adminMenuToggle{display:grid;place-items:center}
+.adminMain{padding-top:60px}
+.adminSidebar{box-shadow:2px 0 12px rgba(0,0,0,.3)}
+}
+
 @media(max-width:760px){.adminSidebar{position:fixed;left:-240px;z-index:100;transition:left .3s}.adminMain{padding:16px}.adminRow{grid-template-columns:60px 1fr}.adminRowActions{grid-column:1/-1}.formRow{grid-template-columns:1fr}.bookingItem{grid-template-columns:1fr}.adminTabs button{padding:10px 14px;font-size:11px}}
 .navSectionLabel{font-family:var(--font-mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted-2);padding:12px 20px 6px}.navSub{padding-left:36px}.navDivider{height:1px;background:var(--line-soft);margin:12px 20px}
 .navGroupLabel{font-family:var(--font-mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted-2);padding:16px 20px 6px}.navItem{padding-left:24px}
