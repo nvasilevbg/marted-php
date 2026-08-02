@@ -7,7 +7,7 @@ $nav = [
     ['href'=>'/za-nas','label'=>'За нас'],
     ['href'=>'/uslugi','label'=>'Услуги'],
     ['href'=>'/proekti','label'=>'Проекти'],
-    ['href'=>'/#otzivi','label'=>'Отзиви'],
+    ['href'=>'/otzivi','label'=>'Отзиви'],
     ['href'=>'/kontakti','label'=>'Контакти'],
 ];
 $current = $GLOBALS['path'] ?? '';
