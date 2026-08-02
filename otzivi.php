@@ -9,7 +9,7 @@ $desc='Дайте отзив за MarTed — монтаж и демонтаж н
 require __DIR__ . '/inc/header.php';
 ?>
 <section class="pageHero">
-  <div class="container pageHeroInner">
+  <div class="container pageHeroInner" style="text-align:center">
     <span class="eyebrow">Отзиви</span>
     <div class="reviewStars" aria-hidden="true"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
     <h1>Помогнахме ли ви? <em>Кажете го.</em></h1>
