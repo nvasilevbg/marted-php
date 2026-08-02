@@ -32,7 +32,7 @@ $bCount = is_admin() ? db()->query("SELECT COUNT(*) FROM bookings")->fetchColumn
 <title><?= e($title ?? $s['name']) ?></title>
 <link rel="icon" href="/assets/media/icon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="/assets/fonts/fonts.css?v=1">
-<link rel="stylesheet" href="/assets/css/style.css?v=10">
+<link rel="stylesheet" href="/assets/css/style.css?v=11">
 <link rel="stylesheet" href="/assets/css/admin.css?v=6">
 </head>
 <body class="adminBody">
