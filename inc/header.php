@@ -20,10 +20,17 @@ $current = $GLOBALS['path'] ?? '';
 <meta name="description" content="<?= e($desc ?? 'Монтаж и демонтаж на мебели в Добрич, Балчик, Варна и околността.') ?>">
 <link rel="icon" href="/assets/media/icon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="/assets/fonts/fonts.css?v=1">
-<link rel="preload" href="/assets/css/style.css?v=8" as="style">
-<link rel="stylesheet" href="/assets/css/style.css?v=8">
+<link rel="preload" href="/assets/css/style.css?v=9" as="style">
+<link rel="stylesheet" href="/assets/css/style.css?v=9">
 </head>
 <body>
+<?php if (!empty($GLOBALS['minimal_header'])): ?>
+<header class="siteHeader minimalHeader">
+  <div class="container navInner" style="justify-content:center">
+    <a href="/" class="logo" aria-label="<?= e($s['name']) ?> — начално"><img class="logoImg" src="/assets/media/logo.png" alt="<?= e($s['name']) ?>"></a>
+  </div>
+</header>
+<?php else: ?>
 <header class="siteHeader">
   <div class="specbar">
     <div class="container specbarInner">
@@ -50,4 +57,5 @@ $current = $GLOBALS['path'] ?? '';
     </div>
   </div>
 </header>
+<?php endif; ?>
 <main>

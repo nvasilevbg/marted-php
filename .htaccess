@@ -37,6 +37,8 @@ RewriteRule ^proekti/([a-zA-Z0-9_-]+)/?$ proekt.php?slug=$1 [L]
 RewriteRule ^kontakti/?$ kontakti.php [L]
 RewriteRule ^zapazi/?$ zapazi.php [L]
 RewriteRule ^za-nas/?$ za-nas.php [L]
+RewriteRule ^otzivi/?$ otzivi.php [L]
+RewriteRule ^review/?$ otzivi.php [L]
 
 # Admin
 RewriteRule ^admin/?$ admin/index.php [L]
