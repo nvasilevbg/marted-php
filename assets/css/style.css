@@ -10,6 +10,7 @@
 .reviewQuote .stars{color:var(--accent);font-size:18px;margin-bottom:12px}
 .reviewQuote blockquote{font-family:var(--font-serif);font-size:20px;line-height:1.5;color:var(--ink);margin:0 0 16px}
 .reviewQuote .who{font-family:var(--font-mono);font-size:13px;color:var(--accent-2);text-transform:uppercase;letter-spacing:.1em}
+.reviewCTAWrap{display:flex;flex-direction:column;align-items:center;gap:14px;margin-top:28px}
 .reviewCTA{display:flex;align-items:center;justify-content:center;gap:12px;width:100%;max-width:480px;margin:0 auto 16px;height:64px;background:var(--accent);color:#0c0b0a;font-family:var(--font-sans);font-weight:800;font-size:18px;border-radius:16px;text-decoration:none;box-shadow:0 6px 24px rgba(194,162,90,.3);transition:transform .2s,box-shadow .2s}
 .reviewCTA:hover{transform:scale(1.02);box-shadow:0 8px 32px rgba(194,162,90,.45)}
 .reviewCTA:active{transform:scale(.99)}
@@ -20,4 +21,5 @@
 .reviewTips li{counter-increment:tip;padding:10px 0 10px 36px;position:relative;color:var(--muted);font-size:16px;line-height:1.6}
 .reviewTips li::before{content:counter(tip);position:absolute;left:0;top:9px;width:26px;height:26px;background:var(--accent);color:#0c0b0a;border-radius:50%;font-size:13px;font-weight:700;display:grid;place-items:center;font-family:var(--font-sans)}
 .reviewTips li strong{color:var(--ink);font-weight:700}
-@media(prefers-reduced-motion:reduce){.reviewCTA{transition:none}.reviewCTA:hover,.reviewCTA:active{transform:none}}
+@media(prefers-reduced-motion:reduce){.reviewCTAWrap{display:flex;flex-direction:column;align-items:center;gap:14px;margin-top:28px}
+.reviewCTA{transition:none}.reviewCTA:hover,.reviewCTA:active{transform:none}}
