@@ -4,7 +4,7 @@ require_once __DIR__ . '/inc/icons.php';
 $s = settings();
 $GLOBALS['path']='/otzivi';
 $GLOBALS['hide_mobile_bar']=true;
-$GLOBALS['minimal_header']=true;
+
 $title='Отзиви | '.$s['name'];
 $desc='Дайте отзив за MarTed — монтаж и демонтаж на мебели в Добрич. Един отзив отнема минута, а на нас помага повече от вячка реклама.';
 require __DIR__ . '/inc/header.php';
