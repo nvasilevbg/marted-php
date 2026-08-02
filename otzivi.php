@@ -67,7 +67,10 @@ require __DIR__ . '/inc/header.php';
 <?php if (!empty($s['facebook'])): ?>
 <section class="section" style="padding-top:0">
   <div class="container" style="max-width:640px;text-align:center">
-    <a class="reviewFb" href="<?= e($s['facebook']) ?>" target="_blank" rel="noopener noreferrer"><?= icon('facebook') ?> Или ни намерете във Facebook</a>
+    <a class="reviewFbBtn" href="<?= e($s['facebook']) ?>" target="_blank" rel="noopener noreferrer">
+      <span class="reviewFbIcon"><?= icon('facebook') ?></span>
+      <span>Или ни намерете във Facebook</span>
+    </a>
   </div>
 </section>
 <?php endif; ?>
