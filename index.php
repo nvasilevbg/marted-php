@@ -26,8 +26,8 @@ require __DIR__ . '/inc/header.php';
       <?php if (empty($heroImages)): $heroImages = [content('home_hero_image', '/assets/media/hero-kitchen.jpg')]; endif; ?>
       <?php if (count($heroImages) > 1): ?>
       <div class="heroCarousel" id="heroCarousel">
-        <?php foreach ($heroImages as $hi): ?>
-        <div class="heroCarouselSlide"><img src="<?= e($hi) ?>" alt="MarTed монтаж на мебели" loading="lazy"></div>
+        <?php foreach ($heroImages as $i => $hi): ?>
+        <div class="heroCarouselSlide<?= $i === 0 ? ' active' : '' ?>"><img src="<?= e($hi) ?>" alt="MarTed монтаж на мебели" loading="lazy"></div>
         <?php endforeach; ?>
       </div>
       <?php else: ?>
@@ -100,15 +100,16 @@ require __DIR__ . '/inc/header.php';
 <?php include __DIR__ . '/inc/booking-section.php'; ?>
 
 <script>
-if (window.document.getElementById('heroCarousel')) {
+if (document.getElementById('heroCarousel')) {
   var slides = document.querySelectorAll('.heroCarouselSlide');
   var current = 0;
-  function showSlide(n) {
-    slides[current].classList.remove('active');
-    current = (n + slides.length) % slides.length;
-    slides[current].classList.add('active');
+  if (slides.length > 1) {
+    setInterval(function() {
+      slides[current].classList.remove('active');
+      current = (current + 1) % slides.length;
+      slides[current].classList.add('active');
+    }, 5000);
   }
-  setInterval(function() { showSlide(current + 1); }, 5000);
 }
 </script>
 <?php require __DIR__ . '/inc/footer.php'; ?>
