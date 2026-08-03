@@ -62,6 +62,17 @@ function convert_to_webp($src, $dest, $quality = 85) {
             default: return false;
         }
         if (!$img) return false;
+        // Fix EXIF orientation (phones save landscape + rotate tag)
+        if (function_exists('exif_read_data') && $info[2] == IMAGETYPE_JPEG) {
+            $exif = @exif_read_data($src);
+            if ($exif && !empty($exif['Orientation'])) {
+                switch ($exif['Orientation']) {
+                    case 3: $img = imagerotate($img, 180, 0); break;
+                    case 6: $img = imagerotate($img, -90, 0); break;
+                    case 8: $img = imagerotate($img, 90, 0); break;
+                }
+            }
+        }
         $ok = @imagewebp($img, $dest, $quality);
         imagedestroy($img);
         return $ok;
