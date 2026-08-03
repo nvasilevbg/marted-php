@@ -30,13 +30,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     if ($webp) $existing[] = $webp;
                 }
             }
-            db()->prepare("UPDATE settings SET v=? WHERE k='home_hero_images'")->execute([json_encode($existing)]);
+            $stHero = db()->prepare("UPDATE settings SET v=? WHERE k='home_hero_images'");
+            $stHero->execute([json_encode($existing)]);
+            if ($stHero->rowCount() === 0) {
+                db()->prepare("INSERT INTO settings (k,v) VALUES ('home_hero_images',?)")->execute([json_encode($existing)]);
+            }
         }
         // Delete a hero carousel image
         if (!empty($_POST['delete_hero_image'])) {
             $existing = json_decode(setting('home_hero_images', '[]'), true) ?: [];
             $existing = array_values(array_filter($existing, fn($img) => $img !== $_POST['delete_hero_image']));
-            db()->prepare("UPDATE settings SET v=? WHERE k='home_hero_images'")->execute([json_encode($existing)]);
+            $stDel = db()->prepare("UPDATE settings SET v=? WHERE k='home_hero_images'");
+        $stDel->execute([json_encode($existing)]);
+        if ($stDel->rowCount() === 0) {
+            db()->prepare("INSERT INTO settings (k,v) VALUES ('home_hero_images',?)")->execute([json_encode($existing)]);
+        }
         }
     } elseif ($section === 'legal') {
         foreach (['politika_poveritelnost','usloviya_polzvane','politika_biskvitki'] as $lk) {
