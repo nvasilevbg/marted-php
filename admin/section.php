@@ -69,7 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-$titles = ['hero'=>'Херобанер','stats'=>'Статистики','contact'=>'Контакти','about'=>'За нас','brand'=>'Настройки','security'=>'Сигурност'];
+$titles = ['hero'=>'Херобанер','stats'=>'Статистики','contact'=>'Контакти','about'=>'За нас','brand'=>'Настройки','security'=>'Сигурност','legal'=>'Правни страници'];
 $title = $titles[$edit] . ' | Админ | ' . $s['name'];
 require __DIR__ . '/../inc/admin-header.php';
 ?>
