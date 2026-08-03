@@ -31,3 +31,8 @@
 .reviewTips li strong{color:var(--ink);font-weight:700}
 @media(prefers-reduced-motion:reduce){
 .reviewCTA:hover,}
+
+.heroCarousel{position:relative;aspect-ratio:4/5;overflow:hidden;border-radius:var(--radius);border:1px solid var(--line);box-shadow:var(--shadow)}
+.heroCarouselSlide{position:absolute;inset:0;opacity:0;transition:opacity 1s ease}
+.heroCarouselSlide.active{opacity:1}
+.heroCarouselSlide img{width:100%;height:100%;object-fit:cover}

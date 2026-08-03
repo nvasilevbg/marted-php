@@ -22,7 +22,17 @@ require __DIR__ . '/inc/header.php';
       </div>
     </div>
     <div class="heroVisual">
-      <div class="heroPhoto"><img src="<?php echo e(content("home_hero_image","/assets/media/hero-kitchen.jpg")); ?>" alt="Монтаж на модерна кухня"></div>
+      <?php $heroImages = json_decode(setting('home_hero_images', '[]'), true) ?: []; ?>
+      <?php if (empty($heroImages)): $heroImages = [content('home_hero_image', '/assets/media/hero-kitchen.jpg')]; endif; ?>
+      <?php if (count($heroImages) > 1): ?>
+      <div class="heroCarousel" id="heroCarousel">
+        <?php foreach ($heroImages as $hi): ?>
+        <div class="heroCarouselSlide"><img src="<?= e($hi) ?>" alt="MarTed монтаж на мебели" loading="lazy"></div>
+        <?php endforeach; ?>
+      </div>
+      <?php else: ?>
+      <div class="heroPhoto"><img src="<?= e($heroImages[0]) ?>" alt="Монтаж на модерна кухня"></div>
+      <?php endif; ?>
       <p class="heroCaption">Кухня по поръчка · гр. Добрич</p>
     </div>
   </div>
@@ -88,4 +98,17 @@ require __DIR__ . '/inc/header.php';
 </section>
 
 <?php include __DIR__ . '/inc/booking-section.php'; ?>
+
+<script>
+if (window.document.getElementById('heroCarousel')) {
+  var slides = document.querySelectorAll('.heroCarouselSlide');
+  var current = 0;
+  function showSlide(n) {
+    slides[current].classList.remove('active');
+    current = (n + slides.length) % slides.length;
+    slides[current].classList.add('active');
+  }
+  setInterval(function() { showSlide(current + 1); }, 5000);
+}
+</script>
 <?php require __DIR__ . '/inc/footer.php'; ?>

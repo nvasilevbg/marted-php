@@ -117,3 +117,23 @@ function slugify($s) {
     $s = preg_replace('/^-+|-+$/u', '', $s);
     return $s ?: 'proekt-' . time();
 }
+
+function convert_to_webp_upload($field, $index, $dest_dir) {
+    $name = $_FILES[$field]['name'][$index] ?? '';
+    $tmp = $_FILES[$field]['tmp_name'][$index] ?? '';
+    $error = $_FILES[$field]['error'][$index] ?? UPLOAD_ERR_NO_FILE;
+    if ($error !== UPLOAD_ERR_OK || empty($name)) return null;
+    $ext = strtolower(pathinfo($name, PATHINFO_EXTENSION));
+    $allowed = ['jpg','jpeg','png','webp'];
+    if (!in_array($ext, $allowed)) return null;
+    $tmpName = 'p_' . time() . '_' . rand(100,999) . '.' . $ext;
+    $tmpPath = $dest_dir . '/' . $tmpName;
+    if (!move_uploaded_file($tmp, $tmpPath)) return null;
+    $webpName = 'p_' . time() . '_' . rand(100,999) . '.webp';
+    $webpPath = $dest_dir . '/' . $webpName;
+    if (convert_to_webp($tmpPath, $webpPath, 85)) {
+        @unlink($tmpPath);
+        return '/assets/media/projects/' . $webpName;
+    }
+    return '/assets/media/projects/' . $tmpName;
+}

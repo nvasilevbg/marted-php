@@ -21,6 +21,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $uploaded = upload_image('hero_image_file', __DIR__ . '/../assets/media/projects');
         if ($uploaded) $heroImg = $uploaded;
         if ($heroImg) db()->prepare("UPDATE settings SET v=? WHERE k='home_hero_image'")->execute([$heroImg]);
+        // Handle multiple hero images (carousel)
+        if (!empty($_FILES['hero_images']['name'][0])) {
+            $existing = json_decode(setting('home_hero_images', '[]'), true) ?: [];
+            foreach ($_FILES['hero_images']['tmp_name'] as $i => $tmp) {
+                if ($_FILES['hero_images']['error'][$i] === UPLOAD_ERR_OK) {
+                    $webp = convert_to_webp_upload('hero_images', $i, __DIR__ . '/../assets/media/projects');
+                    if ($webp) $existing[] = $webp;
+                }
+            }
+            db()->prepare("UPDATE settings SET v=? WHERE k='home_hero_images'")->execute([json_encode($existing)]);
+        }
+        // Delete a hero carousel image
+        if (!empty($_POST['delete_hero_image'])) {
+            $existing = json_decode(setting('home_hero_images', '[]'), true) ?: [];
+            $existing = array_values(array_filter($existing, fn($img) => $img !== $_POST['delete_hero_image']));
+            db()->prepare("UPDATE settings SET v=? WHERE k='home_hero_images'")->execute([json_encode($existing)]);
+        }
     } elseif ($section === 'stats') {
         if (isset($_POST['stat_ids'])) {
             foreach ($_POST['stat_ids'] as $i => $id) {
@@ -61,6 +78,22 @@ require __DIR__ . '/../inc/admin-header.php';
     <?php if ($heroImg): ?><img src="<?= e($heroImg) ?>" style="max-height:100px;border-radius:4px;margin-bottom:8px"><?php endif; ?>
     <input type="hidden" name="hero_image_existing" value="<?= e($heroImg) ?>">
     <input type="file" name="hero_image_file" accept="image/*">
+  </div>
+  <div style="margin-top:20px;border-top:1px solid var(--line);padding-top:20px">
+    <label>Снимки за карусел</label>
+    <p style="font-size:13px;color:var(--muted);margin-bottom:12px">Качете няколко снимки. Автоматично се конвертират на WebP.</p>
+    <?php $heroImages = json_decode(setting('home_hero_images', '[]'), true) ?: []; ?>
+    <?php if (!empty($heroImages)): ?>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px">
+      <?php foreach ($heroImages as $img): ?>
+      <div style="position:relative">
+        <img src="<?= e($img) ?>" style="width:100%;height:80px;object-fit:cover;border-radius:4px;border:1px solid var(--line)">
+        <button type="submit" name="delete_hero_image" value="<?= e($img) ?>" style="position:absolute;top:4px;right:4px;background:rgba(0,0,0,.7);color:#fff;border:none;border-radius:4px;width:24px;height:24px;cursor:pointer;font-size:14px">×</button>
+      </div>
+      <?php endforeach; ?>
+    </div>
+    <?php endif; ?>
+    <input type="file" name="hero_images[]" multiple accept="image/*" style="margin-bottom:8px">
   </div>
   <button class="btn btn-primary btn-block" type="submit">Запази</button>
 </form>

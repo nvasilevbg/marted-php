@@ -20,8 +20,8 @@ $current = $GLOBALS['path'] ?? '';
 <meta name="description" content="<?= e($desc ?? 'Монтаж и демонтаж на мебели в Добрич, Балчик, Варна и околността.') ?>">
 <link rel="icon" href="/assets/media/icon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="/assets/fonts/fonts.css?v=1">
-<link rel="preload" href="/assets/css/style.css?v=13" as="style">
-<link rel="stylesheet" href="/assets/css/style.css?v=13">
+<link rel="preload" href="/assets/css/style.css?v=14" as="style">
+<link rel="stylesheet" href="/assets/css/style.css?v=14">
 <script defer src="https://cloud.umami.is/script.js" data-website-id="78e2dd3b-41f6-43df-bdec-dae392425d6a"></script>
 </head>
 <body>
