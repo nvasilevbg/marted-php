@@ -15,30 +15,30 @@
       <div class="footerTag"><?= e($s['tagline']) ?></div>
     </div>
     <div class="footerCol">
-      <h3>Навигация</h3>
-      <a href="/uslugi">Услуги</a><a href="/proekti">Проекти</a><a href="/za-nas">За нас</a><a href="/kontakti">Контакти</a>
+      <h3>ÐÐ°Ð²Ð¸Ð³Ð°Ñ†Ð¸Ñ</h3>
+      <a href="/uslugi">Ð£ÑÐ»ÑƒÐ³Ð¸</a><a href="/proekti">ÐŸÑ€Ð¾ÐµÐºÑ‚Ð¸</a><a href="/za-nas">Ð—Ð° Ð½Ð°Ñ</a><a href="/kontakti">ÐšÐ¾Ð½Ñ‚Ð°ÐºÑ‚Ð¸</a>
     </div>
     <div class="footerCol">
-      <h3>Услуги</h3>
-      <a href="/uslugi">Монтаж на мебели</a><a href="/uslugi">Демонтаж на мебели</a><a href="/uslugi">Разнос и изнасяне</a><a href="/uslugi">Замерване и консултация</a>
+      <h3>Ð£ÑÐ»ÑƒÐ³Ð¸</h3>
+      <a href="/uslugi">ÐœÐ¾Ð½Ñ‚Ð°Ð¶ Ð½Ð° Ð¼ÐµÐ±ÐµÐ»Ð¸</a><a href="/uslugi">Ð”ÐµÐ¼Ð¾Ð½Ñ‚Ð°Ð¶ Ð½Ð° Ð¼ÐµÐ±ÐµÐ»Ð¸</a><a href="/uslugi">Ð Ð°Ð·Ð½Ð¾Ñ Ð¸ Ð¸Ð·Ð½Ð°ÑÑÐ½Ðµ</a><a href="/uslugi">Ð—Ð°Ð¼ÐµÑ€Ð²Ð°Ð½Ðµ Ð¸ ÐºÐ¾Ð½ÑÑƒÐ»Ñ‚Ð°Ñ†Ð¸Ñ</a>
     </div>
     <div class="footerCol">
-      <h3>Контакти</h3>
+      <h3>ÐšÐ¾Ð½Ñ‚Ð°ÐºÑ‚Ð¸</h3>
       <a href="<?= e($s['phoneHref']) ?>"><?= icon('phone','icon') ?> <?= e($s['phone']) ?></a>
       <a href="mailto:<?= e($s['email']) ?>"><?= icon('mail','icon') ?> <?= e($s['email']) ?></a>
       <span><?= icon('pin','icon') ?> <?= e($s['location']) ?></span>
       <span><?= icon('clock','icon') ?> <?= e($s['hours']) ?></span>
     </div>
   </div>
-  <div class="container footerBottom">
-    <span>© <?= date('Y') ?> <?= e($s['name']) ?> — монтаж и демонтаж на мебели</span>
-    <a href="https://blackswan.social/izrabotka-na-saitove" target="_blank" rel="noopener noreferrer">Уеб сайтът е изработен от Black Swan Social</a>
+  <div class="container footerBottom" style="flex-wrap:wrap;gap:10px"><span><a href="/politika-poveritelnost" style="color:var(--muted);text-decoration:none">Политика за поверителност</a> · <a href="/usloviya-polzvane" style="color:var(--muted);text-decoration:none">Условия за ползване</a> · <a href="/politika-biskvitki" style="color:var(--muted);text-decoration:none">Политика за бисквитки</a></span>
+    <span>Â© <?= date('Y') ?> <?= e($s['name']) ?> â€” Ð¼Ð¾Ð½Ñ‚Ð°Ð¶ Ð¸ Ð´ÐµÐ¼Ð¾Ð½Ñ‚Ð°Ð¶ Ð½Ð° Ð¼ÐµÐ±ÐµÐ»Ð¸</span>
+    <a href="https://blackswan.social/izrabotka-na-saitove" target="_blank" rel="noopener noreferrer">Ð£ÐµÐ± ÑÐ°Ð¹Ñ‚ÑŠÑ‚ Ðµ Ð¸Ð·Ñ€Ð°Ð±Ð¾Ñ‚ÐµÐ½ Ð¾Ñ‚ Black Swan Social</a>
   </div>
 </footer>
 <?php if (!$hideBar): ?>
-<div class="mobileBar" aria-label="Бърз контакт">
-  <a class="mbBtn mbPhone" href="<?= e($s['phoneHref']) ?>"><?= icon('phone') ?> Позвъни</a>
-  <a class="mbBtn mbBook" href="/zapazi">Запази час</a>
+<div class="mobileBar" aria-label="Ð‘ÑŠÑ€Ð· ÐºÐ¾Ð½Ñ‚Ð°ÐºÑ‚">
+  <a class="mbBtn mbPhone" href="<?= e($s['phoneHref']) ?>"><?= icon('phone') ?> ÐŸÐ¾Ð·Ð²ÑŠÐ½Ð¸</a>
+  <a class="mbBtn mbBook" href="/zapazi">Ð—Ð°Ð¿Ð°Ð·Ð¸ Ñ‡Ð°Ñ</a>
 </div>
 <?php endif; ?>
 <script src="/assets/js/main.js?v=4"></script>
@@ -82,6 +82,16 @@
     }
   });
 })();
+</script>
+<!-- Cookie Banner -->
+<div class="cookieBanner" id="cookieBanner">
+  <div class="cookieBannerInner">
+    <div class="cookieBannerText">Този сайт използва бисквитки за анализ на посещенията (Umami Analytics) — без проследяване на лични данни. Продължавайки, вие се съгласявате с това. Вижте <a href="/politika-poveritelnost">Политика за поверителност</a>.</div>
+    <div class="cookieBannerBtns"><button class="btn btn-primary" id="cookieAccept" type="button">Приемам</button></div>
+  </div>
+</div>
+<script>
+(function(){if(localStorage.getItem("cookieAccepted")){document.getElementById("cookieBanner").style.display="none";return;}document.getElementById("cookieBanner").classList.add("show");document.getElementById("cookieAccept").onclick=function(){localStorage.setItem("cookieAccepted","1");document.getElementById("cookieBanner").classList.remove("show");};})();
 </script>
 </body>
 </html>

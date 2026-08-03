@@ -39,6 +39,9 @@ RewriteRule ^zapazi/?$ zapazi.php [L]
 RewriteRule ^za-nas/?$ za-nas.php [L]
 RewriteRule ^otzivi/?$ otzivi.php [L]
 RewriteRule ^review/?$ otzivi.php [L]
+RewriteRule ^politika-poveritelnost/?$ politika_poveritelnost.php [L]
+RewriteRule ^usloviya-polzvane/?$ usloviya_polzvane.php [L]
+RewriteRule ^politika-biskvitki/?$ politika_biskvitki.php [L]
 
 # Admin
 RewriteRule ^admin/?$ admin/index.php [L]
