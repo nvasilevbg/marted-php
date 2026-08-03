@@ -3,10 +3,10 @@ require_once __DIR__ . '/../inc/functions.php';
 require_once __DIR__ . '/../inc/admin-functions.php';
 $s = settings();
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (admin_login($_POST['user'] ?? '', $_POST['pass'] ?? '')) { header('Location: section.php?edit=hero'); exit; }
+    if (admin_login($_POST['user'] ?? '', $_POST['pass'] ?? '')) { header('Location: dashboard.php'); exit; }
     $authErr = 'Грешна парола.';
 }
-if (is_admin()) { header('Location: section.php?edit=hero'); exit; }
+if (is_admin()) { header('Location: dashboard.php'); exit; }
 $GLOBALS['admin_page'] = '';
 $title = 'Vhod | Admin';
 require __DIR__ . '/../inc/admin-header.php';

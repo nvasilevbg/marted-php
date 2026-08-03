@@ -6,6 +6,7 @@ $s = settings();
 $current = $GLOBALS['admin_page'] ?? '';
 $navGroups = [
     'НАЧАЛНА' => [
+        'dashboard' => ['label'=>'Dashboard','icon'=>'pin','href'=>'dashboard.php'],
         'hero' => ['label'=>'Херобанер','icon'=>'pin','href'=>'section.php?edit=hero'],
         'stats' => ['label'=>'Статистики','icon'=>'users','href'=>'section.php?edit=stats'],
         'services' => ['label'=>'Услуги','icon'=>'shield','href'=>'services.php'],
