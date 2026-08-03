@@ -13,7 +13,7 @@ function settings() {
 function setting($k, $def='') { $s = settings(); return isset($s[$k]) && $s[$k] !== '' ? $s[$k] : $def; }
 
 function projects() {
-    $rows = db()->query("SELECT * FROM projects ORDER BY id ASC")->fetchAll();
+    $rows = db()->query("SELECT * FROM projects ORDER BY id DESC")->fetchAll();
     foreach ($rows as &$p) $p['gallery'] = json_decode($p['gallery'] ?: '[]', true) ?: [];
     unset($p);
     return $rows;
