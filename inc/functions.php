@@ -7,7 +7,7 @@ function settings() {
     $rows = db()->query("SELECT k,v FROM settings")->fetchAll();
     $s = [];
     foreach ($rows as $r) $s[$r['k']] = $r['v'];
-    $s += ['name'=>'MarTed','subtitle'=>'Ð¼Ð¾Ð½Ñ‚Ð°Ð¶ Ð½Ð° Ð¼ÐµÐ±ÐµÐ»Ð¸','tagline'=>'Ð¤Ð¸Ñ€Ð¼Ð° Ð·Ð° Ð¼Ð¾Ð½Ñ‚Ð°Ð¶ Ð¸ Ð´ÐµÐ¼Ð¾Ð½Ñ‚Ð°Ð¶','phone'=>'','phoneHref'=>'#','email'=>'','location'=>'','region'=>'','hours'=>'','established'=>'','facebook'=>'','instagram'=>''];
+    $s += ['name'=>'MarTed','subtitle'=>'монтаж на мебели','tagline'=>'Фирма за монтаж и демонтаж','phone'=>'','phoneHref'=>'#','email'=>'','location'=>'','region'=>'','hours'=>'','established'=>'','facebook'=>'','instagram'=>''];
     return $s;
 }
 function setting($k, $def='') { $s = settings(); return isset($s[$k]) && $s[$k] !== '' ? $s[$k] : $def; }
@@ -32,18 +32,18 @@ function taken_slots() {
 
 function add_booking($d) {
     $today = date('Y-m-d');
-    if (empty($d['date']) || empty($d['slot']) || empty(trim($d['name'])) || empty(trim($d['phone']))) return ['ok'=>false,'error'=>'ÐœÐ¾Ð»Ñ, Ð¿Ð¾Ð¿ÑŠÐ»Ð½ÐµÑ‚Ðµ Ð¸Ð¼Ðµ Ð¸ Ñ‚ÐµÐ»ÐµÑ„Ð¾Ð½.'];
-    if ($d['date'] < $today) return ['ok'=>false,'error'=>'Ð˜Ð·Ð±Ñ€Ð°Ð»Ð¸ ÑÑ‚Ðµ Ð´Ð°Ñ‚Ð° Ð² Ð¼Ð¸Ð½Ð°Ð»Ð¾Ñ‚Ð¾.'];
+    if (empty($d['date']) || empty($d['slot']) || empty(trim($d['name'])) || empty(trim($d['phone']))) return ['ok'=>false,'error'=>'Моля, попълнете име и телефон.'];
+    if ($d['date'] < $today) return ['ok'=>false,'error'=>'Избрали сте дата в миналото.'];
     $chk = db()->prepare("SELECT 1 FROM bookings WHERE status<>'cancelled' AND bdate=? AND slot=?");
     $chk->execute([$d['date'],$d['slot']]);
-    if ($chk->fetch()) return ['ok'=>false,'error'=>'Ð¢Ð¾Ð·Ð¸ Ñ‡Ð°Ñ Ð²ÐµÑ‡Ðµ Ðµ Ð·Ð°ÐµÑ‚. ÐœÐ¾Ð»Ñ, Ð¸Ð·Ð±ÐµÑ€ÐµÑ‚Ðµ Ð´Ñ€ÑƒÐ³.'];
+    if ($chk->fetch()) return ['ok'=>false,'error'=>'Този час вече е зает. Моля, изберете друг.'];
     try {
         $st = db()->prepare("INSERT INTO bookings (bdate,slot,name,phone,email,service,notes,status) VALUES (?,?,?,?,?,?,?,'pending')");
         $st->execute([$d['date'],$d['slot'],trim($d['name']),trim($d['phone']),trim($d['email']??''),$d['service']??'',$d['notes']??'']);
         notify_booking($d);
         return ['ok'=>true];
     } catch (\PDOException $e) {
-        if ($e->getCode() == 23000) return ['ok'=>false,'error'=>'Ð¢Ð¾Ð·Ð¸ Ñ‡Ð°Ñ Ð²ÐµÑ‡Ðµ Ðµ Ð·Ð°ÐµÑ‚. ÐœÐ¾Ð»Ñ, Ð¸Ð·Ð±ÐµÑ€ÐµÑ‚Ðµ Ð´Ñ€ÑƒÐ³.'];
+        if ($e->getCode() == 23000) return ['ok'=>false,'error'=>'Този час вече е зает. Моля, изберете друг.'];
         throw $e;
     }
 }
@@ -63,32 +63,32 @@ function notify_booking($d) {
     // Google Calendar event (direct API)
     $gcalResult = create_calendar_event($d, $s);
     
-    $subject = "ÐÐ¾Ð²Ð° Ñ€ÐµÐ·ÐµÑ€Ð²Ð°Ñ†Ð¸Ñ - $date $slot";
+    $subject = "Нова резервация - $date $slot";
     $headers = "From: MarTed <noreply@dobrichmontaj.bg>\r\n";
     $headers .= "Content-Type: text/plain; charset=utf-8\r\n";
     $headers .= "Content-Transfer-Encoding: 8bit\r\n";
     
     // Email to site owner
     if ($ownerEmail) {
-        $ownerBody = "ÐÐ¾Ð²Ð° Ñ€ÐµÐ·ÐµÑ€Ð²Ð°Ñ†Ð¸Ñ Ð¾Ñ‚ $name\n\n";
-        $ownerBody .= "Ð”Ð°Ñ‚Ð°: $date\nÐ§Ð°Ñ: $slot\n";
-        $ownerBody .= "Ð˜Ð¼Ðµ: $name\nÐ¢ÐµÐ»ÐµÑ„Ð¾Ð½: $phone\n";
-        if ($customerEmail) $ownerBody .= "Ð˜Ð¼ÐµÐ¹Ð»: $customerEmail\n";
-        $ownerBody .= "Ð£ÑÐ»ÑƒÐ³Ð°: $service\n";
-        if ($notes) $ownerBody .= "Ð‘ÐµÐ»ÐµÐ¶ÐºÐ°: $notes\n";
-        $ownerBody .= "\nÐÐ´Ð¼Ð¸Ð½: " . ($s['base_url'] ?? '') . "/admin/bookings.php";
-        if ($gcalResult) $ownerBody .= "\nÐ”Ð¾Ð±Ð°Ð²ÐµÐ½Ð¾ Ð² Google Calendar";
+        $ownerBody = "Нова резервация от $name\n\n";
+        $ownerBody .= "Дата: $date\nЧас: $slot\n";
+        $ownerBody .= "Име: $name\nТелефон: $phone\n";
+        if ($customerEmail) $ownerBody .= "Имейл: $customerEmail\n";
+        $ownerBody .= "Услуга: $service\n";
+        if ($notes) $ownerBody .= "Бележка: $notes\n";
+        $ownerBody .= "\nАдмин: " . ($s['base_url'] ?? '') . "/admin/bookings.php";
+        if ($gcalResult) $ownerBody .= "\nДобавено в Google Calendar";
         @mail($ownerEmail, $subject, $ownerBody, $headers);
     }
     
     // Email to customer
     if ($customerEmail) {
-        $custSubject = "Ð—Ð°Ð¿Ð°Ð·ÐµÐ½ Ñ‡Ð°Ñ - MarTed";
-        $custBody = "Ð—Ð´Ñ€Ð°Ð²ÐµÐ¹Ñ‚Ðµ, $name!\n\n";
-        $custBody .= "Ð—Ð°Ð¿Ð°Ð·Ð¸Ñ…Ñ‚Ðµ Ñ‡Ð°Ñ Ð·Ð° $date Ð¾Ñ‚ $slot.\n";
-        $custBody .= "Ð©Ðµ ÑÐµ ÑÐ²ÑŠÑ€Ð¶ÐµÐ¼ Ñ Ð²Ð°Ñ Ð·Ð° Ð¿Ð¾Ñ‚Ð²ÑŠÑ€Ð¶Ð´ÐµÐ½Ð¸Ðµ.\n\n";
-        $custBody .= "Ð¢ÐµÐ»ÐµÑ„Ð¾Ð½: " . ($s['phone'] ?? '') . "\n";
-        $custBody .= "MarTed - Ð¼Ð¾Ð½Ñ‚Ð°Ð¶ Ð¸ Ð´ÐµÐ¼Ð¾Ð½Ñ‚Ð°Ð¶ Ð½Ð° Ð¼ÐµÐ±ÐµÐ»Ð¸";
+        $custSubject = "Запазен час - MarTed";
+        $custBody = "Здравейте, $name!\n\n";
+        $custBody .= "Запазихте час за $date от $slot.\n";
+        $custBody .= "Ще се свържем с вас за потвърждение.\n\n";
+        $custBody .= "Телефон: " . ($s['phone'] ?? '') . "\n";
+        $custBody .= "MarTed - монтаж и демонтаж на мебели";
         @mail($customerEmail, $custSubject, $custBody, $headers);
     }
 }
@@ -134,9 +134,9 @@ function create_calendar_event($d, $s) {
     $startDT = $d['date'] . 'T' . sprintf('%02d:00:00', $startHour);
     $endDT = $d['date'] . 'T' . sprintf('%02d:00:00', $startHour + 1);
     
-    $summary = "ÐœÐ¾Ð½Ñ‚Ð°Ð¶ - " . trim($d['name']);
-    $desc = "Ð¢ÐµÐ»ÐµÑ„Ð¾Ð½: " . trim($d['phone']) . "\nÐ£ÑÐ»ÑƒÐ³Ð°: " . ($d['service'] ?? '');
-    if (!empty($d['notes'])) $desc .= "\nÐ‘ÐµÐ»ÐµÐ¶ÐºÐ°: " . $d['notes'];
+    $summary = "Монтаж - " . trim($d['name']);
+    $desc = "Телефон: " . trim($d['phone']) . "\nУслуга: " . ($d['service'] ?? '');
+    if (!empty($d['notes'])) $desc .= "\nБележка: " . $d['notes'];
     
     $event = [
         'summary' => $summary,
@@ -195,7 +195,7 @@ function content($key, $def='') {
     $v = $st->fetchColumn();
     return ($v !== false && $v !== '') ? $v : $def;
 }
-function filters() { return ['Ð’ÑÐ¸Ñ‡ÐºÐ¸','ÐšÑƒÑ…Ð½Ð¸','Ð¡Ð¿Ð°Ð»Ð½Ð¸','Ð“Ð°Ñ€Ð´ÐµÑ€Ð¾Ð±Ð¸','Ð”Ñ€ÑƒÐ³Ð¸']; }
+function filters() { return ['Всички','Кухни','Спални','Гардероби','Други']; }
 function content_with_html($key, $def='') {
     $st = db()->prepare("SELECT v FROM settings WHERE k=?");
     $st->execute([$key]);

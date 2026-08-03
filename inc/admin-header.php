@@ -5,24 +5,24 @@ require_once __DIR__ . '/admin-functions.php';
 $s = settings();
 $current = $GLOBALS['admin_page'] ?? '';
 $navGroups = [
-    'ÃÂÃÂÃÂ§ÃÂÃâ€ºÃÂÃÂ' => [
+    'ÐÐÐ§ÐÐâ€ºÐÐ' => [
         'dashboard' => ['label'=>'Dashboard','icon'=>'pin','href'=>'dashboard.php'],
-        'hero' => ['label'=>'ÃÂ¥ÃÂµÃ‘â‚¬ÃÂ¾ÃÂ±ÃÂ°ÃÂ½ÃÂµÃ‘â‚¬','icon'=>'pin','href'=>'section.php?edit=hero'],
-        'stats' => ['label'=>'ÃÂ¡Ã‘â€šÃÂ°Ã‘â€šÃÂ¸Ã‘ÂÃ‘â€šÃÂ¸ÃÂºÃÂ¸','icon'=>'users','href'=>'section.php?edit=stats'],
-        'services' => ['label'=>'ÃÂ£Ã‘ÂÃÂ»Ã‘Æ’ÃÂ³ÃÂ¸','icon'=>'shield','href'=>'services.php'],
-        'projects' => ['label'=>'ÃÅ¸Ã‘â‚¬ÃÂ¾ÃÂµÃÂºÃ‘â€šÃÂ¸','icon'=>'drill','href'=>'projects.php'],
-        'testimonials' => ['label'=>'ÃÅ¾Ã‘â€šÃÂ·ÃÂ¸ÃÂ²ÃÂ¸','icon'=>'users','href'=>'testimonials.php'],
+        'hero' => ['label'=>'Ð¥ÐµÑâ‚¬Ð¾Ð±Ð°Ð½ÐµÑâ‚¬','icon'=>'pin','href'=>'section.php?edit=hero'],
+        'stats' => ['label'=>'Ð¡Ñâ€šÐ°Ñâ€šÐ¸ÑÑâ€šÐ¸ÐºÐ¸','icon'=>'users','href'=>'section.php?edit=stats'],
+        'services' => ['label'=>'Ð£ÑÐ»ÑƒÐ³Ð¸','icon'=>'shield','href'=>'services.php'],
+        'projects' => ['label'=>'ÐŸÑâ‚¬Ð¾ÐµÐºÑâ€šÐ¸','icon'=>'drill','href'=>'projects.php'],
+        'testimonials' => ['label'=>'ÐžÑâ€šÐ·Ð¸Ð²Ð¸','icon'=>'users','href'=>'testimonials.php'],
     ],
-    'Ãâ€ÃÂ ÃÂ£Ãâ€œÃËœ ÃÂ¡ÃÂ¢ÃÂ ÃÂÃÂÃËœÃÂ¦ÃËœ' => [
-        'contact' => ['label'=>'ÃÅ¡ÃÂ¾ÃÂ½Ã‘â€šÃÂ°ÃÂºÃ‘â€šÃÂ¸','icon'=>'phone','href'=>'section.php?edit=contact'],
-        'about' => ['label'=>'Ãâ€”ÃÂ° ÃÂ½ÃÂ°Ã‘Â','icon'=>'users','href'=>'section.php?edit=about'],
+    'Ðâ€Ð Ð£Ðâ€œÐ˜ Ð¡Ð¢Ð ÐÐÐ˜Ð¦Ð˜' => [
+        'contact' => ['label'=>'ÐšÐ¾Ð½Ñâ€šÐ°ÐºÑâ€šÐ¸','icon'=>'phone','href'=>'section.php?edit=contact'],
+        'about' => ['label'=>'Ð—Ð° Ð½Ð°Ñ','icon'=>'users','href'=>'section.php?edit=about'],
     ],
-    'ÃÅ¾ÃÅ¸Ãâ€¢ÃÂ ÃÂÃÂ¦ÃËœÃËœ' => [
-        'bookings' => ['label'=>'ÃÂ ÃÂµÃÂ·ÃÂµÃ‘â‚¬ÃÂ²ÃÂ°Ã‘â€ ÃÂ¸ÃÂ¸','icon'=>'calendar','href'=>'bookings.php'],
+    'ÐžÐŸÐâ€¢Ð ÐÐ¦Ð˜Ð˜' => [
+        'bookings' => ['label'=>'Ð ÐµÐ·ÐµÑâ‚¬Ð²Ð°Ñâ€ Ð¸Ð¸','icon'=>'calendar','href'=>'bookings.php'],
     ],
-    'ÃÅ¾Ãâ€˜ÃÂ©ÃËœ' => [
-        'brand' => ['label'=>'ÃÂÃÂ°Ã‘ÂÃ‘â€šÃ‘â‚¬ÃÂ¾ÃÂ¹ÃÂºÃÂ¸','icon'=>'clock','href'=>'section.php?edit=brand'],
-        'security' => ['label'=>'ÃÂ¡ÃÂ¸ÃÂ³Ã‘Æ’Ã‘â‚¬ÃÂ½ÃÂ¾Ã‘ÂÃ‘â€š','icon'=>'shield','href'=>'section.php?edit=security'],
+    'ÐžÐâ€˜Ð©Ð˜' => [
+        'brand' => ['label'=>'ÐÐ°ÑÑâ€šÑâ‚¬Ð¾Ð¹ÐºÐ¸','icon'=>'clock','href'=>'section.php?edit=brand'],
+        'security' => ['label'=>'Ð¡Ð¸Ð³ÑƒÑâ‚¬Ð½Ð¾ÑÑâ€š','icon'=>'shield','href'=>'section.php?edit=security'],
     ],
 ];
 $bCount = is_admin() ? db()->query("SELECT COUNT(*) FROM bookings")->fetchColumn() : 0;
@@ -39,7 +39,7 @@ $bCount = is_admin() ? db()->query("SELECT COUNT(*) FROM bookings")->fetchColumn
 <body class="adminBody">
 <div class="adminLayout">
   <?php if (is_admin()): ?>
-  <button class="adminMenuToggle" id="adminMenuToggle" aria-label="Menu">Ã¢ËœÂ°</button>
+  <button class="adminMenuToggle" id="adminMenuToggle" aria-label="Menu">â˜°</button>
   <aside class="adminSidebar" id="adminSidebar">
     <div class="adminSidebarLogo"><img src="/assets/media/logo.png" alt="<?= e($s['name']) ?>" style="height:40px;width:auto"></div>
     <nav class="adminNav">
@@ -51,8 +51,8 @@ $bCount = is_admin() ? db()->query("SELECT COUNT(*) FROM bookings")->fetchColumn
       <?php endforeach; ?>
     </nav>
     <div class="adminSidebarBottom">
-      <a href="/" class="adminSidebarLink"><?= icon('arrow','icon') ?> ÃÅ¡Ã‘Å ÃÂ¼ Ã‘ÂÃÂ°ÃÂ¹Ã‘â€šÃÂ°</a>
-      <a href="logout.php" class="adminSidebarLink"><?= icon('arrow','icon') ?> ÃËœÃÂ·Ã‘â€¦ÃÂ¾ÃÂ´</a>
+      <a href="/" class="adminSidebarLink"><?= icon('arrow','icon') ?> ÐšÑŠÐ¼ ÑÐ°Ð¹Ñâ€šÐ°</a>
+      <a href="logout.php" class="adminSidebarLink"><?= icon('arrow','icon') ?> Ð˜Ð·Ñâ€¦Ð¾Ð´</a>
     </div>
   </aside>
   <?php else: ?>
