@@ -88,7 +88,6 @@ require __DIR__ . '/../inc/admin-header.php';
 <?php if ($edit === 'hero'): ?>
 <form method="POST" enctype="multipart/form-data" class="adminForm">
   <?= csrf_field() ?>
-  <?= csrf_field() ?>
   <input type="hidden" name="section" value="hero">
   <div><label>Заглавие</label><input name="home_hero_title" value="<?= e(content('home_hero_title')) ?>"></div>
   <div><label>Подзаглавие (текст)</label><textarea name="home_hero_lead" rows="3"><?= e(content('home_hero_lead')) ?></textarea></div>
@@ -96,7 +95,7 @@ require __DIR__ . '/../inc/admin-header.php';
     <?php $heroImg = content('home_hero_image', '/assets/media/hero-kitchen.jpg'); ?>
     <?php if ($heroImg): ?><img src="<?= e($heroImg) ?>" style="max-height:100px;border-radius:4px;margin-bottom:8px"><?php elseif ($edit === 'legal'): ?>
 <form method="POST" class="adminForm">
-  <?= csrf_field() ?>
+  
   <input type="hidden" name="section" value="legal">
   <div><label>Политика за поверителност</label><textarea name="politika_poveritelnost" rows="12" style="font-size:14px;line-height:1.6"><?= content_with_html('politika_poveritelnost','') ?></textarea></div>
   <div><label>Условия за ползване</label><textarea name="usloviya_polzvane" rows="12" style="font-size:14px;line-height:1.6"><?= content_with_html('usloviya_polzvane','') ?></textarea></div>
@@ -138,7 +137,6 @@ require __DIR__ . '/../inc/admin-header.php';
 <?php elseif ($edit === 'stats'): ?>
 <form method="POST" class="adminForm">
   <?= csrf_field() ?>
-  <?= csrf_field() ?>
   <input type="hidden" name="section" value="stats">
   <?php foreach ($stats as $st): ?>
   <input type="hidden" name="stat_ids[]" value="<?= e($st['id']) ?>">
@@ -149,7 +147,6 @@ require __DIR__ . '/../inc/admin-header.php';
 
 <?php elseif ($edit === 'contact'): ?>
 <form method="POST" class="adminForm">
-  <?= csrf_field() ?>
   <?= csrf_field() ?>
   <input type="hidden" name="section" value="contact">
   <div class="formRow"><div><label>Телефон</label><input name="phone" value="<?= e($s['phone']) ?>"></div><div><label>Тел. линк</label><input name="phoneHref" value="<?= e($s['phoneHref']) ?>"></div></div>
@@ -164,7 +161,6 @@ require __DIR__ . '/../inc/admin-header.php';
 <?php elseif ($edit === 'about'): ?>
 <form method="POST" class="adminForm">
   <?= csrf_field() ?>
-  <?= csrf_field() ?>
   <input type="hidden" name="section" value="about">
   <div><label>Заглавие</label><input name="about_heading" value="<?= e(content('about_heading')) ?>"></div>
   <div><label>Текст</label><textarea name="about_text" rows="6"><?= e(content('about_text')) ?></textarea></div>
@@ -173,7 +169,6 @@ require __DIR__ . '/../inc/admin-header.php';
 
 <?php elseif ($edit === 'brand'): ?>
 <form method="POST" class="adminForm">
-  <?= csrf_field() ?>
   <?= csrf_field() ?>
   <input type="hidden" name="section" value="brand">
   <div><label>Име на фирмата</label><input name="name" value="<?= e($s['name']) ?>"></div>
