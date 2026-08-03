@@ -22,7 +22,6 @@ $current = $GLOBALS['path'] ?? '';
 <link rel="stylesheet" href="/assets/fonts/fonts.css?v=1">
 <link rel="preload" href="/assets/css/style.css?v=15" as="style">
 <link rel="stylesheet" href="/assets/css/style.css?v=15">
-<script defer src="https://cloud.umami.is/script.js" data-website-id="78e2dd3b-41f6-43df-bdec-dae392425d6a"></script>
 </head>
 <body>
 <?php if (!empty($GLOBALS['minimal_header'])): ?>

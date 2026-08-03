@@ -83,15 +83,42 @@
   });
 })();
 </script>
-<!-- Cookie Banner -->
+<!-- Cookie Banner (EU GDPR compliant) -->
 <div class="cookieBanner" id="cookieBanner">
   <div class="cookieBannerInner">
-    <div class="cookieBannerText">Този сайт използва бисквитки за анализ на посещенията (Umami Analytics) — без проследяване на лични данни. Продължавайки, вие се съгласявате с това. Вижте <a href="/politika-poveritelnost">Политика за поверителност</a>.</div>
-    <div class="cookieBannerBtns"><button class="btn btn-primary" id="cookieAccept" type="button">Приемам</button></div>
+    <div class="cookieBannerText">
+      Този сайт използва бисквитки за анализ на посещенията (Umami Analytics) — анонимни, без проследяване на лични данни. Вижте <a href="/politika-poveritelnost">Политика за поверителност</a> и <a href="/politika-biskvitki">Политика за бисквитки</a>.
+    </div>
+    <div class="cookieBannerBtns">
+      <button class="btn btn-ghost" id="cookieReject" type="button">Отказвам</button>
+      <button class="btn btn-primary" id="cookieAccept" type="button">Приемам</button>
+    </div>
   </div>
 </div>
 <script>
-(function(){if(localStorage.getItem("cookieAccepted")){document.getElementById("cookieBanner").style.display="none";return;}document.getElementById("cookieBanner").classList.add("show");document.getElementById("cookieAccept").onclick=function(){localStorage.setItem("cookieAccepted","1");document.getElementById("cookieBanner").classList.remove("show");};})();
+(function(){
+  var banner=document.getElementById('cookieBanner');
+  var choice=localStorage.getItem('cookieChoice');
+  if(choice==='accepted'){loadAnalytics();banner.style.display='none';return;}
+  if(choice==='rejected'){banner.style.display='none';return;}
+  banner.classList.add('show');
+  function loadAnalytics(){
+    var s=document.createElement('script');
+    s.defer=true;
+    s.src='https://cloud.umami.is/script.js';
+    s.setAttribute('data-website-id','78e2dd3b-41f6-43df-bdec-dae392425d6a');
+    document.head.appendChild(s);
+  }
+  document.getElementById('cookieAccept').onclick=function(){
+    localStorage.setItem('cookieChoice','accepted');
+    loadAnalytics();
+    banner.classList.remove('show');
+  };
+  document.getElementById('cookieReject').onclick=function(){
+    localStorage.setItem('cookieChoice','rejected');
+    banner.classList.remove('show');
+  };
+})();
 </script>
 </body>
 </html>
