@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 require_once __DIR__ . '/functions.php';
 require_once __DIR__ . '/icons.php';
 require_once __DIR__ . '/admin-functions.php';
@@ -7,22 +7,23 @@ $current = $GLOBALS['admin_page'] ?? '';
 $navGroups = [
     'НАЧАЛНА' => [
         'dashboard' => ['label'=>'Dashboard','icon'=>'pin','href'=>'dashboard.php'],
-        'hero' => ['label'=>'ХеÑâ‚¬обанеÑâ‚¬','icon'=>'pin','href'=>'section.php?edit=hero'],
-        'stats' => ['label'=>'СÑâ€šаÑâ€šисÑâ€šики','icon'=>'users','href'=>'section.php?edit=stats'],
+        'hero' => ['label'=>'Херобанер','icon'=>'pin','href'=>'section.php?edit=hero'],
+        'stats' => ['label'=>'Статистики','icon'=>'users','href'=>'section.php?edit=stats'],
         'services' => ['label'=>'Услуги','icon'=>'shield','href'=>'services.php'],
-        'projects' => ['label'=>'ПÑâ‚¬оекÑâ€šи','icon'=>'drill','href'=>'projects.php'],
-        'testimonials' => ['label'=>'ОÑâ€šзиви','icon'=>'users','href'=>'testimonials.php'],
+        'projects' => ['label'=>'Проекти','icon'=>'drill','href'=>'projects.php'],
+        'testimonials' => ['label'=>'Отзиви','icon'=>'users','href'=>'testimonials.php'],
     ],
-    'ДРУÐâ€œИ СТРАНИЦИ' => [
-        'contact' => ['label'=>'КонÑâ€šакÑâ€šи','icon'=>'phone','href'=>'section.php?edit=contact'],
+    'ДРУГИ СТРАНИЦИ' => [
+        'contact' => ['label'=>'Контакти','icon'=>'phone','href'=>'section.php?edit=contact'],
         'about' => ['label'=>'За нас','icon'=>'users','href'=>'section.php?edit=about'],
     ],
     'ОПЕРАЦИИ' => [
-        'bookings' => ['label'=>'РезеÑâ‚¬ваÑâ€ ии','icon'=>'calendar','href'=>'bookings.php'],
+        'bookings' => ['label'=>'Резервации','icon'=>'calendar','href'=>'bookings.php'],
     ],
-    'ОÐâ€˜ЩИ' => [
-        'brand' => ['label'=>'НасÑâ€šÑâ‚¬ойки','icon'=>'clock','href'=>'section.php?edit=brand'],
-        'security' => ['label'=>'СигуÑâ‚¬носÑâ€š','icon'=>'shield','href'=>'section.php?edit=security'],
+    'ОБЩИ' => [
+        'brand' => ['label'=>'Настройки','icon'=>'clock','href'=>'section.php?edit=brand'],
+        'legal' => ['label'=>'Правни страници','icon'=>'shield','href'=>'section.php?edit=legal'],
+        'security' => ['label'=>'Сигурност','icon'=>'shield','href'=>'section.php?edit=security'],
     ],
 ];
 $bCount = is_admin() ? db()->query("SELECT COUNT(*) FROM bookings")->fetchColumn() : 0;
@@ -33,13 +34,13 @@ $bCount = is_admin() ? db()->query("SELECT COUNT(*) FROM bookings")->fetchColumn
 <title><?= e($title ?? $s['name']) ?></title>
 <link rel="icon" href="/assets/media/icon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="/assets/fonts/fonts.css?v=1">
-<link rel="stylesheet" href="/assets/css/style.css?v=15">
+<link rel="stylesheet" href="/assets/css/style.css?v=14">
 <link rel="stylesheet" href="/assets/css/admin.css?v=6">
 </head>
 <body class="adminBody">
 <div class="adminLayout">
   <?php if (is_admin()): ?>
-  <button class="adminMenuToggle" id="adminMenuToggle" aria-label="Menu">â˜°</button>
+  <button class="adminMenuToggle" id="adminMenuToggle" aria-label="Menu">☰</button>
   <aside class="adminSidebar" id="adminSidebar">
     <div class="adminSidebarLogo"><img src="/assets/media/logo.png" alt="<?= e($s['name']) ?>" style="height:40px;width:auto"></div>
     <nav class="adminNav">
@@ -51,7 +52,7 @@ $bCount = is_admin() ? db()->query("SELECT COUNT(*) FROM bookings")->fetchColumn
       <?php endforeach; ?>
     </nav>
     <div class="adminSidebarBottom">
-      <a href="/" class="adminSidebarLink"><?= icon('arrow','icon') ?> Към сайÑâ€šа</a>
+      <a href="/" class="adminSidebarLink"><?= icon('arrow','icon') ?> Към сайта</a>
       <a href="logout.php" class="adminSidebarLink"><?= icon('arrow','icon') ?> Изход</a>
     </div>
   </aside>
