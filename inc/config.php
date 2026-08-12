@@ -1,20 +1,18 @@
 <?php
-// Config — reads from env vars (Docker/Coolify) or falls back to SQLite (local).
-// For shared hosting: copy config.sample.php to config.php and fill in real values.
-$driver = getenv('DB_DRIVER') ?: 'sqlite';
+$driver = 'mysql';
 return [
     'db' => [
         'driver' => $driver,
         'sqlite_path' => __DIR__ . '/../data/site.db',
         'mysql' => [
-            'host' => getenv('DB_HOST') ?: 'localhost',
-            'name' => getenv('DB_NAME') ?: 'MARTED_DB',
-            'user' => getenv('DB_USER') ?: 'MARTED_USER',
-            'pass' => getenv('DB_PASS') ?: 'MARTED_PASS',
+            'host' => 'localhost',
+            'name' => 'dobr4dgm_NSN',
+            'user' => 'dobr4dgm_NSN',
+            'pass' => 'Marted2026!Db',
             'charset' => 'utf8mb4',
         ],
     ],
-    'admin_user' => getenv('ADMIN_USER') ?: 'admin',
-    'admin_pass' => getenv('ADMIN_PASS') ?: 'CHANGE_ME_IN_CONFIG',
-    'base_url' => getenv('BASE_URL') ?: '',
+    'admin_user' => 'admin',
+    'admin_pass' => 'Marted2026!Admin',
+    'base_url' => 'https://dobrichmontaj.bg',
 ];
