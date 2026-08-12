@@ -104,7 +104,7 @@ require __DIR__ . '/../inc/admin-header.php';
     <?php if ($heroImg): ?><img src="<?= e($heroImg) ?>" style="max-height:100px;border-radius:4px;margin-bottom:8px"><?php elseif ($edit === 'legal'): ?>
 <form method="POST" class="adminForm">
   
-  <input type="hidden" name="section" value="legal">
+  <?= csrf_field() ?><input type="hidden" name="section" value="legal">
   <div><label>ÐŸÐ¾Ð»Ð¸Ñ‚Ð¸ÐºÐ° Ð·Ð° Ð¿Ð¾Ð²ÐµÑ€Ð¸Ñ‚ÐµÐ»Ð½Ð¾ÑÑ‚</label><textarea name="politika_poveritelnost" rows="12" style="font-size:14px;line-height:1.6"><?= content_with_html('politika_poveritelnost','') ?></textarea></div>
   <div><label>Ð£ÑÐ»Ð¾Ð²Ð¸Ñ Ð·Ð° Ð¿Ð¾Ð»Ð·Ð²Ð°Ð½Ðµ</label><textarea name="usloviya_polzvane" rows="12" style="font-size:14px;line-height:1.6"><?= content_with_html('usloviya_polzvane','') ?></textarea></div>
   <div><label>ÐŸÐ¾Ð»Ð¸Ñ‚Ð¸ÐºÐ° Ð·Ð° Ð±Ð¸ÑÐºÐ²Ð¸Ñ‚ÐºÐ¸</label><textarea name="politika_biskvitki" rows="12" style="font-size:14px;line-height:1.6"><?= content_with_html('politika_biskvitki','') ?></textarea></div>
