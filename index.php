@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 require_once __DIR__ . '/inc/functions.php';
 require_once __DIR__ . '/inc/icons.php';
 $s = settings(); $svcs = services(); $projs = projects(); $sts = stats(); $tests = testimonials();
