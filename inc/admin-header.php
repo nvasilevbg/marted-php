@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 require_once __DIR__ . '/functions.php';
 require_once __DIR__ . '/icons.php';
 require_once __DIR__ . '/admin-functions.php';
