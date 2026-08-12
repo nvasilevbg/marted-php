@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 require_once __DIR__ . '/../inc/functions.php';
 require_once __DIR__ . '/../inc/icons.php';
 require_once __DIR__ . '/../inc/admin-functions.php';
@@ -19,20 +19,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
 $filter = $_GET['filter'] ?? '';
 $where = $filter === 'pending' ? " WHERE status='pending'" : '';
 $bookings = db()->query("SELECT * FROM bookings$where ORDER BY bdate DESC, slot DESC")->fetchAll();
-$labels = ['pending'=>'Чака','confirmed'=>'Потвърден','cancelled'=>'Отказан'];
-$title = 'Резервации | Админ | ' . $s['name'];
+$labels = ['pending'=>'Ð§Ð°ÐºÐ°','confirmed'=>'ÐŸÐ¾Ñ‚Ð²ÑŠÑ€Ð´ÐµÐ½','cancelled'=>'ÐžÑ‚ÐºÐ°Ð·Ð°Ð½'];
+$title = 'Ð ÐµÐ·ÐµÑ€Ð²Ð°Ñ†Ð¸Ð¸ | ÐÐ´Ð¼Ð¸Ð½ | ' . $s['name'];
 require __DIR__ . '/../inc/admin-header.php';
 ?>
-<div class="adminTop"><div><span class="eyebrow eyebrow-line">Админ</span><h1>Запазени часове</h1></div></div>
+<div class="adminTop"><div><span class="eyebrow eyebrow-line">ÐÐ´Ð¼Ð¸Ð½</span><h1>Ð—Ð°Ð¿Ð°Ð·ÐµÐ½Ð¸ Ñ‡Ð°ÑÐ¾Ð²Ðµ</h1></div></div>
 <?php if (empty($bookings)): ?>
-<p class="formNote" style="margin-top:20px">Все още няма запазени часове.</p>
+<p class="formNote" style="margin-top:20px">Ð’ÑÐµ Ð¾Ñ‰Ðµ Ð½ÑÐ¼Ð° Ð·Ð°Ð¿Ð°Ð·ÐµÐ½Ð¸ Ñ‡Ð°ÑÐ¾Ð²Ðµ.</p>
 <?php else: ?>
 <div class="adminList">
   <?php foreach ($bookings as $b): ?>
   <div class="bookingItem">
     <div class="biMain">
       <span class="pill <?= e($b['status']) ?>"><?= e($labels[$b['status']] ?? $b['status']) ?></span>
-      <strong><?= e($b['bdate']) ?> · <?= e($b['slot']) ?></strong>
+      <strong><?= e($b['bdate']) ?> Â· <?= e($b['slot']) ?></strong>
       <span class="biService"><?= e($b['service']) ?></span>
     </div>
     <div class="biContact">
@@ -43,17 +43,15 @@ require __DIR__ . '/../inc/admin-header.php';
     <div class="biActions">
       <form method="POST" style="display:inline">
   <?= csrf_field() ?>
-  <?= csrf_field() ?>
         <input type="hidden" name="action" value="status"><input type="hidden" name="id" value="<?= e($b['id']) ?>">
-        <?php if ($b['status'] !== 'confirmed'): ?><button name="status" value="confirmed" type="submit">Потвърди</button><?php endif; ?>
-        <?php if ($b['status'] !== 'cancelled'): ?><button name="status" value="cancelled" type="submit">Откажи</button><?php endif; ?>
-        <?php if ($b['status'] !== 'pending'): ?><button name="status" value="pending" type="submit">Чакащи</button><?php endif; ?>
+        <?php if ($b['status'] !== 'confirmed'): ?><button name="status" value="confirmed" type="submit">ÐŸÐ¾Ñ‚Ð²ÑŠÑ€Ð´Ð¸</button><?php endif; ?>
+        <?php if ($b['status'] !== 'cancelled'): ?><button name="status" value="cancelled" type="submit">ÐžÑ‚ÐºÐ°Ð¶Ð¸</button><?php endif; ?>
+        <?php if ($b['status'] !== 'pending'): ?><button name="status" value="pending" type="submit">Ð§Ð°ÐºÐ°Ñ‰Ð¸</button><?php endif; ?>
       </form>
-      <form method="POST" style="display:inline" onsubmit="return confirm('Изтриване?')">
-  <?= csrf_field() ?>
+      <form method="POST" style="display:inline" onsubmit="return confirm('Ð˜Ð·Ñ‚Ñ€Ð¸Ð²Ð°Ð½Ðµ?')">
   <?= csrf_field() ?>
         <input type="hidden" name="action" value="delete"><input type="hidden" name="id" value="<?= e($b['id']) ?>">
-        <button class="del" type="submit">Изтрий</button>
+        <button class="del" type="submit">Ð˜Ð·Ñ‚Ñ€Ð¸Ð¹</button>
       </form>
     </div>
   </div>
