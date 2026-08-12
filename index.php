@@ -17,7 +17,7 @@ require __DIR__ . '/inc/header.php';
       </div>
       <div class="heroSpec" >
         <div><?= icon('shield') ?><span><strong>Гаранция</strong></span></div>
-        <div><?= icon('clock') ?><span><strong>Понâ€“Нед</strong> 08â€“20</span></div>
+        <div><?= icon('clock') ?><span><strong>Пон–Нед</strong> 08–20</span></div>
         <div><?= icon('pin') ?><span><strong>Добрич</strong></span></div>
       </div>
     </div>
@@ -68,7 +68,7 @@ require __DIR__ . '/inc/header.php';
     <div class="sectionHead">
       <span class="sectionIndex" aria-hidden="true"></span>
       <div class="sectionTitle"><span class="eyebrow eyebrow-line">Проекти</span><h2>Нашите <em>проекти</em></h2></div>
-      <p>Изпълнени обекти â€” кухни, спални, гардероби, секции и офис обзавеждане.</p>
+      <p>Изпълнени обекти — кухни, спални, гардероби, секции и офис обзавеждане.</p>
       <div class="headActions"><a href="/proekti" class="btn btn-ghost">Виж всички проекти</a></div>
     </div>
     <div class="projectMosaic" >
@@ -91,7 +91,7 @@ require __DIR__ . '/inc/header.php';
     </div>
     <div class="quoteGrid" >
       <?php foreach ($tests as $t): ?>
-      <article class="quote"><span class="mark">"</span><div class="stars">â˜…â˜…â˜…â˜…â˜…</div><blockquote><?= e($t['text']) ?></blockquote><span class="who"><?= e($t['name']) ?></span></article>
+      <article class="quote"><span class="mark">"</span><div class="stars">★★★★★</div><blockquote><?= e($t['text']) ?></blockquote><span class="who"><?= e($t['name']) ?></span></article>
       <?php endforeach; ?>
     </div>
   </div>
