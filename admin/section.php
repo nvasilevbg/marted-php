@@ -71,7 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         foreach (['name','subtitle','tagline','established'] as $k) if (isset($_POST[$k])) db()->prepare("UPDATE settings SET v=? WHERE k=?")->execute([trim($_POST[$k]), $k]);
     }
     if ($section === 'security' && !empty($GLOBALS['sec_error'])) {
-        // Don't redirect â€” show error
+        // Don't redirect — show error
     } else {
         header("Location: section.php?edit=$section&ok=1"); exit;
     }
