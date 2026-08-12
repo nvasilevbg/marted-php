@@ -24,26 +24,26 @@ if (isset($_GET['edit'])) {
     else { $st = db()->prepare("SELECT * FROM testimonials WHERE id=?"); $st->execute([$_GET['edit']]); $editing = $st->fetch(); }
 }
 $list = db()->query("SELECT * FROM testimonials ORDER BY sort_order ASC, id ASC")->fetchAll();
-$title = 'ÐžÑ‚Ð·Ð¸Ð²Ð¸ | ÐÐ´Ð¼Ð¸Ð½ | ' . $s['name'];
+$title = 'Отзиви | Админ | ' . $s['name'];
 require __DIR__ . '/../inc/admin-header.php';
 ?>
-<?php if (isset($_GET['ok'])): ?><p class="formMsg ok" style="margin-bottom:16px">Ð—Ð°Ð¿Ð°Ð·ÐµÐ½Ð¾.</p><?php endif; ?>
-<div class="adminTop"><div><span class="eyebrow eyebrow-line">Ð¡ÑŠÐ´ÑŠÑ€Ð¶Ð°Ð½Ð¸Ðµ</span><h1>ÐžÑ‚Ð·Ð¸Ð²Ð¸</h1></div></div>
+<?php if (isset($_GET['ok'])): ?><p class="formMsg ok" style="margin-bottom:16px">Запазено.</p><?php endif; ?>
+<div class="adminTop"><div><span class="eyebrow eyebrow-line">Съдържание</span><h1>Отзиви</h1></div></div>
 <?php if ($editing): ?>
 <form method="POST" class="adminForm">
   <?= csrf_field() ?>
-  <div class="projFormHead"><span class="eyebrow eyebrow-line"><?= $editing['id']?'Ð ÐµÐ´Ð°ÐºÑ†Ð¸Ñ':'ÐÐ¾Ð² Ð¾Ñ‚Ð·Ð¸Ð²' ?></span><a href="testimonials.php" class="linkBtn">&larr; ÐÐ°Ð·Ð°Ð´</a></div>
+  <div class="projFormHead"><span class="eyebrow eyebrow-line"><?= $editing['id']?'Редакция':'Нов отзив' ?></span><a href="testimonials.php" class="linkBtn">&larr; Назад</a></div>
   <input type="hidden" name="id" value="<?= e($editing['id']) ?>">
-  <div><label>Ð˜Ð¼Ðµ *</label><input name="name" value="<?= e($editing['tname']) ?>"></div>
-  <div><label>Ð¢ÐµÐºÑÑ‚ *</label><textarea name="text" rows="3"><?= e($editing['ttext']) ?></textarea></div>
-  <div class="formRow"><div><label>Ð—Ð²ÐµÐ·Ð´Ð¸</label><select name="stars"><?php for($i=1;$i<=5;$i++): ?><option value="<?= $i ?>" <?= $editing['stars']==$i?'selected':'' ?>><?= $i ?></option><?php endfor; ?></select></div><div><label>Ð ÐµÐ´</label><input name="sort_order" type="number" value="<?= e($editing['sort_order']) ?>"></div></div>
-  <button class="btn btn-primary btn-block" type="submit"><?= $editing['id']?'Ð—Ð°Ð¿Ð°Ð·Ð¸':'Ð”Ð¾Ð±Ð°Ð²Ð¸' ?></button>
+  <div><label>Име *</label><input name="name" value="<?= e($editing['tname']) ?>"></div>
+  <div><label>Текст *</label><textarea name="text" rows="3"><?= e($editing['ttext']) ?></textarea></div>
+  <div class="formRow"><div><label>Звезди</label><select name="stars"><?php for($i=1;$i<=5;$i++): ?><option value="<?= $i ?>" <?= $editing['stars']==$i?'selected':'' ?>><?= $i ?></option><?php endfor; ?></select></div><div><label>Ред</label><input name="sort_order" type="number" value="<?= e($editing['sort_order']) ?>"></div></div>
+  <button class="btn btn-primary btn-block" type="submit"><?= $editing['id']?'Запази':'Добави' ?></button>
 </form>
 <?php else: ?>
-<div style="margin-bottom:16px"><a href="testimonials.php?edit=new" class="btn btn-primary">+ Ð”Ð¾Ð±Ð°Ð²Ð¸ Ð¾Ñ‚Ð·Ð¸Ð²</a></div>
+<div style="margin-bottom:16px"><a href="testimonials.php?edit=new" class="btn btn-primary">+ Добави отзив</a></div>
 <div class="adminList">
   <?php foreach ($list as $t): ?>
-  <div class="adminRow"><div style="width:80px;height:60px;display:grid;place-items:center;background:var(--bg-3);border-radius:var(--radius);color:var(--accent-2);font-size:18px"><?= str_repeat('â˜…',$t['stars']) ?></div><div class="adminRowInfo"><strong><?= e($t['tname']) ?></strong><span><?= e(mb_substr($t['ttext'],0,60)) ?>...</span></div><div class="adminRowActions"><a href="testimonials.php?edit=<?= $t['id'] ?>">Ð ÐµÐ´Ð°ÐºÑ‚Ð¸Ñ€Ð°Ð¹</a><a href="testimonials.php?delete=<?= $t['id'] ?>" onclick="return confirm('Ð˜Ð·Ñ‚Ñ€Ð¸Ð²Ð°Ð½Ðµ?')" class="del">Ð˜Ð·Ñ‚Ñ€Ð¸Ð¹</a></div></div>
+  <div class="adminRow"><div style="width:80px;height:60px;display:grid;place-items:center;background:var(--bg-3);border-radius:var(--radius);color:var(--accent-2);font-size:18px"><?= str_repeat('â˜…',$t['stars']) ?></div><div class="adminRowInfo"><strong><?= e($t['tname']) ?></strong><span><?= e(mb_substr($t['ttext'],0,60)) ?>...</span></div><div class="adminRowActions"><a href="testimonials.php?edit=<?= $t['id'] ?>">Редактирай</a><a href="testimonials.php?delete=<?= $t['id'] ?>" onclick="return confirm('Изтриване?')" class="del">Изтрий</a></div></div>
   <?php endforeach; ?>
 </div>
 <?php endif; ?>
